@@ -1,0 +1,18 @@
+--- a/litellm/llms/ollama/completion/transformation.py
++++ b/litellm/llms/ollama/completion/transformation.py
+@@ -428,7 +428,14 @@ class OllamaTextCompletionResponseIterator(BaseModelResponseIterator):
+                     usage=usage,
+                 )
+-            elif chunk["response"]:
++            elif "thinking" in chunk:
++                # Handle chain-of-thought reasoning chunks from newer models
++                # These chunks have "thinking" field but empty "response"
++                return GenericStreamingChunk(
++                    text="",
++                    is_finished=False,
++                    finish_reason=None,
++                    usage=None,
++                )
++            elif chunk.get("response"):
+                 text = chunk["response"]
+                 return GenericStreamingChunk(
