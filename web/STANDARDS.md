@@ -162,7 +162,7 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
 
 **ONLY use icons from the `web/src/icons` directory. Do NOT use icons from `react-icons`, `lucide`, or other external libraries.**
 
-**Reason:** We have a very carefully curated selection of icons that match our Onyx guidelines. We do NOT want to muddy those up with different aesthetic stylings.
+**Reason:** We have a very carefully curated selection of icons that match our Callosum guidelines. We do NOT want to muddy those up with different aesthetic stylings.
 
 ```typescript
 // ✅ Good
@@ -175,7 +175,7 @@ import { FiSearch } from "react-icons/fi";
 ```
 
 **Missing Icons**: If an icon is needed but doesn't exist in the `web/src/icons` directory, import it from Figma using the Figma MCP tool and add it to the icons directory.
-If you need help with this step, reach out to `raunak@onyx.app`.
+If you need help with this step, reach out to `raunak@callosum.app`.
 
 ## 9. Text Rendering
 
@@ -215,7 +215,7 @@ function UserCard({ name }: { name: string }) {
 
 **Heavily avoid raw HTML input components. Always use components from the `refresh-components` directory.**
 
-**Reason:** We've put in a lot of effort to unify the components that are rendered in the Onyx app. Using raw components breaks the entire UI of the application, and leaves it in a muddier state than before.
+**Reason:** We've put in a lot of effort to unify the components that are rendered in the Callosum app. Using raw components breaks the entire UI of the application, and leaves it in a muddier state than before.
 
 ```typescript
 // ✅ Good

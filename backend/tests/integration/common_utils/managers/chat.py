@@ -8,15 +8,15 @@ from uuid import UUID
 import requests
 from requests.models import Response
 
-from onyx.context.search.models import RetrievalDetails
-from onyx.context.search.models import SavedSearchDoc
-from onyx.context.search.models import SearchDoc
-from onyx.file_store.models import FileDescriptor
-from onyx.llm.override_models import LLMOverride
-from onyx.llm.override_models import PromptOverride
-from onyx.server.query_and_chat.models import ChatSessionCreationRequest
-from onyx.server.query_and_chat.models import CreateChatMessageRequest
-from onyx.server.query_and_chat.streaming_models import StreamingType
+from callosum.context.search.models import RetrievalDetails
+from callosum.context.search.models import SavedSearchDoc
+from callosum.context.search.models import SearchDoc
+from callosum.file_store.models import FileDescriptor
+from callosum.llm.override_models import LLMOverride
+from callosum.llm.override_models import PromptOverride
+from callosum.server.query_and_chat.models import ChatSessionCreationRequest
+from callosum.server.query_and_chat.models import CreateChatMessageRequest
+from callosum.server.query_and_chat.streaming_models import StreamingType
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.constants import GENERAL_HEADERS
 from tests.integration.common_utils.test_models import DATestChatMessage

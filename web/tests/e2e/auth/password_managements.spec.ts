@@ -17,7 +17,7 @@ test.skip("User changes password and logs in with new password", async ({
   const newPassword = "newPassword456!";
 
   // Navigate to user settings
-  await page.click("#onyx-user-dropdown");
+  await page.click("#callosum-user-dropdown");
   await page.getByText("User Settings").click();
   await page.getByRole("button", { name: "Password" }).click();
 
@@ -32,7 +32,7 @@ test.skip("User changes password and logs in with new password", async ({
 
   // Log out
   await page.getByRole("button", { name: "Close modal", exact: true }).click();
-  await page.click("#onyx-user-dropdown");
+  await page.click("#callosum-user-dropdown");
   await page.getByText("Log out").click();
 
   // Log in with new password
@@ -100,7 +100,7 @@ test.skip("Admin resets own password and logs in with new password", async ({
   await page.getByLabel("Close modal").click();
 
   // Log out
-  await page.click("#onyx-user-dropdown");
+  await page.click("#callosum-user-dropdown");
   await page.getByText("Log out").click();
 
   // Log in with new password

@@ -81,7 +81,7 @@ import {
   WEB_SEARCH_TOOL_ID,
 } from "@/app/chat/components/tools/constants";
 import TextView from "@/components/chat/TextView";
-import { MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { MinimalCallosumDocument } from "@/lib/search/interfaces";
 import { MAX_CHARACTERS_PERSONA_DESCRIPTION } from "@/lib/constants";
 import { FormErrorFocus } from "@/components/FormErrorHelpers";
 import {
@@ -161,7 +161,7 @@ export default function AssistantEditor({
   const settings = useContext(SettingsContext);
 
   const [presentingDocument, setPresentingDocument] =
-    useState<MinimalOnyxDocument | null>(null);
+    useState<MinimalCallosumDocument | null>(null);
   const [showAdvancedOptions, setShowAdvancedOptions] = useState(false);
   const userFilesModal = useCreateModal();
 

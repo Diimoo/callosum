@@ -3,7 +3,7 @@ import os
 import pytest
 import requests
 
-from onyx.auth.schemas import UserRole
+from callosum.auth.schemas import UserRole
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.managers.user import UserManager
 from tests.integration.common_utils.test_models import DATestUser
@@ -28,7 +28,7 @@ def test_saml_user_conversion(reset: None) -> None:
     are properly converted to authenticated roles during SAML login.
     """
     # Create an admin user (first user created is automatically an admin)
-    admin_user: DATestUser = UserManager.create(email="admin@onyx-test.com")
+    admin_user: DATestUser = UserManager.create(email="admin@callosum-test.com")
 
     # Create a regular user that we'll convert to EXT_PERM_USER
     test_user_email = "ext_perm_user@example.com"

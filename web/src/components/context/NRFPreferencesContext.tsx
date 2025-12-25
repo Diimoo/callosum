@@ -18,8 +18,8 @@ interface NRFPreferencesContextValue {
   setDefaultDarkBackgroundUrl: (val: string) => void;
   shortcuts: Shortcut[];
   setShortcuts: (s: Shortcut[]) => void;
-  useOnyxAsNewTab: boolean;
-  setUseOnyxAsNewTab: (v: boolean) => void;
+  useCallosumAsNewTab: boolean;
+  setUseCallosumAsNewTab: (v: boolean) => void;
   showShortcuts: boolean;
   setShowShortcuts: (v: boolean) => void;
 }
@@ -80,8 +80,8 @@ export function NRFPreferencesProvider({
     LocalStorageKeys.SHOW_SHORTCUTS,
     false
   );
-  const [useOnyxAsNewTab, setUseOnyxAsNewTab] = useLocalStorageState<boolean>(
-    LocalStorageKeys.USE_ONYX_AS_NEW_TAB,
+  const [useCallosumAsNewTab, setUseCallosumAsNewTab] = useLocalStorageState<boolean>(
+    LocalStorageKeys.USE_CALLOSUM_AS_NEW_TAB,
     true
   );
 
@@ -104,8 +104,8 @@ export function NRFPreferencesProvider({
         setDefaultDarkBackgroundUrl,
         shortcuts,
         setShortcuts,
-        useOnyxAsNewTab,
-        setUseOnyxAsNewTab,
+        useCallosumAsNewTab,
+        setUseCallosumAsNewTab,
         showShortcuts,
         setShowShortcuts,
       }}

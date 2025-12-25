@@ -8,7 +8,7 @@ import {
 } from "../../../services/streamingModels";
 import { MessageRenderer } from "../interfaces";
 import { truncateString } from "@/lib/utils";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { CallosumDocument } from "@/lib/search/interfaces";
 import { SourceChip2 } from "@/app/chat/components/SourceChip2";
 import { BlinkingDot } from "../../BlinkingDot";
 import { clearTimeoutRefs } from "../timing";
@@ -24,7 +24,7 @@ const constructCurrentFetchState = (
   packets: FetchToolPacket[]
 ): {
   urls: string[];
-  documents: OnyxDocument[];
+  documents: CallosumDocument[];
   hasStarted: boolean;
   isLoading: boolean;
   isComplete: boolean;

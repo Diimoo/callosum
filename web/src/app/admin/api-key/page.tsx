@@ -21,7 +21,7 @@ import { DeleteButton } from "@/components/DeleteButton";
 import Modal from "@/refresh-components/Modal";
 import { Spinner } from "@/components/Spinner";
 import { deleteApiKey, regenerateApiKey } from "@/app/admin/api-key/lib";
-import OnyxApiKeyForm from "@/app/admin/api-key/OnyxApiKeyForm";
+import CallosumApiKeyForm from "@/app/admin/api-key/CallosumApiKeyForm";
 import { APIKey } from "@/app/admin/api-key/types";
 import CreateButton from "@/refresh-components/buttons/CreateButton";
 import Button from "@/refresh-components/buttons/Button";
@@ -64,7 +64,7 @@ function Main() {
   const introSection = (
     <div className="flex flex-col items-start gap-4">
       <Text>
-        API Keys allow you to access Onyx APIs programmatically. Click the
+        API Keys allow you to access Callosum APIs programmatically. Click the
         button below to generate a new API Key.
       </Text>
       <CreateButton
@@ -83,7 +83,7 @@ function Main() {
         {introSection}
 
         {showCreateUpdateForm && (
-          <OnyxApiKeyForm
+          <CallosumApiKeyForm
             onCreateApiKey={(apiKey) => {
               setFullApiKey(apiKey.api_key);
             }}
@@ -200,7 +200,7 @@ function Main() {
       </Table>
 
       {showCreateUpdateForm && (
-        <OnyxApiKeyForm
+        <CallosumApiKeyForm
           onCreateApiKey={(apiKey) => {
             setFullApiKey(apiKey.api_key);
           }}

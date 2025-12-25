@@ -3,11 +3,11 @@ from collections.abc import Callable
 
 import pytest
 
-from onyx.auth.schemas import UserRole
-from onyx.configs.constants import DocumentSource
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.engine.sql_engine import SqlEngine
-from onyx.db.search_settings import get_current_search_settings
+from callosum.auth.schemas import UserRole
+from callosum.configs.constants import DocumentSource
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.engine.sql_engine import SqlEngine
+from callosum.db.search_settings import get_current_search_settings
 from tests.integration.common_utils.constants import ADMIN_USER_NAME
 from tests.integration.common_utils.constants import GENERAL_HEADERS
 from tests.integration.common_utils.managers.api_key import APIKeyManager

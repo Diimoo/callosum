@@ -7,7 +7,7 @@ import Text from "@/refresh-components/texts/Text";
 import { FileDescriptor } from "@/app/chat/interfaces";
 import { cn } from "@/lib/utils";
 import TextView from "@/components/chat/TextView";
-import { MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { MinimalCallosumDocument } from "@/lib/search/interfaces";
 
 export interface ExpandableContentWrapperProps {
   fileDescriptor: FileDescriptor;
@@ -110,7 +110,7 @@ export default function ExpandableContentWrapper({
     </div>
   );
 
-  const presentingDocument: MinimalOnyxDocument = {
+  const presentingDocument: MinimalCallosumDocument = {
     document_id: fileDescriptor.id,
     semantic_identifier: fileDescriptor.name ?? null,
   };

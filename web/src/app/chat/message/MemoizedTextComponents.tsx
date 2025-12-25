@@ -3,7 +3,7 @@ import {
   QuestionCardProps,
   DocumentCardProps,
 } from "@/components/search/results/Citation";
-import { LoadedOnyxDocument, OnyxDocument } from "@/lib/search/interfaces";
+import { LoadedCallosumDocument, CallosumDocument } from "@/lib/search/interfaces";
 import React, { memo, JSX } from "react";
 import isEqual from "lodash/isEqual";
 import { SourceIcon } from "@/components/SourceIcon";
@@ -28,10 +28,10 @@ export const MemoizedAnchor = memo(
   }: {
     subQuestions?: SubQuestionDetail[];
     openQuestion?: (question: SubQuestionDetail) => void;
-    docs?: OnyxDocument[] | null;
+    docs?: CallosumDocument[] | null;
     userFiles?: ProjectFile[] | null;
     citations?: CitationMap;
-    updatePresentingDocument: (doc: OnyxDocument) => void;
+    updatePresentingDocument: (doc: CallosumDocument) => void;
     href?: string;
     children: React.ReactNode;
   }): JSX.Element => {
@@ -50,7 +50,7 @@ export const MemoizedAnchor = memo(
           // Use citation map to find the correct document
           // Citations map format: {citation_num: document_id}
           // e.g., {1: "doc_abc", 2: "doc_xyz", 3: "doc_123"}
-          let associatedDoc: OnyxDocument | null = null;
+          let associatedDoc: CallosumDocument | null = null;
           if (isDocument && docs && citations) {
             const document_id = citations[citation_num];
             if (document_id) {
@@ -137,7 +137,7 @@ export const MemoizedLink = memo(
       document && updatePresentingDocument
         ? {
             url: document.link,
-            document: document as LoadedOnyxDocument,
+            document: document as LoadedCallosumDocument,
             updatePresentingDocument: updatePresentingDocument!,
           }
         : undefined;

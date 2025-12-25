@@ -1,10 +1,10 @@
 import time
 from collections.abc import Sequence
 
-from onyx.connectors.google_drive.connector import GoogleDriveConnector
-from onyx.connectors.models import ConnectorFailure
-from onyx.connectors.models import Document
-from onyx.connectors.models import TextSection
+from callosum.connectors.google_drive.connector import GoogleDriveConnector
+from callosum.connectors.models import ConnectorFailure
+from callosum.connectors.models import Document
+from callosum.connectors.models import TextSection
 from tests.daily.connectors.utils import load_all_docs_from_checkpoint_connector
 from tests.daily.connectors.utils import load_everything_from_checkpoint_connector
 
@@ -85,10 +85,10 @@ PADDING_DRIVE_URLS = [
     "0ABu8fYjvA21dUk9PVA",
 ]
 
-ADMIN_EMAIL = "admin@onyx-test.com"
-TEST_USER_1_EMAIL = "test_user_1@onyx-test.com"
-TEST_USER_2_EMAIL = "test_user_2@onyx-test.com"
-TEST_USER_3_EMAIL = "test_user_3@onyx-test.com"
+ADMIN_EMAIL = "admin@callosum-test.com"
+TEST_USER_1_EMAIL = "test_user_1@callosum-test.com"
+TEST_USER_2_EMAIL = "test_user_2@callosum-test.com"
+TEST_USER_3_EMAIL = "test_user_3@callosum-test.com"
 
 # Dictionary for access permissions
 # All users have access to their own My Drive as well as public files

@@ -2,7 +2,7 @@ from collections.abc import Callable
 from unittest.mock import MagicMock
 from unittest.mock import patch
 
-from onyx.connectors.google_drive.connector import GoogleDriveConnector
+from callosum.connectors.google_drive.connector import GoogleDriveConnector
 from tests.daily.connectors.google_drive.consts_and_utils import ADMIN_EMAIL
 from tests.daily.connectors.google_drive.consts_and_utils import ADMIN_FILE_IDS
 from tests.daily.connectors.google_drive.consts_and_utils import ADMIN_FOLDER_3_FILE_IDS
@@ -29,7 +29,7 @@ from tests.daily.connectors.google_drive.consts_and_utils import SHARED_DRIVE_2_
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_include_all(
@@ -69,7 +69,7 @@ def test_include_all(
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_include_shared_drives_only(
@@ -107,7 +107,7 @@ def test_include_shared_drives_only(
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_include_my_drives_only(
@@ -135,7 +135,7 @@ def test_include_my_drives_only(
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_drive_one_only(
@@ -168,7 +168,7 @@ def test_drive_one_only(
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_folder_and_shared_drive(
@@ -205,7 +205,7 @@ def test_folder_and_shared_drive(
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_folders_only(
@@ -248,7 +248,7 @@ def test_folders_only(
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_personal_folders_only(

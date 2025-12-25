@@ -11,7 +11,7 @@ from pydantic import BaseModel, ConfigDict
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
 
-from onyx.llm.llm_provider_options import (
+from callosum.llm.llm_provider_options import (
     fetch_model_names_for_provider_as_set,
     fetch_visible_model_names_for_provider_as_set,
 )

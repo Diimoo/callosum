@@ -5,11 +5,11 @@ import pytest
 from fastapi_users.password import PasswordHelper
 from sqlalchemy.orm import Session
 
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.engine.sql_engine import SqlEngine
-from onyx.db.models import User
-from onyx.db.models import UserRole
-from onyx.file_store.file_store import get_default_file_store
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.engine.sql_engine import SqlEngine
+from callosum.db.models import User
+from callosum.db.models import UserRole
+from callosum.file_store.file_store import get_default_file_store
 from shared_configs.contextvars import CURRENT_TENANT_ID_CONTEXTVAR
 from tests.external_dependency_unit.constants import TEST_TENANT_ID
 from tests.external_dependency_unit.full_setup import (

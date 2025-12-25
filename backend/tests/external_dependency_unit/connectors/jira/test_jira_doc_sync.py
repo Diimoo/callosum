@@ -3,18 +3,18 @@ from typing import Any
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from ee.onyx.external_permissions.jira.doc_sync import jira_doc_sync
-from onyx.access.models import DocExternalAccess
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import InputType
-from onyx.db.enums import AccessType
-from onyx.db.enums import ConnectorCredentialPairStatus
-from onyx.db.models import Connector
-from onyx.db.models import ConnectorCredentialPair
-from onyx.db.models import Credential
-from onyx.db.utils import DocumentRow
-from onyx.db.utils import SortOrder
-from onyx.utils.variable_functionality import global_version
+from ee.callosum.external_permissions.jira.doc_sync import jira_doc_sync
+from callosum.access.models import DocExternalAccess
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.models import InputType
+from callosum.db.enums import AccessType
+from callosum.db.enums import ConnectorCredentialPairStatus
+from callosum.db.models import Connector
+from callosum.db.models import ConnectorCredentialPair
+from callosum.db.models import Credential
+from callosum.db.utils import DocumentRow
+from callosum.db.utils import SortOrder
+from callosum.utils.variable_functionality import global_version
 
 
 # In order to get these tests to run, use the credentials from Bitwarden.
@@ -209,7 +209,7 @@ def test_jira_doc_sync_with_specific_permissions(
         assert len(docs) > 0, "Expected at least one document from SUP project"
 
         _EXPECTED_USER_EMAILS = set(
-            ["yuhong@onyx.app", "chris@onyx.app", "founders@onyx.app"]
+            ["yuhong@callosum.app", "chris@callosum.app", "founders@callosum.app"]
         )
         _EXPECTED_USER_GROUP_IDS = set(["jira-users-danswerai"])
 

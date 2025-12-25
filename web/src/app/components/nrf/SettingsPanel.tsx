@@ -53,11 +53,11 @@ const RadioOption = ({
 export const SettingsPanel = ({
   settingsOpen,
   toggleSettings,
-  handleUseOnyxToggle,
+  handleUseCallosumToggle,
 }: {
   settingsOpen: boolean;
   toggleSettings: () => void;
-  handleUseOnyxToggle: (checked: boolean) => void;
+  handleUseCallosumToggle: (checked: boolean) => void;
 }) => {
   const {
     theme,
@@ -66,7 +66,7 @@ export const SettingsPanel = ({
     setDefaultLightBackgroundUrl,
     defaultDarkBackgroundUrl,
     setDefaultDarkBackgroundUrl,
-    useOnyxAsNewTab,
+    useCallosumAsNewTab,
     showShortcuts,
     setShowShortcuts,
   } = useNRFPreferences();
@@ -107,9 +107,9 @@ export const SettingsPanel = ({
 
         <h3 className="text-sm font-semibold mb-2">General</h3>
         <SidebarSwitch
-          checked={useOnyxAsNewTab}
-          onCheckedChange={handleUseOnyxToggle}
-          label="Use Onyx as new tab page"
+          checked={useCallosumAsNewTab}
+          onCheckedChange={handleUseCallosumToggle}
+          label="Use Callosum as new tab page"
         />
 
         <SidebarSwitch

@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2.0.0",
-  "productName": "Onyx",
+  "productName": "Callosum",
   "version": "0.0.0-dev",
-  "identifier": "app.onyx.desktop",
+  "identifier": "app.callosum.desktop",
   "build": {
     "beforeBuildCommand": "",
     "beforeDevCommand": "",
@@ -12,9 +12,9 @@
     "withGlobalTauri": true,
     "windows": [
       {
-        "title": "Onyx",
+        "title": "Callosum",
         "label": "main",
-        "url": "https://cloud.onyx.app",
+        "url": "https://cloud.callosum.app",
         "width": 1200,
         "height": 800,
         "minWidth": 800,
@@ -27,7 +27,7 @@
         "titleBarStyle": "Overlay",
         "hiddenTitle": true,
         "acceptFirstMouse": true,
-        "tabbingIdentifier": "onyx"
+        "tabbingIdentifier": "callosum"
       }
     ],
     "security": {
@@ -46,11 +46,11 @@
       "icons/icon.ico"
     ],
     "category": "Productivity",
-    "shortDescription": "Onyx Cloud Desktop App",
-    "longDescription": "A lightweight desktop wrapper for Onyx Cloud - your AI-powered knowledge assistant.",
+    "shortDescription": "Callosum Cloud Desktop App",
+    "longDescription": "A lightweight desktop wrapper for Callosum Cloud - your AI-powered knowledge assistant.",
     "macOS": {
       "entitlements": null,
-      "exceptionDomain": "cloud.onyx.app",
+      "exceptionDomain": "cloud.callosum.app",
       "minimumSystemVersion": "10.15",
       "signingIdentity": "-",
       "dmg": {

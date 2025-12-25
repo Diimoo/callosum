@@ -1,8 +1,8 @@
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import InputType
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.models import Document
-from onyx.db.tag import get_structured_tags_for_document
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.models import InputType
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.models import Document
+from callosum.db.tag import get_structured_tags_for_document
 from tests.integration.common_utils.managers.api_key import APIKeyManager
 from tests.integration.common_utils.managers.cc_pair import CCPairManager
 from tests.integration.common_utils.managers.document import DocumentManager
@@ -13,7 +13,7 @@ from tests.integration.common_utils.test_models import DATestUser
 
 def test_tag_creation_and_update(reset: None) -> None:
     # create admin user
-    admin_user: DATestUser = UserManager.create(email="admin@onyx.app")
+    admin_user: DATestUser = UserManager.create(email="admin@callosum.app")
 
     # create a minimal file connector
     cc_pair = CCPairManager.create_from_scratch(
@@ -122,7 +122,7 @@ def test_tag_creation_and_update(reset: None) -> None:
 
 def test_tag_sharing(reset: None) -> None:
     # create admin user
-    admin_user: DATestUser = UserManager.create(email="admin@onyx.app")
+    admin_user: DATestUser = UserManager.create(email="admin@callosum.app")
 
     # create a minimal file connector
     cc_pair = CCPairManager.create_from_scratch(

@@ -11,15 +11,15 @@ from uuid import uuid4
 
 from sqlalchemy.orm import Session
 
-from onyx.connectors.models import ConnectorFailure
-from onyx.connectors.models import DocumentFailure
-from onyx.db.engine.sql_engine import get_sqlalchemy_engine
-from onyx.db.enums import IndexingStatus
-from onyx.db.index_attempt import create_index_attempt
-from onyx.db.index_attempt import create_index_attempt_error
-from onyx.db.models import IndexAttempt
-from onyx.db.search_settings import get_current_search_settings
-from onyx.server.documents.models import DocumentSource
+from callosum.connectors.models import ConnectorFailure
+from callosum.connectors.models import DocumentFailure
+from callosum.db.engine.sql_engine import get_sqlalchemy_engine
+from callosum.db.enums import IndexingStatus
+from callosum.db.index_attempt import create_index_attempt
+from callosum.db.index_attempt import create_index_attempt_error
+from callosum.db.models import IndexAttempt
+from callosum.db.search_settings import get_current_search_settings
+from callosum.server.documents.models import DocumentSource
 from tests.integration.common_utils.constants import NUM_DOCS
 from tests.integration.common_utils.managers.api_key import APIKeyManager
 from tests.integration.common_utils.managers.cc_pair import CCPairManager

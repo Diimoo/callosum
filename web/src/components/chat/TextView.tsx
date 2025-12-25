@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { MinimalCallosumDocument } from "@/lib/search/interfaces";
 import MinimalMarkdown from "@/components/chat/MinimalMarkdown";
 import IconButton from "@/refresh-components/buttons/IconButton";
 import Modal from "@/refresh-components/Modal";
@@ -26,7 +26,7 @@ import SimpleLoader from "@/refresh-components/loaders/SimpleLoader";
 import ScrollIndicatorDiv from "@/refresh-components/ScrollIndicatorDiv";
 import { cn } from "@/lib/utils";
 export interface TextViewProps {
-  presentingDocument: MinimalOnyxDocument;
+  presentingDocument: MinimalCallosumDocument;
   onClose: () => void;
 }
 

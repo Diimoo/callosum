@@ -1,11 +1,11 @@
 import { JSX } from "react";
 import { MinimalPersonaSnapshot } from "@/app/admin/assistants/interfaces";
 import { Packet } from "../../services/streamingModels";
-import { OnyxDocument, MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { CallosumDocument, MinimalCallosumDocument } from "@/lib/search/interfaces";
 import { ProjectFile } from "../../projects/projectsService";
 import { LlmDescriptor } from "@/lib/hooks";
 import { IconType } from "react-icons";
-import { OnyxIconType } from "@/components/icons/icons";
+import { CallosumIconType } from "@/components/icons/icons";
 import { CitationMap } from "../../interfaces";
 
 export enum RenderType {
@@ -16,10 +16,10 @@ export enum RenderType {
 export interface FullChatState {
   assistant: MinimalPersonaSnapshot;
   // Document-related context for citations
-  docs?: OnyxDocument[] | null;
+  docs?: CallosumDocument[] | null;
   userFiles?: ProjectFile[];
   citations?: CitationMap;
-  setPresentingDocument?: (document: MinimalOnyxDocument) => void;
+  setPresentingDocument?: (document: MinimalCallosumDocument) => void;
   // Regenerate functionality
   regenerate?: (modelOverRide: LlmDescriptor) => Promise<void>;
   overriddenModel?: string;
@@ -27,7 +27,7 @@ export interface FullChatState {
 }
 
 export interface RendererResult {
-  icon: IconType | OnyxIconType | null;
+  icon: IconType | CallosumIconType | null;
   status: string | null;
   content: JSX.Element;
 

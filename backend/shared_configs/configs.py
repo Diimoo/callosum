@@ -32,13 +32,13 @@ INDEXING_MODEL_SERVER_PORT = int(
     os.environ.get("INDEXING_MODEL_SERVER_PORT") or MODEL_SERVER_PORT
 )
 
-# Onyx custom Deep Learning Models
+# Callosum custom Deep Learning Models
 CONNECTOR_CLASSIFIER_MODEL_REPO = "Danswer/filter-extraction-model"
 CONNECTOR_CLASSIFIER_MODEL_TAG = "1.0.0"
-INTENT_MODEL_VERSION = "onyx-dot-app/hybrid-intent-token-classifier"
+INTENT_MODEL_VERSION = "callosum-dot-app/hybrid-intent-token-classifier"
 # INTENT_MODEL_TAG = "v1.0.3"
 INTENT_MODEL_TAG: str | None = None
-INFORMATION_CONTENT_MODEL_VERSION = "onyx-dot-app/information-content-model"
+INFORMATION_CONTENT_MODEL_VERSION = "callosum-dot-app/information-content-model"
 INFORMATION_CONTENT_MODEL_TAG: str | None = None
 
 # Bi-Encoder, other details
@@ -71,7 +71,7 @@ INDEXING_ONLY = os.environ.get("INDEXING_ONLY", "").lower() == "true"
 # The process needs to have this for the log file to write to
 # otherwise, it will not create additional log files
 # This should just be the filename base without extension or path.
-LOG_FILE_NAME = os.environ.get("LOG_FILE_NAME") or "onyx"
+LOG_FILE_NAME = os.environ.get("LOG_FILE_NAME") or "callosum"
 
 # Enable generating persistent log files for local dev environments
 DEV_LOGGING_ENABLED = os.environ.get("DEV_LOGGING_ENABLED", "").lower() == "true"

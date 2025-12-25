@@ -33,11 +33,11 @@ env:
   PERM_SYNC_SHAREPOINT_CERTIFICATE_PASSWORD: ${{ secrets.PERM_SYNC_SHAREPOINT_CERTIFICATE_PASSWORD }}
   PERM_SYNC_SHAREPOINT_DIRECTORY_ID: ${{ secrets.PERM_SYNC_SHAREPOINT_DIRECTORY_ID }}
   EXA_API_KEY: ${{ secrets.EXA_API_KEY }}
-  GITHUB_PERMISSION_SYNC_TEST_ACCESS_TOKEN: ${{ secrets.ONYX_GITHUB_PERMISSION_SYNC_TEST_ACCESS_TOKEN }}
-  GITHUB_PERMISSION_SYNC_TEST_ACCESS_TOKEN_CLASSIC: ${{ secrets.ONYX_GITHUB_PERMISSION_SYNC_TEST_ACCESS_TOKEN_CLASSIC }}
-  GITHUB_ADMIN_EMAIL: ${{ secrets.ONYX_GITHUB_ADMIN_EMAIL }}
-  GITHUB_TEST_USER_1_EMAIL: ${{ secrets.ONYX_GITHUB_TEST_USER_1_EMAIL }}
-  GITHUB_TEST_USER_2_EMAIL: ${{ secrets.ONYX_GITHUB_TEST_USER_2_EMAIL }}
+  GITHUB_PERMISSION_SYNC_TEST_ACCESS_TOKEN: ${{ secrets.CALLOSUM_GITHUB_PERMISSION_SYNC_TEST_ACCESS_TOKEN }}
+  GITHUB_PERMISSION_SYNC_TEST_ACCESS_TOKEN_CLASSIC: ${{ secrets.CALLOSUM_GITHUB_PERMISSION_SYNC_TEST_ACCESS_TOKEN_CLASSIC }}
+  GITHUB_ADMIN_EMAIL: ${{ secrets.CALLOSUM_GITHUB_ADMIN_EMAIL }}
+  GITHUB_TEST_USER_1_EMAIL: ${{ secrets.CALLOSUM_GITHUB_TEST_USER_1_EMAIL }}
+  GITHUB_TEST_USER_2_EMAIL: ${{ secrets.CALLOSUM_GITHUB_TEST_USER_2_EMAIL }}
 
 jobs:
   discover-test-dirs:
@@ -120,7 +120,7 @@ jobs:
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:backend-cache-${{ github.event.pull_request.head.sha || github.sha }}
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:backend-cache-${{ steps.format-branch.outputs.cache-suffix }}
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:backend-cache
-            type=registry,ref=onyxdotapp/onyx-backend:latest
+            type=registry,ref=callosumdotapp/callosum-backend:latest
           cache-to: |
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:backend-cache-${{ github.event.pull_request.head.sha || github.sha }},mode=max
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:backend-cache-${{ steps.format-branch.outputs.cache-suffix }},mode=max
@@ -175,7 +175,7 @@ jobs:
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:model-server-cache-${{ github.event.pull_request.head.sha || github.sha }}
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:model-server-cache-${{ steps.format-branch.outputs.cache-suffix }}
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:model-server-cache
-            type=registry,ref=onyxdotapp/onyx-model-server:latest
+            type=registry,ref=callosumdotapp/callosum-model-server:latest
           cache-to: |
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:model-server-cache-${{ github.event.pull_request.head.sha || github.sha }},mode=max
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:model-server-cache-${{ steps.format-branch.outputs.cache-suffix }},mode=max
@@ -229,7 +229,7 @@ jobs:
             --set backend.cache-from=type=registry,ref=${RUNS_ON_ECR_CACHE}:backend-cache-${HEAD_SHA} \
             --set backend.cache-from=type=registry,ref=${RUNS_ON_ECR_CACHE}:backend-cache-${CACHE_SUFFIX} \
             --set backend.cache-from=type=registry,ref=${RUNS_ON_ECR_CACHE}:backend-cache \
-            --set backend.cache-from=type=registry,ref=onyxdotapp/onyx-backend:latest \
+            --set backend.cache-from=type=registry,ref=callosumdotapp/callosum-backend:latest \
             --set backend.cache-to=type=registry,ref=${RUNS_ON_ECR_CACHE}:backend-cache-${HEAD_SHA},mode=max \
             --set backend.cache-to=type=registry,ref=${RUNS_ON_ECR_CACHE}:backend-cache-${CACHE_SUFFIX},mode=max \
             --set backend.cache-to=type=registry,ref=${RUNS_ON_ECR_CACHE}:backend-cache,mode=max \
@@ -291,8 +291,8 @@ jobs:
           POSTGRES_USE_NULL_POOL=true
           REQUIRE_EMAIL_VERIFICATION=false
           DISABLE_TELEMETRY=true
-          ONYX_BACKEND_IMAGE=${ECR_CACHE}:integration-test-backend-test-${RUN_ID}
-          ONYX_MODEL_SERVER_IMAGE=${ECR_CACHE}:integration-test-model-server-test-${RUN_ID}
+          CALLOSUM_BACKEND_IMAGE=${ECR_CACHE}:integration-test-backend-test-${RUN_ID}
+          CALLOSUM_MODEL_SERVER_IMAGE=${ECR_CACHE}:integration-test-model-server-test-${RUN_ID}
           INTEGRATION_TESTS_MODE=true
           CHECK_TTL_MANAGEMENT_TASK_FREQUENCY_IN_HOURS=0.001
           MCP_SERVER_ENABLED=true
@@ -374,7 +374,7 @@ jobs:
           retry_wait_seconds: 10
           command: |
             echo "Running integration tests for ${{ matrix.test-dir.path }}..."
-            docker run --rm --network onyx_default \
+            docker run --rm --network callosum_default \
               --name test-runner \
               -e POSTGRES_HOST=relational_db \
               -e POSTGRES_USER=postgres \
@@ -472,8 +472,8 @@ jobs:
           AUTH_TYPE=cloud \
           REQUIRE_EMAIL_VERIFICATION=false \
           DISABLE_TELEMETRY=true \
-          ONYX_BACKEND_IMAGE=${ECR_CACHE}:integration-test-backend-test-${RUN_ID} \
-          ONYX_MODEL_SERVER_IMAGE=${ECR_CACHE}:integration-test-model-server-test-${RUN_ID} \
+          CALLOSUM_BACKEND_IMAGE=${ECR_CACHE}:integration-test-backend-test-${RUN_ID} \
+          CALLOSUM_MODEL_SERVER_IMAGE=${ECR_CACHE}:integration-test-model-server-test-${RUN_ID} \
           DEV_MODE=true \
           MCP_SERVER_ENABLED=true \
           docker compose -f docker-compose.multitenant-dev.yml up \
@@ -492,7 +492,7 @@ jobs:
       - name: Wait for service to be ready (multi-tenant)
         run: |
           echo "Starting wait-for-service script for multi-tenant..."
-          docker logs -f onyx-api_server-1 &
+          docker logs -f callosum-api_server-1 &
           start_time=$(date +%s)
           timeout=300
           while true; do
@@ -521,7 +521,7 @@ jobs:
           RUN_ID: ${{ github.run_id }}
         run: |
           echo "Running multi-tenant integration tests..."
-          docker run --rm --network onyx_default \
+          docker run --rm --network callosum_default \
             --name test-runner \
             -e POSTGRES_HOST=relational_db \
             -e POSTGRES_USER=postgres \

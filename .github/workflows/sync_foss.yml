@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Checkout main Onyx repo
+      - name: Checkout main Callosum repo
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # ratchet:actions/checkout@v6
         with:
           fetch-depth: 0
@@ -34,15 +34,15 @@ jobs:
 
       - name: Set Git config
         run: |
-          git config --global user.name "onyx-bot"
-          git config --global user.email "bot@onyx.app"
+          git config --global user.name "callosum-bot"
+          git config --global user.email "bot@callosum.app"
 
       - name: Build FOSS version
         run: bash backend/scripts/make_foss_repo.sh
 
       - name: Push to FOSS repo
         env:
-          FOSS_REPO_URL: git@github.com:onyx-dot-app/onyx-foss.git
+          FOSS_REPO_URL: git@github.com:callosum-dot-app/callosum-foss.git
         run: |
           cd /tmp/foss_repo
           git remote add public "$FOSS_REPO_URL"

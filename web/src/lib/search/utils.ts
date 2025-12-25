@@ -1,5 +1,5 @@
 import { Tag, ValidSources } from "../types";
-import { Filters, OnyxDocument, SourceMetadata } from "./interfaces";
+import { Filters, CallosumDocument, SourceMetadata } from "./interfaces";
 import { DateRangePickerValue } from "@/components/dateRangeSelectors/AdminDateRangeSelector";
 
 export const buildFilters = (
@@ -26,8 +26,8 @@ export function endsWithLetterOrNumber(str: string) {
 // If we have a link, open it in a new tab (including if it's a file)
 // If above fails and we have a file, update the presenting document
 export const openDocument = (
-  document: OnyxDocument,
-  updatePresentingDocument?: (document: OnyxDocument) => void
+  document: CallosumDocument,
+  updatePresentingDocument?: (document: CallosumDocument) => void
 ) => {
   if (document.link) {
     window.open(document.link, "_blank");

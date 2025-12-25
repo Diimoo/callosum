@@ -5,11 +5,11 @@ import pytest
 import requests
 from requests.models import Response
 
-from onyx.llm.model_name_parser import parse_litellm_model_name
-from onyx.llm.utils import get_max_input_tokens
-from onyx.llm.utils import litellm_thinks_model_supports_image_input
-from onyx.llm.utils import model_is_reasoning_model
-from onyx.server.manage.llm.models import ModelConfigurationUpsertRequest
+from callosum.llm.model_name_parser import parse_litellm_model_name
+from callosum.llm.utils import get_max_input_tokens
+from callosum.llm.utils import litellm_thinks_model_supports_image_input
+from callosum.llm.utils import model_is_reasoning_model
+from callosum.server.manage.llm.models import ModelConfigurationUpsertRequest
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.managers.user import UserManager
 from tests.integration.common_utils.test_models import DATestUser

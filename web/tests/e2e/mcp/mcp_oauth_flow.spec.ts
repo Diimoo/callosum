@@ -1,7 +1,7 @@
 import { test, expect } from "@chromatic-com/playwright";
 import type { Page, Browser, Locator } from "@playwright/test";
 import { loginAs, loginWithCredentials } from "../utils/auth";
-import { OnyxApiClient } from "../utils/onyxApiClient";
+import { CallosumApiClient } from "../utils/callosumApiClient";
 import { startMcpOauthServer, McpServerProcess } from "../utils/mcpServer";
 import { TEST_ADMIN_CREDENTIALS } from "../constants";
 import { logPageState } from "../utils/pageStateLogger";
@@ -972,7 +972,7 @@ async function ensureServerVisibleInActions(page: Page, serverName: string) {
 }
 
 async function waitForUserRecord(
-  client: OnyxApiClient,
+  client: CallosumApiClient,
   email: string,
   timeoutMs: number = 10_000
 ) {
@@ -988,7 +988,7 @@ async function waitForUserRecord(
 }
 
 async function waitForAssistantByName(
-  client: OnyxApiClient,
+  client: CallosumApiClient,
   assistantName: string,
   timeoutMs: number = 20_000
 ) {
@@ -1006,7 +1006,7 @@ async function waitForAssistantByName(
 }
 
 async function waitForAssistantTools(
-  client: OnyxApiClient,
+  client: CallosumApiClient,
   assistantName: string,
   requiredToolNames: string[],
   timeoutMs: number = 30_000
@@ -1078,7 +1078,7 @@ test.describe("MCP OAuth flows", () => {
       storageState: "admin_auth.json",
     });
     const adminPage = await adminContext.newPage();
-    const adminClient = new OnyxApiClient(adminPage);
+    const adminClient = new CallosumApiClient(adminPage);
     try {
       const existingServers = await adminClient.listMcpServers();
       for (const server of existingServers) {
@@ -1150,7 +1150,7 @@ test.describe("MCP OAuth flows", () => {
       storageState: "admin_auth.json",
     });
     const adminPage = await adminContext.newPage();
-    const adminClient = new OnyxApiClient(adminPage);
+    const adminClient = new CallosumApiClient(adminPage);
 
     if (adminArtifacts?.assistantId) {
       await adminClient.deleteAssistant(adminArtifacts.assistantId);
@@ -1202,7 +1202,7 @@ test.describe("MCP OAuth flows", () => {
       { email: TEST_ADMIN_CREDENTIALS.email, role: "admin" },
       "AdminFlow primary login"
     );
-    const adminApiClient = new OnyxApiClient(page);
+    const adminApiClient = new CallosumApiClient(page);
     logStep("Logged in as admin");
 
     const serverName = `PW MCP Admin ${Date.now()}`;
@@ -1475,7 +1475,7 @@ test.describe("MCP OAuth flows", () => {
       "CuratorFlow primary login"
     );
     logStep("Logged in as curator");
-    const curatorApiClient = new OnyxApiClient(page);
+    const curatorApiClient = new CallosumApiClient(page);
 
     const serverName = `PW MCP Curator ${Date.now()}`;
     const assistantName = `PW Curator Assistant ${Date.now()}`;

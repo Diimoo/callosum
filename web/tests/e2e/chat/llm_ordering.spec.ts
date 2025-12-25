@@ -15,7 +15,7 @@ test("Non-image-generation model visibility in chat input bar", async ({
 
   // Navigate to the chat page
   await page.goto("http://localhost:3000/chat");
-  await page.waitForSelector("#onyx-chat-input-textarea", { timeout: 10000 });
+  await page.waitForSelector("#callosum-chat-input-textarea", { timeout: 10000 });
 
   const testModelDisplayName = "GPT-4o Mini";
 

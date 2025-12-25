@@ -14,7 +14,7 @@ import { FilterManager, LlmManager, useFederatedConnectors } from "@/lib/hooks";
 import { useInputPrompts } from "@/lib/hooks/useInputPrompts";
 import { useCCPairs } from "@/lib/hooks/useCCPairs";
 import { DocumentIcon2, FileIcon } from "@/components/icons/icons";
-import { OnyxDocument, MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { CallosumDocument, MinimalCallosumDocument } from "@/lib/search/interfaces";
 import { ChatState } from "@/app/chat/interfaces";
 import { useForcedTools } from "@/lib/hooks/useForcedTools";
 import { CalendarIcon, XIcon } from "lucide-react";
@@ -86,7 +86,7 @@ export interface ChatInputBarHandle {
 
 export interface ChatInputBarProps {
   removeDocs: () => void;
-  selectedDocuments: OnyxDocument[];
+  selectedDocuments: CallosumDocument[];
   initialMessage?: string;
   stopGenerating: () => void;
   onSubmit: (message: string) => void;
@@ -104,7 +104,7 @@ export interface ChatInputBarProps {
   filterManager: FilterManager;
   retrievalEnabled: boolean;
   deepResearchEnabled: boolean;
-  setPresentingDocument?: (document: MinimalOnyxDocument) => void;
+  setPresentingDocument?: (document: MinimalCallosumDocument) => void;
   toggleDeepResearch: () => void;
   disabled: boolean;
 }
@@ -171,12 +171,12 @@ const ChatInputBar = React.memo(
         );
       }, [currentMessageFiles]);
 
-      // Convert ProjectFile to MinimalOnyxDocument format for viewing
+      // Convert ProjectFile to MinimalCallosumDocument format for viewing
       const handleFileClick = useCallback(
         (file: ProjectFile) => {
           if (!setPresentingDocument) return;
 
-          const documentForViewer: MinimalOnyxDocument = {
+          const documentForViewer: MinimalCallosumDocument = {
             document_id: `project_file__${file.file_id}`,
             semantic_identifier: file.name,
           };
@@ -460,9 +460,9 @@ const ChatInputBar = React.memo(
 
           <div
             ref={containerRef}
-            id="onyx-chat-input"
+            id="callosum-chat-input"
             className={cn(
-              "max-w-full w-[min(50rem,100%)] flex flex-col shadow-01 bg-background-neutral-00 rounded-16",
+              "max-w-full w-[min(50rem,100%)] flex flex-col shadow-lg border border-border-02 bg-background-neutral-00 rounded-16",
               disabled && "opacity-50 cursor-not-allowed pointer-events-none"
             )}
             aria-disabled={disabled}
@@ -489,7 +489,7 @@ const ChatInputBar = React.memo(
               onKeyDownCapture={handleKeyDown}
               onChange={handleInputChange}
               ref={textAreaRef}
-              id="onyx-chat-input-textarea"
+              id="callosum-chat-input-textarea"
               className={cn(
                 "w-full",
                 "h-[44px]", // Fixed initial height to prevent flash - useEffect will adjust as needed
@@ -690,7 +690,7 @@ const ChatInputBar = React.memo(
 
                 {/* Submit button - always visible */}
                 <IconButton
-                  id="onyx-chat-input-send-button"
+                  id="callosum-chat-input-send-button"
                   icon={chatState === "input" ? SvgArrowUp : SvgStop}
                   disabled={
                     (chatState === "input" && !message) || hasUploadingFiles

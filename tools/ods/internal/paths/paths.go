@@ -20,9 +20,9 @@ func GitRoot() (string, error) {
 	return strings.TrimSpace(string(output)), nil
 }
 
-// DataDir returns the data directory for onyx-dev tools.
-// On Linux/macOS: ~/.local/share/onyx-dev/
-// On Windows: %LOCALAPPDATA%/onyx-dev/
+// DataDir returns the data directory for callosum-dev tools.
+// On Linux/macOS: ~/.local/share/callosum-dev/
+// On Windows: %LOCALAPPDATA%/callosum-dev/
 func DataDir() string {
 	var base string
 	if runtime.GOOS == "windows" {
@@ -44,7 +44,7 @@ func DataDir() string {
 			base = filepath.Join(home, ".local", "share")
 		}
 	}
-	return filepath.Join(base, "onyx-dev")
+	return filepath.Join(base, "callosum-dev")
 }
 
 // SnapshotsDir returns the directory for database snapshots.

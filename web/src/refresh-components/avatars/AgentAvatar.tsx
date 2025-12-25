@@ -2,7 +2,7 @@
 
 import { MinimalPersonaSnapshot } from "@/app/admin/assistants/interfaces";
 import { buildImgUrl } from "@/app/chat/components/files/images/utils";
-import { OnyxIcon } from "@/components/icons/icons";
+import { CallosumIcon } from "@/components/icons/icons";
 import { useSettingsContext } from "@/components/settings/SettingsProvider";
 import {
   DEFAULT_AGENT_AVATAR_SIZE_PX,
@@ -38,7 +38,7 @@ export default function AgentAvatar({
         />
       </div>
     ) : (
-      <OnyxIcon size={size} className="shrink-0" />
+      <CallosumIcon size={size} className="shrink-0" />
     );
   }
 

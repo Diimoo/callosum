@@ -8,10 +8,10 @@ from typing import cast
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import Document
-from onyx.connectors.salesforce.connector import SalesforceConnector
-from onyx.connectors.salesforce.utils import ACCOUNT_OBJECT_TYPE
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.models import Document
+from callosum.connectors.salesforce.connector import SalesforceConnector
+from callosum.connectors.salesforce.utils import ACCOUNT_OBJECT_TYPE
 
 
 def extract_key_value_pairs_to_set(

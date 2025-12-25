@@ -9,10 +9,10 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/onyx-dot-app/onyx/tools/ods/internal/docker"
-	"github.com/onyx-dot-app/onyx/tools/ods/internal/paths"
-	"github.com/onyx-dot-app/onyx/tools/ods/internal/postgres"
-	"github.com/onyx-dot-app/onyx/tools/ods/internal/prompt"
+	"github.com/callosum-dot-app/callosum/tools/ods/internal/docker"
+	"github.com/callosum-dot-app/callosum/tools/ods/internal/paths"
+	"github.com/callosum-dot-app/callosum/tools/ods/internal/postgres"
+	"github.com/callosum-dot-app/callosum/tools/ods/internal/prompt"
 )
 
 // DBRestoreOptions holds options for the db restore command.
@@ -35,7 +35,7 @@ The format is automatically detected based on file extension:
   - .sql files: restored with psql (plain SQL)
 
 If just a filename is provided (without path), the file is looked up
-in the default snapshots directory (~/.local/share/onyx-dev/snapshots/).
+in the default snapshots directory (~/.local/share/callosum-dev/snapshots/).
 
 Examples:
   ods db restore mybackup.dump           # Restores from snapshots dir
@@ -118,7 +118,7 @@ func runDBRestore(input string, opts *DBRestoreOptions) {
 	log.Infof("Restoring database '%s' from: %s", config.Database, inputPath)
 
 	// Copy file to container
-	containerTmpFile := "/tmp/onyx_restore_tmp"
+	containerTmpFile := "/tmp/callosum_restore_tmp"
 	if err := docker.CopyToContainer(container, inputPath, containerTmpFile); err != nil {
 		log.Fatalf("Failed to copy file to container: %v", err)
 	}

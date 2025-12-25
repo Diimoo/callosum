@@ -104,7 +104,7 @@ jobs:
 
     # Backend
     - name: Pull backend docker image
-      run: docker pull onyxdotapp/onyx-backend:latest
+      run: docker pull callosumdotapp/callosum-backend:latest
 
     - name: Run Trivy vulnerability scanner on backend
       uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # ratchet:aquasecurity/trivy-action@0.33.1
@@ -112,7 +112,7 @@ jobs:
         TRIVY_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-db:2'
         TRIVY_JAVA_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-java-db:1'
       with:
-        image-ref: onyxdotapp/onyx-backend:latest
+        image-ref: callosumdotapp/callosum-backend:latest
         scanners: license
         severity: HIGH,CRITICAL
         vuln-type: library
@@ -120,7 +120,7 @@ jobs:
 
     # Web server
     - name: Pull web server docker image
-      run: docker pull onyxdotapp/onyx-web-server:latest
+      run: docker pull callosumdotapp/callosum-web-server:latest
 
     - name: Run Trivy vulnerability scanner on web server
       uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # ratchet:aquasecurity/trivy-action@0.33.1
@@ -128,7 +128,7 @@ jobs:
         TRIVY_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-db:2'
         TRIVY_JAVA_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-java-db:1'
       with:
-        image-ref: onyxdotapp/onyx-web-server:latest
+        image-ref: callosumdotapp/callosum-web-server:latest
         scanners: license
         severity: HIGH,CRITICAL
         vuln-type: library
@@ -136,7 +136,7 @@ jobs:
 
     # Model server
     - name: Pull model server docker image
-      run: docker pull onyxdotapp/onyx-model-server:latest
+      run: docker pull callosumdotapp/callosum-model-server:latest
 
     - name: Run Trivy vulnerability scanner
       uses: aquasecurity/trivy-action@b6643a29fecd7f34b3597bc6acb0a98b03d33ff8 # ratchet:aquasecurity/trivy-action@0.33.1
@@ -144,7 +144,7 @@ jobs:
         TRIVY_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-db:2'
         TRIVY_JAVA_DB_REPOSITORY: 'public.ecr.aws/aquasecurity/trivy-java-db:1'
       with:
-        image-ref: onyxdotapp/onyx-model-server:latest
+        image-ref: callosumdotapp/callosum-model-server:latest
         scanners: license
         severity: HIGH,CRITICAL
         vuln-type: library

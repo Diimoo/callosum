@@ -13,8 +13,8 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - onyx_default
+      - callosum_default
 networks:
-  onyx_default:
-    name: onyx_default
+  callosum_default:
+    name: callosum_default
     external: true

@@ -5,10 +5,10 @@ from sqlalchemy import and_
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from onyx.configs.constants import DocumentSource
-from onyx.db.enums import AccessType
-from onyx.db.models import ConnectorCredentialPair
-from onyx.db.models import DocumentByConnectorCredentialPair
+from callosum.configs.constants import DocumentSource
+from callosum.db.enums import AccessType
+from callosum.db.models import ConnectorCredentialPair
+from callosum.db.models import DocumentByConnectorCredentialPair
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.constants import GENERAL_HEADERS
 from tests.integration.common_utils.constants import NUM_DOCS
@@ -116,7 +116,7 @@ class DocumentManager:
             document = _generate_dummy_document(document_id, cc_pair.id)
             documents.append(document)
             response = requests.post(
-                f"{API_SERVER_URL}/onyx-api/ingestion",
+                f"{API_SERVER_URL}/callosum-api/ingestion",
                 json=document,
                 headers=api_key.headers if api_key else GENERAL_HEADERS,
             )
@@ -151,7 +151,7 @@ class DocumentManager:
             extra_metadata=metadata,
         )
         response = requests.post(
-            f"{API_SERVER_URL}/onyx-api/ingestion",
+            f"{API_SERVER_URL}/callosum-api/ingestion",
             json=document,
             headers=api_key.headers if api_key else GENERAL_HEADERS,
         )
@@ -271,7 +271,7 @@ class IngestionManager(DocumentManager):
         api_key: DATestAPIKey | None = None,
     ) -> list[dict]:
         response = requests.get(
-            f"{API_SERVER_URL}/onyx-api/ingestion",
+            f"{API_SERVER_URL}/callosum-api/ingestion",
             headers=api_key.headers if api_key else GENERAL_HEADERS,
         )
         response.raise_for_status()
@@ -283,7 +283,7 @@ class IngestionManager(DocumentManager):
         api_key: DATestAPIKey | None = None,
     ) -> None:
         response = requests.delete(
-            f"{API_SERVER_URL}/onyx-api/ingestion/{document_id}",
+            f"{API_SERVER_URL}/callosum-api/ingestion/{document_id}",
             headers=api_key.headers if api_key else GENERAL_HEADERS,
         )
         response.raise_for_status()

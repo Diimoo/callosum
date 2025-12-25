@@ -91,8 +91,8 @@ test.describe("Disable Default Assistant Setting @exclusive", () => {
     await newSessionButton.click();
 
     // Verify the WelcomeMessage shown is NOT from the default assistant
-    // Default assistant shows onyx-logo, custom assistants show assistant-name-display
-    await expect(page.locator('[data-testid="onyx-logo"]')).not.toBeVisible();
+    // Default assistant shows callosum-logo, custom assistants show assistant-name-display
+    await expect(page.locator('[data-testid="callosum-logo"]')).not.toBeVisible();
     await expect(
       page.locator('[data-testid="assistant-name-display"]')
     ).toBeVisible();

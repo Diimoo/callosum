@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import type { Page } from "@playwright/test";
 import { loginAs, loginWithCredentials } from "../utils/auth";
-import { OnyxApiClient } from "../utils/onyxApiClient";
+import { CallosumApiClient } from "../utils/callosumApiClient";
 import { startMcpApiKeyServer, McpServerProcess } from "../utils/mcpServer";
 
 const API_KEY = process.env.MCP_API_KEY || "test-api-key-12345";
@@ -56,7 +56,7 @@ test.describe("Default Assistant MCP Integration", () => {
       storageState: "admin_auth.json",
     });
     const adminPage = await adminContext.newPage();
-    const adminClient = new OnyxApiClient(adminPage);
+    const adminClient = new CallosumApiClient(adminPage);
 
     // Clean up any existing servers with the same URL
     try {
@@ -83,7 +83,7 @@ test.describe("Default Assistant MCP Integration", () => {
       storageState: "admin_auth.json",
     });
     const adminPage = await adminContext.newPage();
-    const adminClient = new OnyxApiClient(adminPage);
+    const adminClient = new CallosumApiClient(adminPage);
 
     if (serverId) {
       await adminClient.deleteMcpServer(serverId);

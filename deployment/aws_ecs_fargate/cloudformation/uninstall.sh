@@ -3,7 +3,7 @@
 AWS_REGION="${AWS_REGION:-us-west-1}"
 
 # Reference to consolidated config
-CONFIG_FILE="onyx_config.json"
+CONFIG_FILE="callosum_config.json"
 
 # Get environment from config file
 ENVIRONMENT=$(jq -r '.Environment' "$CONFIG_FILE")
@@ -17,29 +17,29 @@ S3_BUCKET_FROM_CONFIG=$(jq -r '.S3Bucket // empty' "$CONFIG_FILE")
 if [ -n "$S3_BUCKET_FROM_CONFIG" ]; then
     S3_BUCKET="$S3_BUCKET_FROM_CONFIG"
 else
-    S3_BUCKET="${S3_BUCKET:-onyx-ecs-fargate-configs}"
+    S3_BUCKET="${S3_BUCKET:-callosum-ecs-fargate-configs}"
 fi
 
 STACK_NAMES=(
-  "${ENVIRONMENT}-onyx-nginx-service"
-  "${ENVIRONMENT}-onyx-web-server-service"
-  "${ENVIRONMENT}-onyx-backend-background-server-service"
-  "${ENVIRONMENT}-onyx-backend-api-server-service"
-  "${ENVIRONMENT}-onyx-model-server-inference-service"
-  "${ENVIRONMENT}-onyx-model-server-indexing-service"
-  "${ENVIRONMENT}-onyx-vespaengine-service"
-  "${ENVIRONMENT}-onyx-redis-service"
-  "${ENVIRONMENT}-onyx-postgres-service"
-  "${ENVIRONMENT}-onyx-cluster"
-  "${ENVIRONMENT}-onyx-acm"
-  "${ENVIRONMENT}-onyx-efs"
+  "${ENVIRONMENT}-callosum-nginx-service"
+  "${ENVIRONMENT}-callosum-web-server-service"
+  "${ENVIRONMENT}-callosum-backend-background-server-service"
+  "${ENVIRONMENT}-callosum-backend-api-server-service"
+  "${ENVIRONMENT}-callosum-model-server-inference-service"
+  "${ENVIRONMENT}-callosum-model-server-indexing-service"
+  "${ENVIRONMENT}-callosum-vespaengine-service"
+  "${ENVIRONMENT}-callosum-redis-service"
+  "${ENVIRONMENT}-callosum-postgres-service"
+  "${ENVIRONMENT}-callosum-cluster"
+  "${ENVIRONMENT}-callosum-acm"
+  "${ENVIRONMENT}-callosum-efs"
   )
 
 delete_stack() {
   local stack_name=$1
 
-  if [ "$stack_name" == "${ENVIRONMENT}-onyx-cluster" ]; then
-      echo "Removing all objects and directories from the onyx config s3 bucket."
+  if [ "$stack_name" == "${ENVIRONMENT}-callosum-cluster" ]; then
+      echo "Removing all objects and directories from the callosum config s3 bucket."
       aws s3 rm "s3://${ENVIRONMENT}-${S3_BUCKET}" --recursive
       sleep 5
   fi

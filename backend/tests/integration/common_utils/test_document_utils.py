@@ -2,11 +2,11 @@ import uuid
 from datetime import datetime
 from datetime import timezone
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import ConnectorFailure
-from onyx.connectors.models import Document
-from onyx.connectors.models import DocumentFailure
-from onyx.connectors.models import TextSection
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.models import ConnectorFailure
+from callosum.connectors.models import Document
+from callosum.connectors.models import DocumentFailure
+from callosum.connectors.models import TextSection
 
 
 def create_test_document(

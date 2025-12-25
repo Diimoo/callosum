@@ -11,8 +11,8 @@ import { usePopup } from "@/components/admin/connectors/Popup";
 import { SEARCH_PARAM_NAMES } from "@/app/chat/services/searchParams";
 import { useFederatedConnectors, useFilters, useLlmManager } from "@/lib/hooks";
 import { useForcedTools } from "@/lib/hooks/useForcedTools";
-import OnyxInitializingLoader from "@/components/OnyxInitializingLoader";
-import { OnyxDocument, MinimalOnyxDocument } from "@/lib/search/interfaces";
+import CallosumInitializingLoader from "@/components/CallosumInitializingLoader";
+import { CallosumDocument, MinimalCallosumDocument } from "@/lib/search/interfaces";
 import { useSettingsContext } from "@/components/settings/SettingsProvider";
 import Dropzone from "react-dropzone";
 import ChatInputBar, {
@@ -178,7 +178,7 @@ export default function ChatPage({ firstMessage }: ChatPageProps) {
   });
 
   const [presentingDocument, setPresentingDocument] =
-    useState<MinimalOnyxDocument | null>(null);
+    useState<MinimalCallosumDocument | null>(null);
   const [showOnboarding, setShowOnboarding] = useState(false);
 
   // Initialize onboarding state
@@ -315,7 +315,7 @@ export default function ChatPage({ firstMessage }: ChatPageProps) {
     };
   }, []);
 
-  const [selectedDocuments, setSelectedDocuments] = useState<OnyxDocument[]>(
+  const [selectedDocuments, setSelectedDocuments] = useState<CallosumDocument[]>(
     []
   );
 
@@ -553,7 +553,7 @@ export default function ChatPage({ firstMessage }: ChatPageProps) {
     );
   }
 
-  if (!isReady) return <OnyxInitializingLoader />;
+  if (!isReady) return <CallosumInitializingLoader />;
 
   return (
     <>

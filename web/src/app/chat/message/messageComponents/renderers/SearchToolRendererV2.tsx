@@ -12,7 +12,7 @@ import { MessageRenderer, RendererResult } from "../interfaces";
 import { truncateString } from "@/lib/utils";
 import { SourceChip2 } from "@/app/chat/components/SourceChip2";
 import { BlinkingDot } from "../../BlinkingDot";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { CallosumDocument } from "@/lib/search/interfaces";
 import { ResultIcon } from "@/components/chat/sources/SourceCard";
 
 const MAX_TITLE_LENGTH = 25;
@@ -28,7 +28,7 @@ const SEARCHED_MIN_DURATION_MS = 1000; // 1 second minimum for "Searched" state
 
 export interface SearchState {
   queries: string[];
-  results: OnyxDocument[];
+  results: CallosumDocument[];
   isSearching: boolean;
   hasResults: boolean;
   isComplete: boolean;

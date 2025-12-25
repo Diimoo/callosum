@@ -1,12 +1,12 @@
 # =============================================================================
-# ONYX DOCKER COMPOSE
+# CALLOSUM DOCKER COMPOSE
 # =============================================================================
-# This is the default configuration for Onyx. This file is fairly configurable,
+# This is the default configuration for Callosum. This file is fairly configurable,
 # also see env.template for possible settings.
 #
 # PRODUCTION DEPLOYMENT CHECKLIST:
 # To convert this setup to a production deployment following best practices,
-# follow the checklist below. Note that there are other ways to secure the Onyx
+# follow the checklist below. Note that there are other ways to secure the Callosum
 # deployment so these are not strictly necessary for all teams.
 #
 # 1. SECURITY HARDENING:
@@ -34,18 +34,18 @@
 # For a complete production setup, refer to docker-compose.prod.yml
 # =============================================================================
 
-name: onyx
+name: callosum
 
 services:
   api_server:
-    image: ${ONYX_BACKEND_IMAGE:-onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_BACKEND_IMAGE:-callosumdotapp/callosum-backend:${IMAGE_TAG:-latest}}
     build:
       context: ../../backend
       dockerfile: Dockerfile
     command: >
       /bin/sh -c "alembic upgrade head &&
-      echo \"Starting Onyx Api Server\" &&
-      uvicorn onyx.main:app --host 0.0.0.0 --port 8080"
+      echo \"Starting Callosum Api Server\" &&
+      uvicorn callosum.main:app --host 0.0.0.0 --port 8080"
     # Check env.template and copy to .env for env vars
     env_file:
       - path: .env
@@ -84,10 +84,10 @@ services:
         max-file: "6"
     # Optional, only for debugging purposes
     volumes:
-      - api_server_logs:/var/log/onyx
+      - api_server_logs:/var/log/callosum
 
   background:
-    image: ${ONYX_BACKEND_IMAGE:-onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_BACKEND_IMAGE:-callosumdotapp/callosum-backend:${IMAGE_TAG:-latest}}
     build:
       context: ../../backend
       dockerfile: Dockerfile
@@ -124,7 +124,7 @@ services:
       - "host.docker.internal:host-gateway"
     # Optional, only for debugging purposes
     volumes:
-      - background_logs:/var/log/onyx
+      - background_logs:/var/log/callosum
     logging:
       driver: json-file
       options:
@@ -141,7 +141,7 @@ services:
     #   - ${CA_CERT_PATH:-./custom-ca.crt}:/etc/ssl/certs/custom-ca.crt:ro
 
   web_server:
-    image: ${ONYX_WEB_SERVER_IMAGE:-onyxdotapp/onyx-web-server:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_WEB_SERVER_IMAGE:-callosumdotapp/callosum-web-server:${IMAGE_TAG:-latest}}
     build:
       context: ../../web
       dockerfile: Dockerfile
@@ -153,7 +153,7 @@ services:
         - NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED=${NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED:-}
         # Enterprise Edition only
         - NEXT_PUBLIC_THEME=${NEXT_PUBLIC_THEME:-}
-        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Onyx.
+        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Callosum.
         - NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED=${NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED:-false}
         - NODE_OPTIONS=${NODE_OPTIONS:-"--max-old-space-size=4096"}
     env_file:
@@ -166,7 +166,7 @@ services:
       - INTERNAL_URL=${INTERNAL_URL:-http://api_server:8080}
 
   mcp_server:
-    image: ${ONYX_BACKEND_IMAGE:-onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_BACKEND_IMAGE:-callosumdotapp/callosum-backend:${IMAGE_TAG:-latest}}
     build:
       context: ../../backend
       dockerfile: Dockerfile
@@ -175,7 +175,7 @@ services:
         echo 'MCP server is disabled (MCP_SERVER_ENABLED=false), skipping...';
         exit 0;
       else
-        exec python -m onyx.mcp_server_main;
+        exec python -m callosum.mcp_server_main;
       fi"
     env_file:
       - path: .env
@@ -203,10 +203,10 @@ services:
         max-file: "6"
     # Optional, only for debugging purposes
     volumes:
-      - mcp_server_logs:/var/log/onyx
+      - mcp_server_logs:/var/log/callosum
 
   inference_model_server:
-    image: ${ONYX_MODEL_SERVER_IMAGE:-onyxdotapp/onyx-model-server:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_MODEL_SERVER_IMAGE:-callosumdotapp/callosum-model-server:${IMAGE_TAG:-latest}}
     build:
       context: ../../backend
       dockerfile: Dockerfile.model_server
@@ -234,7 +234,7 @@ services:
       # Not necessary, this is just to reduce download time during startup
       - model_cache_huggingface:/app/.cache/huggingface/
       # Optional, only for debugging purposes
-      - inference_model_server_logs:/var/log/onyx
+      - inference_model_server_logs:/var/log/callosum
     logging:
       driver: json-file
       options:
@@ -242,7 +242,7 @@ services:
         max-file: "6"
 
   indexing_model_server:
-    image: ${ONYX_MODEL_SERVER_IMAGE:-onyxdotapp/onyx-model-server:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_MODEL_SERVER_IMAGE:-callosumdotapp/callosum-model-server:${IMAGE_TAG:-latest}}
     build:
       context: ../../backend
       dockerfile: Dockerfile.model_server
@@ -272,7 +272,7 @@ services:
       # Not necessary, this is just to reduce download time during startup
       - indexing_huggingface_model_cache:/app/.cache/huggingface/
       # Optional, only for debugging purposes
-      - indexing_model_server_logs:/var/log/onyx
+      - indexing_model_server_logs:/var/log/callosum
     logging:
       driver: json-file
       options:
@@ -396,7 +396,7 @@ services:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
       # Note: we've seen the default bucket creation logic not work in some cases
-      MINIO_DEFAULT_BUCKETS: ${S3_FILE_STORE_BUCKET_NAME:-onyx-file-store-bucket}
+      MINIO_DEFAULT_BUCKETS: ${S3_FILE_STORE_BUCKET_NAME:-callosum-file-store-bucket}
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
@@ -407,7 +407,7 @@ services:
       retries: 3
 
   code-interpreter:
-    image: onyxdotapp/code-interpreter:${CODE_INTERPRETER_IMAGE_TAG:-latest}
+    image: callosumdotapp/code-interpreter:${CODE_INTERPRETER_IMAGE_TAG:-latest}
     entrypoint: ["/bin/bash", "-c"]
     command: >
       "

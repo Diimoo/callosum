@@ -1,11 +1,11 @@
 FROM node:20-alpine AS base
 
-LABEL com.onyx.maintainer="founders@onyx.app"
-LABEL com.onyx.description="This image is the web/frontend container of Onyx which \
-contains code for both the Community and Enterprise editions of Onyx. If you do not \
+LABEL com.callosum.maintainer="founders@callosum.app"
+LABEL com.callosum.description="This image is the web/frontend container of Callosum which \
+contains code for both the Community and Enterprise editions of Callosum. If you do not \
 have a contract or agreement with DanswerAI, you are not permitted to use the Enterprise \
 Edition features outside of personal development or testing purposes. Please reach out to \
-founders@onyx.app for more information. Please visit https://github.com/onyx-dot-app/onyx"
+founders@callosum.app for more information. Please visit https://github.com/callosum-dot-app/callosum"
 
 # Step 1. Install dependencies + rebuild the source code only when needed
 FROM base AS builder
@@ -162,9 +162,9 @@ ENV NEXT_PUBLIC_INCLUDE_ERROR_POPUP_SUPPORT_LINK=${NEXT_PUBLIC_INCLUDE_ERROR_POP
 ARG NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 ENV NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
 
-# Default ONYX_VERSION, typically overriden during builds by GitHub Actions.
-ARG ONYX_VERSION=0.0.0-dev
-ENV ONYX_VERSION=${ONYX_VERSION}
+# Default CALLOSUM_VERSION, typically overriden during builds by GitHub Actions.
+ARG CALLOSUM_VERSION=0.0.0-dev
+ENV CALLOSUM_VERSION=${CALLOSUM_VERSION}
 
 # Note: Don't expose ports here, Compose will handle that for us if necessary.
 # If you want to run this without compose, specify the ports to

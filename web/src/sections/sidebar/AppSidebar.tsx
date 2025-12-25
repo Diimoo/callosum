@@ -62,7 +62,7 @@ import {
   SvgEditBig,
   SvgFolderPlus,
   SvgMoreHorizontal,
-  SvgOnyxOctagon,
+  SvgCallosumOctagon,
   SvgSettings,
 } from "@opal/icons";
 
@@ -380,7 +380,7 @@ const MemoizedAppSidebarInner = memo(
           <SidebarTab
             leftIcon={
               folded || visibleAgents.length === 0
-                ? SvgOnyxOctagon
+                ? SvgCallosumOctagon
                 : SvgMoreHorizontal
             }
             href="/chat/agents"

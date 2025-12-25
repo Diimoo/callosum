@@ -52,12 +52,12 @@ export interface Quote {
 export interface QuotesInfoPacket {
   quotes: Quote[];
 }
-export interface MinimalOnyxDocument {
+export interface MinimalCallosumDocument {
   document_id: string;
   semantic_identifier: string | null;
 }
 
-export interface OnyxDocument extends MinimalOnyxDocument {
+export interface CallosumDocument extends MinimalCallosumDocument {
   link: string;
   source_type: ValidSources;
   blurb: string;
@@ -73,20 +73,20 @@ export interface OnyxDocument extends MinimalOnyxDocument {
   validationState?: null | "good" | "bad";
 }
 
-export interface LoadedOnyxDocument extends OnyxDocument {
+export interface LoadedCallosumDocument extends CallosumDocument {
   icon: React.FC<{ size?: number; className?: string }>;
 }
 
-export interface SearchOnyxDocument extends OnyxDocument {
+export interface SearchCallosumDocument extends CallosumDocument {
   is_relevant: boolean;
   relevance_explanation: string;
 }
 
-export interface FilteredOnyxDocument extends OnyxDocument {
+export interface FilteredCallosumDocument extends CallosumDocument {
   included: boolean;
 }
 export interface DocumentInfoPacket {
-  top_documents: OnyxDocument[];
+  top_documents: CallosumDocument[];
   predicted_flow: FlowType | null;
   predicted_search: SearchType | null;
   time_cutoff: string | null;
@@ -111,7 +111,7 @@ export interface SearchResponse {
   suggestedFlowType: FlowType | null;
   answer: string | null;
   quotes: Quote[] | null;
-  documents: SearchOnyxDocument[] | null;
+  documents: SearchCallosumDocument[] | null;
   selectedDocIndices: number[] | null;
   error: string | null;
   messageId: number | null;
@@ -166,7 +166,7 @@ export interface SearchRequestArgs {
   updateDocumentRelevance: (relevance: any) => void;
   updateCurrentAnswer: (val: string) => void;
   updateQuotes: (quotes: Quote[]) => void;
-  updateDocs: (documents: OnyxDocument[]) => void;
+  updateDocs: (documents: CallosumDocument[]) => void;
   updateSelectedDocIndices: (docIndices: number[]) => void;
   updateSuggestedSearchType: (searchType: SearchType) => void;
   updateSuggestedFlowType: (flowType: FlowType) => void;

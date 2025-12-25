@@ -1,6 +1,6 @@
 ## Some additional notes for Mac Users
 
-The base instructions to set up the development environment are located in [CONTRIBUTING.md](https://github.com/onyx-dot-app/onyx/blob/main/CONTRIBUTING.md).
+The base instructions to set up the development environment are located in [CONTRIBUTING.md](https://github.com/callosum-dot-app/callosum/blob/main/CONTRIBUTING.md).
 
 ### Setting up Python
 

@@ -7,9 +7,9 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/onyx-dot-app/onyx/tools/ods/internal/docker"
-	"github.com/onyx-dot-app/onyx/tools/ods/internal/postgres"
-	"github.com/onyx-dot-app/onyx/tools/ods/internal/prompt"
+	"github.com/callosum-dot-app/callosum/tools/ods/internal/docker"
+	"github.com/callosum-dot-app/callosum/tools/ods/internal/postgres"
+	"github.com/callosum-dot-app/callosum/tools/ods/internal/prompt"
 )
 
 // validIdentifier matches valid PostgreSQL identifiers (letters, digits, underscores, starting with letter/underscore)

@@ -18,7 +18,7 @@ const cspHeader = `
 const nextConfig = {
   productionBrowserSourceMaps: false,
   output: "standalone",
-  transpilePackages: ["@onyx/opal"],
+  transpilePackages: ["@callosum/opal"],
   typedRoutes: true,
   reactCompiler: true,
   images: {
@@ -111,8 +111,8 @@ const sentryEnabled = Boolean(
 
 // Sentry webpack plugin options
 const sentryWebpackPluginOptions = {
-  org: process.env.SENTRY_ORG || "onyx-vl",
-  project: process.env.SENTRY_PROJECT || "onyx-web",
+  org: process.env.SENTRY_ORG || "callosum-vl",
+  project: process.env.SENTRY_PROJECT || "callosum-web",
   authToken: process.env.SENTRY_AUTH_TOKEN,
   silent: !sentryEnabled, // Silence output when Sentry is disabled
   dryRun: !sentryEnabled, // Don't upload source maps when Sentry is disabled

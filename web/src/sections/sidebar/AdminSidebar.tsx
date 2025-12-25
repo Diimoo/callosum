@@ -31,8 +31,8 @@ import {
   SvgFolder,
   SvgGlobe,
   SvgKey,
-  SvgOnyxLogo,
-  SvgOnyxOctagon,
+  SvgCallosumLogo,
+  SvgCallosumOctagon,
   SvgSearch,
   SvgServer,
   SvgSettings,
@@ -82,7 +82,7 @@ const custom_assistants_items = (
   const items = [
     {
       name: "Assistants",
-      icon: SvgOnyxOctagon,
+      icon: SvgCallosumOctagon,
       link: "/admin/assistants",
     },
   ];
@@ -160,7 +160,7 @@ const collections = (
           items: [
             {
               name: "Default Assistant",
-              icon: SvgOnyxLogo,
+              icon: SvgCallosumLogo,
               link: "/admin/configuration/default-assistant",
             },
             {
@@ -344,7 +344,7 @@ export default function AdminSidebar({
           <div className="flex flex-col gap-2">
             {settings.webVersion && (
               <Text text02 secondaryBody className="px-2">
-                {`Onyx version: ${settings.webVersion}`}
+                {`Callosum version: ${settings.webVersion}`}
               </Text>
             )}
             <Settings />

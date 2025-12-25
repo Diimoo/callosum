@@ -10,19 +10,19 @@ from alembic import op
 import sqlalchemy as sa
 from sqlalchemy import table, column, String, Integer, Boolean
 
-from onyx.configs.model_configs import ASYM_PASSAGE_PREFIX
-from onyx.configs.model_configs import ASYM_QUERY_PREFIX
-from onyx.configs.model_configs import DOC_EMBEDDING_DIM
-from onyx.configs.model_configs import DOCUMENT_ENCODER_MODEL
-from onyx.configs.model_configs import NORMALIZE_EMBEDDINGS
-from onyx.configs.model_configs import OLD_DEFAULT_DOCUMENT_ENCODER_MODEL
-from onyx.configs.model_configs import OLD_DEFAULT_MODEL_DOC_EMBEDDING_DIM
-from onyx.configs.model_configs import OLD_DEFAULT_MODEL_NORMALIZE_EMBEDDINGS
-from onyx.db.enums import EmbeddingPrecision
-from onyx.db.models import IndexModelStatus
-from onyx.db.search_settings import user_has_overridden_embedding_model
-from onyx.indexing.models import IndexingSetting
-from onyx.natural_language_processing.search_nlp_models import clean_model_name
+from callosum.configs.model_configs import ASYM_PASSAGE_PREFIX
+from callosum.configs.model_configs import ASYM_QUERY_PREFIX
+from callosum.configs.model_configs import DOC_EMBEDDING_DIM
+from callosum.configs.model_configs import DOCUMENT_ENCODER_MODEL
+from callosum.configs.model_configs import NORMALIZE_EMBEDDINGS
+from callosum.configs.model_configs import OLD_DEFAULT_DOCUMENT_ENCODER_MODEL
+from callosum.configs.model_configs import OLD_DEFAULT_MODEL_DOC_EMBEDDING_DIM
+from callosum.configs.model_configs import OLD_DEFAULT_MODEL_NORMALIZE_EMBEDDINGS
+from callosum.db.enums import EmbeddingPrecision
+from callosum.db.models import IndexModelStatus
+from callosum.db.search_settings import user_has_overridden_embedding_model
+from callosum.indexing.models import IndexingSetting
+from callosum.natural_language_processing.search_nlp_models import clean_model_name
 
 # revision identifiers, used by Alembic.
 revision = "dbaa756c2ccf"

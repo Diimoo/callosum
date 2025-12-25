@@ -30,7 +30,7 @@ import {
 import {
   SvgActions,
   SvgCheck,
-  SvgOnyxOctagon,
+  SvgCallosumOctagon,
   SvgPlus,
   SvgUser,
 } from "@opal/icons";
@@ -415,7 +415,7 @@ export default function AgentsPage() {
   return (
     <PageLayout data-testid="AgentsPage/container" aria-label="Agents Page">
       <PageHeader
-        icon={SvgOnyxOctagon}
+        icon={SvgCallosumOctagon}
         title="Agents & Assistants"
         description="Customize AI behavior and knowledge for you and your team’s use cases."
         className="bg-background-tint-01"

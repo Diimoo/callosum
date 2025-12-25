@@ -22,7 +22,7 @@ import { ToolSelector } from "@/components/admin/assistants/ToolSelector";
 import InputTextArea from "@/refresh-components/inputs/InputTextArea";
 import { HoverPopup } from "@/components/HoverPopup";
 import { Info } from "lucide-react";
-import { SvgOnyxLogo } from "@opal/icons";
+import { SvgCallosumLogo } from "@opal/icons";
 
 interface DefaultAssistantConfiguration {
   tool_ids: number[];
@@ -252,7 +252,7 @@ export default function Page() {
       <AdminPageTitle
         title="Default Assistant"
         icon={
-          <SvgOnyxLogo
+          <SvgCallosumLogo
             width={32}
             height={32}
             className="my-auto stroke-text-04"

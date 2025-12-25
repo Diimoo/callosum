@@ -10,7 +10,7 @@ import {
 } from "../../../services/streamingModels";
 import { MessageRenderer } from "../interfaces";
 import { ResultIcon } from "@/components/chat/sources/SourceCard";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { CallosumDocument } from "@/lib/search/interfaces";
 import { SourceChip2 } from "@/app/chat/components/SourceChip2";
 import { BlinkingDot } from "../../BlinkingDot";
 import Text from "@/refresh-components/texts/Text";
@@ -32,7 +32,7 @@ const constructCurrentSearchState = (
   packets: SearchToolPacket[]
 ): {
   queries: string[];
-  results: OnyxDocument[];
+  results: CallosumDocument[];
   isSearching: boolean;
   isComplete: boolean;
   isInternetSearch: boolean;

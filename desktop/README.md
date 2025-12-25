@@ -1,6 +1,6 @@
-# Onyx Desktop
+# Callosum Desktop
 
-A lightweight macOS desktop application for [Onyx Cloud](https://cloud.onyx.app).
+A lightweight macOS desktop application for [Callosum Cloud](https://cloud.callosum.app).
 
 Built with [Tauri](https://tauri.app) for minimal bundle size (~10MB vs Electron's 150MB+).
 
@@ -10,7 +10,7 @@ Built with [Tauri](https://tauri.app) for minimal bundle size (~10MB vs Electron
 - ⌨️ **Keyboard Shortcuts** - Quick navigation and actions
 - 🪟 **Native Feel** - macOS-style title bar with traffic lights
 - 💾 **Window State** - Remembers size/position between sessions
-- 🔗 **Multi-window** - Open multiple Onyx windows
+- 🔗 **Multi-window** - Open multiple Callosum windows
 
 ## Keyboard Shortcuts
 
@@ -79,7 +79,7 @@ The built `.dmg` will be in `src-tauri/target/release/bundle/dmg/`.
 ## Project Structure
 
 ```
-onyx-desktop/
+callosum-desktop/
 ├── package.json          # Node dependencies & scripts
 ├── src/
 │   └── index.html        # Fallback/loading page
@@ -112,12 +112,12 @@ npm run tauri icon path/to/your-icon.png
 
 ### Self-Hosted / Custom Server URL
 
-The app defaults to `https://cloud.onyx.app` but supports any Onyx instance.
+The app defaults to `https://cloud.callosum.app` but supports any Callosum instance.
 
 **Config file location:**
-- macOS: `~/Library/Application Support/app.onyx.desktop/config.json`
-- Linux: `~/.config/app.onyx.desktop/config.json`
-- Windows: `%APPDATA%/app.onyx.desktop/config.json`
+- macOS: `~/Library/Application Support/app.callosum.desktop/config.json`
+- Linux: `~/.config/app.callosum.desktop/config.json`
+- Windows: `%APPDATA%/app.callosum.desktop/config.json`
 
 **To use a self-hosted instance:**
 
@@ -127,8 +127,8 @@ The app defaults to `https://cloud.onyx.app` but supports any Onyx instance.
 
 ```json
 {
-  "server_url": "https://your-onyx-instance.company.com",
-  "window_title": "Onyx"
+  "server_url": "https://your-callosum-instance.company.com",
+  "window_title": "Callosum"
 }
 ```
 
@@ -137,10 +137,10 @@ The app defaults to `https://cloud.onyx.app` but supports any Onyx instance.
 **Quick edit via terminal:**
 ```bash
 # macOS
-open -t ~/Library/Application\ Support/app.onyx.desktop/config.json
+open -t ~/Library/Application\ Support/app.callosum.desktop/config.json
 
 # Or use any editor
-code ~/Library/Application\ Support/app.onyx.desktop/config.json
+code ~/Library/Application\ Support/app.callosum.desktop/config.json
 ```
 
 ### Change the default URL in build
@@ -151,7 +151,7 @@ Edit `src-tauri/tauri.conf.json`:
   "app": {
     "windows": [
       {
-        "url": "https://your-onyx-instance.com"
+        "url": "https://your-callosum-instance.com"
       }
     ]
   }
@@ -172,7 +172,7 @@ Modify the window configuration in `src-tauri/tauri.conf.json`:
 ## Troubleshooting
 
 ### "Unable to resolve host"
-Make sure you have an internet connection. The app loads content from `cloud.onyx.app`.
+Make sure you have an internet connection. The app loads content from `cloud.callosum.app`.
 
 ### Build fails on M1/M2 Mac
 ```bash
@@ -183,7 +183,7 @@ rustup target add aarch64-apple-darwin
 ### Code signing for distribution
 For distributing outside the App Store, you'll need to:
 1. Get an Apple Developer certificate
-2. Sign the app: `codesign --deep --force --sign "Developer ID" target/release/bundle/macos/Onyx.app`
+2. Sign the app: `codesign --deep --force --sign "Developer ID" target/release/bundle/macos/Callosum.app`
 3. Notarize with Apple
 
 ## License

@@ -7,7 +7,7 @@ Create Date: 2025-12-18 16:00:00.000000
 """
 
 from alembic import op
-from onyx.deep_research.dr_mock_tools import RESEARCH_AGENT_DB_NAME
+from callosum.deep_research.dr_mock_tools import RESEARCH_AGENT_DB_NAME
 import sqlalchemy as sa
 
 

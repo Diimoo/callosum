@@ -2,7 +2,7 @@ import { Page } from "@playwright/test";
 import { expect } from "@chromatic-com/playwright";
 
 export async function verifyDefaultAssistantIsChosen(page: Page) {
-  await expect(page.getByTestId("onyx-logo")).toBeVisible({ timeout: 5000 });
+  await expect(page.getByTestId("callosum-logo")).toBeVisible({ timeout: 5000 });
 }
 
 export async function verifyAssistantIsChosen(
@@ -32,10 +32,10 @@ export async function navigateToAssistantInHistorySidebar(
 }
 
 export async function sendMessage(page: Page, message: string) {
-  await page.locator("#onyx-chat-input-textarea").click();
-  await page.locator("#onyx-chat-input-textarea").fill(message);
-  await page.locator("#onyx-chat-input-send-button").click();
-  await page.waitForSelector('[data-testid="onyx-ai-message"]');
+  await page.locator("#callosum-chat-input-textarea").click();
+  await page.locator("#callosum-chat-input-textarea").fill(message);
+  await page.locator("#callosum-chat-input-send-button").click();
+  await page.waitForSelector('[data-testid="callosum-ai-message"]');
   // Wait for the copy button to appear, which indicates the message is fully rendered
   await page.waitForSelector('[data-testid="AIMessage/copy-button"]', {
     timeout: 30000,

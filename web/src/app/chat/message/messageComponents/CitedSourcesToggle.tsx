@@ -2,7 +2,7 @@ import React from "react";
 import { FiFileText } from "react-icons/fi";
 import { SourceIcon } from "@/components/SourceIcon";
 import { WebResultIcon } from "@/components/WebResultIcon";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { CallosumDocument } from "@/lib/search/interfaces";
 import { ValidSources } from "@/lib/types";
 import Tag from "@/refresh-components/buttons/Tag";
 
@@ -13,7 +13,7 @@ interface SourcesToggleProps {
     citation_num: number;
     document_id: string;
   }>;
-  documentMap: Map<string, OnyxDocument>;
+  documentMap: Map<string, CallosumDocument>;
   nodeId: number;
   onToggle: (toggledNodeId: number) => void;
 }
@@ -31,7 +31,7 @@ export default function CitedSourcesToggle({
   }
 
   // Helper function to create icon for a document
-  const createDocumentIcon = (doc: OnyxDocument, documentId: string) => {
+  const createDocumentIcon = (doc: CallosumDocument, documentId: string) => {
     let sourceKey: string;
     let iconElement: React.ReactNode;
     if (doc.is_internet || doc.source_type === ValidSources.Web) {

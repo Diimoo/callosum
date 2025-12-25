@@ -8,25 +8,25 @@ import requests
 
 from alembic import command
 from alembic.config import Config
-from onyx.configs.app_configs import POSTGRES_HOST
-from onyx.configs.app_configs import POSTGRES_PASSWORD
-from onyx.configs.app_configs import POSTGRES_PORT
-from onyx.configs.app_configs import POSTGRES_USER
-from onyx.db.engine.sql_engine import build_connection_string
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.engine.sql_engine import get_session_with_tenant
-from onyx.db.engine.sql_engine import SYNC_DB_API
-from onyx.db.engine.tenant_utils import get_all_tenant_ids
-from onyx.db.search_settings import get_current_search_settings
-from onyx.db.swap_index import check_and_perform_index_swap
-from onyx.document_index.document_index_utils import get_multipass_config
-from onyx.document_index.vespa.index import DOCUMENT_ID_ENDPOINT
-from onyx.document_index.vespa.index import VespaIndex
-from onyx.file_store.file_store import get_default_file_store
-from onyx.indexing.models import IndexingSetting
-from onyx.setup import setup_postgres
-from onyx.setup import setup_vespa
-from onyx.utils.logger import setup_logger
+from callosum.configs.app_configs import POSTGRES_HOST
+from callosum.configs.app_configs import POSTGRES_PASSWORD
+from callosum.configs.app_configs import POSTGRES_PORT
+from callosum.configs.app_configs import POSTGRES_USER
+from callosum.db.engine.sql_engine import build_connection_string
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.engine.sql_engine import get_session_with_tenant
+from callosum.db.engine.sql_engine import SYNC_DB_API
+from callosum.db.engine.tenant_utils import get_all_tenant_ids
+from callosum.db.search_settings import get_current_search_settings
+from callosum.db.swap_index import check_and_perform_index_swap
+from callosum.document_index.document_index_utils import get_multipass_config
+from callosum.document_index.vespa.index import DOCUMENT_ID_ENDPOINT
+from callosum.document_index.vespa.index import VespaIndex
+from callosum.file_store.file_store import get_default_file_store
+from callosum.indexing.models import IndexingSetting
+from callosum.setup import setup_postgres
+from callosum.setup import setup_vespa
+from callosum.utils.logger import setup_logger
 from tests.integration.common_utils.timeout import run_with_timeout_multiproc
 
 logger = setup_logger()
@@ -249,7 +249,7 @@ def drop_multitenant_postgres_task(dbname: str) -> None:
 def reset_postgres(
     database: str = "postgres",
     config_name: str = "alembic",
-    setup_onyx: bool = True,
+    setup_callosum: bool = True,
 ) -> None:
     """Reset the Postgres database."""
     # this seems to hang due to locking issues, so run with a timeout with a few retries
@@ -285,7 +285,7 @@ def reset_postgres(
 
     logger.info("Upgrading Postgres...")
     upgrade_postgres(database=database, config_name=config_name, revision="head")
-    if setup_onyx:
+    if setup_callosum:
         logger.info("Setting up Postgres...")
         with get_session_with_current_tenant() as db_session:
             setup_postgres(db_session)
@@ -343,7 +343,7 @@ def reset_postgres_multitenant() -> None:
     """Reset the Postgres database for all tenants in a multitenant setup."""
 
     drop_multitenant_postgres()
-    reset_postgres(config_name="schema_private", setup_onyx=False)
+    reset_postgres(config_name="schema_private", setup_callosum=False)
 
 
 def reset_vespa_multitenant() -> None:

@@ -26,7 +26,7 @@ import LineItem from "@/refresh-components/buttons/LineItem";
 import { SvgFolder, SvgFolderIn, SvgShare, SvgTrash } from "@opal/icons";
 // Constants
 const DEFAULT_PERSONA_ID = 0;
-const LS_HIDE_MOVE_CUSTOM_AGENT_MODAL_KEY = "onyx:hideMoveCustomAgentModal";
+const LS_HIDE_MOVE_CUSTOM_AGENT_MODAL_KEY = "callosum:hideMoveCustomAgentModal";
 
 interface ChatSessionMorePopupProps {
   chatSession: ChatSession;

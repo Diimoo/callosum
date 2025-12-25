@@ -1,16 +1,16 @@
-name: onyx
+name: callosum
 
 services:
   api_server:
-    image: ${ONYX_BACKEND_IMAGE:-onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_BACKEND_IMAGE:-callosumdotapp/callosum-backend:${IMAGE_TAG:-latest}}
     build:
       context: ../../backend
       dockerfile: Dockerfile
     command: >
       /bin/sh -c "
       alembic -n schema_private upgrade head &&
-      echo \"Starting Onyx Api Server\" &&
-      uvicorn onyx.main:app --host 0.0.0.0 --port 8080"
+      echo \"Starting Callosum Api Server\" &&
+      uvicorn callosum.main:app --host 0.0.0.0 --port 8080"
     depends_on:
       - relational_db
       - index
@@ -84,7 +84,7 @@ services:
       - MODEL_SERVER_HOST=${MODEL_SERVER_HOST:-inference_model_server}
       - MODEL_SERVER_PORT=${MODEL_SERVER_PORT:-}
       - LOG_ALL_MODEL_INTERACTIONS=${LOG_ALL_MODEL_INTERACTIONS:-}
-      - LOG_ONYX_MODEL_INTERACTIONS=${LOG_ONYX_MODEL_INTERACTIONS:-}
+      - LOG_CALLOSUM_MODEL_INTERACTIONS=${LOG_CALLOSUM_MODEL_INTERACTIONS:-}
       - LOG_INDIVIDUAL_MODEL_TOKENS=${LOG_INDIVIDUAL_MODEL_TOKENS:-}
       - LOG_VESPA_TIMING_INFORMATION=${LOG_VESPA_TIMING_INFORMATION:-}
       - LOG_ENDPOINT_LATENCY=${LOG_ENDPOINT_LATENCY:-}
@@ -127,7 +127,7 @@ services:
         max-file: "6"
 
   background:
-    image: ${ONYX_BACKEND_IMAGE:-onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_BACKEND_IMAGE:-callosumdotapp/callosum-backend:${IMAGE_TAG:-latest}}
     build:
       context: ../../backend
       dockerfile: Dockerfile
@@ -155,7 +155,7 @@ services:
       - IMAGE_TAG=test
       - ENCRYPTION_KEY_SECRET=${ENCRYPTION_KEY_SECRET:-}
       - JWT_PUBLIC_KEY_URL=${JWT_PUBLIC_KEY_URL:-}
-      # Gen AI Settings (Needed by OnyxBot)
+      # Gen AI Settings (Needed by CallosumBot)
       - GEN_AI_MAX_TOKENS=${GEN_AI_MAX_TOKENS:-}
       - QA_TIMEOUT=${QA_TIMEOUT:-}
       - MAX_CHUNKS_FED_TO_CHAT=${MAX_CHUNKS_FED_TO_CHAT:-}
@@ -227,20 +227,20 @@ services:
       - CELERY_WORKER_LIGHT_CONCURRENCY=${CELERY_WORKER_LIGHT_CONCURRENCY:-}
       - CELERY_WORKER_LIGHT_PREFETCH_MULTIPLIER=${CELERY_WORKER_LIGHT_PREFETCH_MULTIPLIER:-}
 
-      # Onyx SlackBot Configs
-      - ONYX_BOT_DISABLE_DOCS_ONLY_ANSWER=${ONYX_BOT_DISABLE_DOCS_ONLY_ANSWER:-}
-      - ONYX_BOT_FEEDBACK_VISIBILITY=${ONYX_BOT_FEEDBACK_VISIBILITY:-}
-      - ONYX_BOT_DISPLAY_ERROR_MSGS=${ONYX_BOT_DISPLAY_ERROR_MSGS:-}
+      # Callosum SlackBot Configs
+      - CALLOSUM_BOT_DISABLE_DOCS_ONLY_ANSWER=${CALLOSUM_BOT_DISABLE_DOCS_ONLY_ANSWER:-}
+      - CALLOSUM_BOT_FEEDBACK_VISIBILITY=${CALLOSUM_BOT_FEEDBACK_VISIBILITY:-}
+      - CALLOSUM_BOT_DISPLAY_ERROR_MSGS=${CALLOSUM_BOT_DISPLAY_ERROR_MSGS:-}
       - NOTIFY_SLACKBOT_NO_ANSWER=${NOTIFY_SLACKBOT_NO_ANSWER:-}
-      - ONYX_BOT_MAX_QPM=${ONYX_BOT_MAX_QPM:-}
-      - ONYX_BOT_MAX_WAIT_TIME=${ONYX_BOT_MAX_WAIT_TIME:-}
+      - CALLOSUM_BOT_MAX_QPM=${CALLOSUM_BOT_MAX_QPM:-}
+      - CALLOSUM_BOT_MAX_WAIT_TIME=${CALLOSUM_BOT_MAX_WAIT_TIME:-}
       # Logging
       # Leave this on pretty please? Nothing sensitive is collected!
       - DISABLE_TELEMETRY=${DISABLE_TELEMETRY:-}
       - LOG_LEVEL=${LOG_LEVEL:-info} # Set to debug to get more fine-grained logs
       - LOG_ALL_MODEL_INTERACTIONS=${LOG_ALL_MODEL_INTERACTIONS:-} # LiteLLM Verbose Logging
-      # Log all of Onyx prompts and interactions with the LLM
-      - LOG_ONYX_MODEL_INTERACTIONS=${LOG_ONYX_MODEL_INTERACTIONS:-}
+      # Log all of Callosum prompts and interactions with the LLM
+      - LOG_CALLOSUM_MODEL_INTERACTIONS=${LOG_CALLOSUM_MODEL_INTERACTIONS:-}
       - LOG_INDIVIDUAL_MODEL_TOKENS=${LOG_INDIVIDUAL_MODEL_TOKENS:-}
       - LOG_VESPA_TIMING_INFORMATION=${LOG_VESPA_TIMING_INFORMATION:-}
 
@@ -274,7 +274,7 @@ services:
     #   - ${CA_CERT_PATH:-./custom-ca.crt}:/etc/ssl/certs/custom-ca.crt:ro
 
   web_server:
-    image: ${ONYX_WEB_SERVER_IMAGE:-onyxdotapp/onyx-web-server:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_WEB_SERVER_IMAGE:-callosumdotapp/callosum-web-server:${IMAGE_TAG:-latest}}
     build:
       context: ../../web
       dockerfile: Dockerfile
@@ -286,7 +286,7 @@ services:
         - NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED=${NEXT_PUBLIC_FORGOT_PASSWORD_ENABLED:-}
         # Enterprise Edition only
         - NEXT_PUBLIC_THEME=${NEXT_PUBLIC_THEME:-}
-        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Onyx.
+        # DO NOT TURN ON unless you have EXPLICIT PERMISSION from Callosum.
         - NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED=${NEXT_PUBLIC_DO_NOT_USE_TOGGLE_OFF_DANSWER_POWERED:-false}
     depends_on:
       - api_server
@@ -302,7 +302,7 @@ services:
       - NEXT_PUBLIC_CUSTOM_REFRESH_URL=${NEXT_PUBLIC_CUSTOM_REFRESH_URL:-}
 
   mcp_server:
-    image: ${ONYX_BACKEND_IMAGE:-onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_BACKEND_IMAGE:-callosumdotapp/callosum-backend:${IMAGE_TAG:-latest}}
     build:
       context: ../../backend
       dockerfile: Dockerfile
@@ -311,7 +311,7 @@ services:
         echo 'MCP server is disabled (MCP_SERVER_ENABLED=false), skipping...';
         exit 0;
       else
-        exec python -m onyx.mcp_server_main;
+        exec python -m callosum.mcp_server_main;
       fi"
     ports:
       - "8090:8090"
@@ -340,10 +340,10 @@ services:
         max-size: "50m"
         max-file: "6"
     volumes:
-      - mcp_server_logs:/var/log/onyx
+      - mcp_server_logs:/var/log/callosum
 
   inference_model_server:
-    image: ${ONYX_MODEL_SERVER_IMAGE:-onyxdotapp/onyx-model-server:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_MODEL_SERVER_IMAGE:-callosumdotapp/callosum-model-server:${IMAGE_TAG:-latest}}
     build:
       context: ../../backend
       dockerfile: Dockerfile.model_server
@@ -372,7 +372,7 @@ services:
         max-file: "6"
 
   indexing_model_server:
-    image: ${ONYX_MODEL_SERVER_IMAGE:-onyxdotapp/onyx-model-server:${IMAGE_TAG:-latest}}
+    image: ${CALLOSUM_MODEL_SERVER_IMAGE:-callosumdotapp/callosum-model-server:${IMAGE_TAG:-latest}}
     build:
       context: ../../backend
       dockerfile: Dockerfile.model_server
@@ -473,7 +473,7 @@ services:
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
-      MINIO_DEFAULT_BUCKETS: ${S3_FILE_STORE_BUCKET_NAME:-onyx-file-store-bucket}
+      MINIO_DEFAULT_BUCKETS: ${S3_FILE_STORE_BUCKET_NAME:-callosum-file-store-bucket}
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
@@ -496,7 +496,7 @@ services:
       - /data
 
   code-interpreter:
-    image: onyxdotapp/code-interpreter:${CODE_INTERPRETER_IMAGE_TAG:-latest}
+    image: callosumdotapp/code-interpreter:${CODE_INTERPRETER_IMAGE_TAG:-latest}
     entrypoint: ["/bin/bash", "-c"]
     command: >
       "

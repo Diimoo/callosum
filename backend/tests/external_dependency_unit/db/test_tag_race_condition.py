@@ -15,12 +15,12 @@ from uuid import uuid4
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from onyx.configs.constants import DocumentSource
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.models import Document
-from onyx.db.models import Tag
-from onyx.db.tag import create_or_add_document_tag
-from onyx.db.tag import create_or_add_document_tag_list
+from callosum.configs.constants import DocumentSource
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.models import Document
+from callosum.db.models import Tag
+from callosum.db.tag import create_or_add_document_tag
+from callosum.db.tag import create_or_add_document_tag_list
 
 
 def _create_test_document(db_session: Session, doc_id: str) -> Document:

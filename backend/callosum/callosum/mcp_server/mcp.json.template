@@ -1,0 +1,10 @@
+{
+    "mcpServers": {
+      "Callosum": {
+        "url": "https://cloud.callosum.app/mcp",
+        "headers": {
+          "Authorization": "Bearer [YOUR PAT OR API KEY HERE]"
+        }
+      }
+    }
+  }

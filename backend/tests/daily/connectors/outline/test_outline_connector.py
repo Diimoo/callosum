@@ -4,12 +4,12 @@ from typing import Any
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.exceptions import ConnectorValidationError
-from onyx.connectors.exceptions import CredentialExpiredError
-from onyx.connectors.models import ConnectorMissingCredentialError
-from onyx.connectors.models import Document
-from onyx.connectors.outline.connector import OutlineConnector
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.exceptions import ConnectorValidationError
+from callosum.connectors.exceptions import CredentialExpiredError
+from callosum.connectors.models import ConnectorMissingCredentialError
+from callosum.connectors.models import Document
+from callosum.connectors.outline.connector import OutlineConnector
 
 
 class TestOutlineConnector:

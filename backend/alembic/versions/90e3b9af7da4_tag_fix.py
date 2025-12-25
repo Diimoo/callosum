@@ -16,12 +16,12 @@ from typing import Generator
 from alembic import op
 import sqlalchemy as sa
 
-from onyx.document_index.factory import get_default_document_index
-from onyx.document_index.vespa_constants import DOCUMENT_ID_ENDPOINT
-from onyx.db.search_settings import SearchSettings
-from onyx.configs.app_configs import AUTH_TYPE
-from onyx.configs.constants import AuthType
-from onyx.document_index.vespa.shared_utils.utils import get_vespa_http_client
+from callosum.document_index.factory import get_default_document_index
+from callosum.document_index.vespa_constants import DOCUMENT_ID_ENDPOINT
+from callosum.db.search_settings import SearchSettings
+from callosum.configs.app_configs import AUTH_TYPE
+from callosum.configs.constants import AuthType
+from callosum.document_index.vespa.shared_utils.utils import get_vespa_http_client
 
 logger = logging.getLogger("alembic.runtime.migration")
 

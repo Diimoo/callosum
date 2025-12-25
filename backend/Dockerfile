@@ -1,11 +1,11 @@
 FROM python:3.11.7-slim-bookworm
 
-LABEL com.danswer.maintainer="founders@onyx.app"
-LABEL com.danswer.description="This image is the web/frontend container of Onyx which \
-contains code for both the Community and Enterprise editions of Onyx. If you do not \
+LABEL com.danswer.maintainer="founders@callosum.app"
+LABEL com.danswer.description="This image is the web/frontend container of Callosum which \
+contains code for both the Community and Enterprise editions of Callosum. If you do not \
 have a contract or agreement with DanswerAI, you are not permitted to use the Enterprise \
 Edition features outside of personal development or testing purposes. Please reach out to \
-founders@onyx.app for more information. Please visit https://github.com/onyx-dot-app/onyx"
+founders@callosum.app for more information. Please visit https://github.com/callosum-dot-app/callosum"
 
 # DO_NOT_TRACK is used to disable telemetry for Unstructured
 ENV DANSWER_RUNNING_IN_DOCKER="true" \
@@ -13,11 +13,11 @@ ENV DANSWER_RUNNING_IN_DOCKER="true" \
     PLAYWRIGHT_BROWSERS_PATH="/app/.cache/ms-playwright"
 
 # Create non-root user for security best practices
-RUN groupadd -g 1001 onyx && \
-    useradd -u 1001 -g onyx -m -s /bin/bash onyx && \
-    mkdir -p /var/log/onyx && \
-    chmod 755 /var/log/onyx && \
-    chown onyx:onyx /var/log/onyx
+RUN groupadd -g 1001 callosum && \
+    useradd -u 1001 -g callosum -m -s /bin/bash callosum && \
+    mkdir -p /var/log/callosum && \
+    chmod 755 /var/log/callosum && \
+    chown callosum:callosum /var/log/callosum
 
 COPY --from=ghcr.io/astral-sh/uv:0.9.9 /uv /uvx /bin/
 
@@ -58,12 +58,12 @@ RUN uv pip install --system --no-cache-dir --upgrade \
     pip uninstall -y py && \
     playwright install chromium && \
     playwright install-deps chromium && \
-    chown -R onyx:onyx /app && \
+    chown -R callosum:callosum /app && \
     ln -s /usr/local/bin/supervisord /usr/bin/supervisord && \
     # Cleanup for CVEs and size reduction
     # https://github.com/tornadoweb/tornado/issues/3107
     # xserver-common and xvfb included by playwright installation but not needed after
-    # perl-base is part of the base Python Debian image but not needed for Onyx functionality
+    # perl-base is part of the base Python Debian image but not needed for Callosum functionality
     # perl-base could only be removed with --allow-remove-essential
     apt-get update && \
     apt-get remove -y --allow-remove-essential \
@@ -103,32 +103,32 @@ tiktoken.get_encoding('cl100k_base')"
 WORKDIR /app
 
 # Enterprise Version Files
-COPY --chown=onyx:onyx ./ee /app/ee
+COPY --chown=callosum:callosum ./ee /app/ee
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Set up application files
-COPY --chown=onyx:onyx ./onyx /app/onyx
-COPY --chown=onyx:onyx ./shared_configs /app/shared_configs
-COPY --chown=onyx:onyx ./alembic /app/alembic
-COPY --chown=onyx:onyx ./alembic_tenants /app/alembic_tenants
-COPY --chown=onyx:onyx ./alembic.ini /app/alembic.ini
+COPY --chown=callosum:callosum ./callosum /app/callosum
+COPY --chown=callosum:callosum ./shared_configs /app/shared_configs
+COPY --chown=callosum:callosum ./alembic /app/alembic
+COPY --chown=callosum:callosum ./alembic_tenants /app/alembic_tenants
+COPY --chown=callosum:callosum ./alembic.ini /app/alembic.ini
 COPY supervisord.conf /usr/etc/supervisord.conf
-COPY --chown=onyx:onyx ./static /app/static
+COPY --chown=callosum:callosum ./static /app/static
 
 # Escape hatch scripts
-COPY --chown=onyx:onyx ./scripts/debugging /app/scripts/debugging
-COPY --chown=onyx:onyx ./scripts/force_delete_connector_by_id.py /app/scripts/force_delete_connector_by_id.py
-COPY --chown=onyx:onyx ./scripts/supervisord_entrypoint.sh /app/scripts/supervisord_entrypoint.sh
+COPY --chown=callosum:callosum ./scripts/debugging /app/scripts/debugging
+COPY --chown=callosum:callosum ./scripts/force_delete_connector_by_id.py /app/scripts/force_delete_connector_by_id.py
+COPY --chown=callosum:callosum ./scripts/supervisord_entrypoint.sh /app/scripts/supervisord_entrypoint.sh
 RUN chmod +x /app/scripts/supervisord_entrypoint.sh
 
 # Put logo in assets
-COPY --chown=onyx:onyx ./assets /app/assets
+COPY --chown=callosum:callosum ./assets /app/assets
 
 ENV PYTHONPATH=/app
 
-# Default ONYX_VERSION, typically overriden during builds by GitHub Actions.
-ARG ONYX_VERSION=0.0.0-dev
-ENV ONYX_VERSION=${ONYX_VERSION}
+# Default CALLOSUM_VERSION, typically overriden during builds by GitHub Actions.
+ARG CALLOSUM_VERSION=0.0.0-dev
+ENV CALLOSUM_VERSION=${CALLOSUM_VERSION}
 
 # Default command which does nothing
 # This container is used by api server and background which specify their own CMD

@@ -136,7 +136,7 @@ jobs:
     outputs:
       digest: ${{ steps.build.outputs.digest }}
     env:
-      REGISTRY_IMAGE: onyxdotapp/onyx-web-server
+      REGISTRY_IMAGE: callosumdotapp/callosum-web-server
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -171,7 +171,7 @@ jobs:
           platforms: linux/amd64
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ONYX_VERSION=${{ github.ref_name }}
+            CALLOSUM_VERSION=${{ github.ref_name }}
             NODE_OPTIONS=--max-old-space-size=8192
           cache-from: |
             type=registry,ref=${{ env.REGISTRY_IMAGE }}:latest
@@ -194,7 +194,7 @@ jobs:
     outputs:
       digest: ${{ steps.build.outputs.digest }}
     env:
-      REGISTRY_IMAGE: onyxdotapp/onyx-web-server
+      REGISTRY_IMAGE: callosumdotapp/callosum-web-server
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -229,7 +229,7 @@ jobs:
           platforms: linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ONYX_VERSION=${{ github.ref_name }}
+            CALLOSUM_VERSION=${{ github.ref_name }}
             NODE_OPTIONS=--max-old-space-size=8192
           cache-from: |
             type=registry,ref=${{ env.REGISTRY_IMAGE }}:latest
@@ -252,7 +252,7 @@ jobs:
       - extras=ecr-cache
     timeout-minutes: 90
     env:
-      REGISTRY_IMAGE: onyxdotapp/onyx-web-server
+      REGISTRY_IMAGE: callosumdotapp/callosum-web-server
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -302,7 +302,7 @@ jobs:
     outputs:
       digest: ${{ steps.build.outputs.digest }}
     env:
-      REGISTRY_IMAGE: onyxdotapp/onyx-web-server-cloud
+      REGISTRY_IMAGE: callosumdotapp/callosum-web-server-cloud
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -337,7 +337,7 @@ jobs:
           platforms: linux/amd64
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ONYX_VERSION=${{ github.ref_name }}
+            CALLOSUM_VERSION=${{ github.ref_name }}
             NEXT_PUBLIC_CLOUD_ENABLED=true
             NEXT_PUBLIC_POSTHOG_KEY=${{ secrets.POSTHOG_KEY }}
             NEXT_PUBLIC_POSTHOG_HOST=${{ secrets.POSTHOG_HOST }}
@@ -368,7 +368,7 @@ jobs:
     outputs:
       digest: ${{ steps.build.outputs.digest }}
     env:
-      REGISTRY_IMAGE: onyxdotapp/onyx-web-server-cloud
+      REGISTRY_IMAGE: callosumdotapp/callosum-web-server-cloud
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -403,7 +403,7 @@ jobs:
           platforms: linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ONYX_VERSION=${{ github.ref_name }}
+            CALLOSUM_VERSION=${{ github.ref_name }}
             NEXT_PUBLIC_CLOUD_ENABLED=true
             NEXT_PUBLIC_POSTHOG_KEY=${{ secrets.POSTHOG_KEY }}
             NEXT_PUBLIC_POSTHOG_HOST=${{ secrets.POSTHOG_HOST }}
@@ -434,7 +434,7 @@ jobs:
       - extras=ecr-cache
     timeout-minutes: 90
     env:
-      REGISTRY_IMAGE: onyxdotapp/onyx-web-server-cloud
+      REGISTRY_IMAGE: callosumdotapp/callosum-web-server-cloud
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -481,7 +481,7 @@ jobs:
     outputs:
       digest: ${{ steps.build.outputs.digest }}
     env:
-      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'onyxdotapp/onyx-backend-cloud' || 'onyxdotapp/onyx-backend' }}
+      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'callosumdotapp/callosum-backend-cloud' || 'callosumdotapp/callosum-backend' }}
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -516,7 +516,7 @@ jobs:
           platforms: linux/amd64
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ONYX_VERSION=${{ github.ref_name }}
+            CALLOSUM_VERSION=${{ github.ref_name }}
           cache-from: |
             type=registry,ref=${{ env.REGISTRY_IMAGE }}:latest
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:backend-cache-amd64
@@ -538,7 +538,7 @@ jobs:
     outputs:
       digest: ${{ steps.build.outputs.digest }}
     env:
-      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'onyxdotapp/onyx-backend-cloud' || 'onyxdotapp/onyx-backend' }}
+      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'callosumdotapp/callosum-backend-cloud' || 'callosumdotapp/callosum-backend' }}
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -573,7 +573,7 @@ jobs:
           platforms: linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ONYX_VERSION=${{ github.ref_name }}
+            CALLOSUM_VERSION=${{ github.ref_name }}
           cache-from: |
             type=registry,ref=${{ env.REGISTRY_IMAGE }}:latest
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:backend-cache-arm64
@@ -595,7 +595,7 @@ jobs:
       - extras=ecr-cache
     timeout-minutes: 90
     env:
-      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'onyxdotapp/onyx-backend-cloud' || 'onyxdotapp/onyx-backend' }}
+      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'callosumdotapp/callosum-backend-cloud' || 'callosumdotapp/callosum-backend' }}
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -646,7 +646,7 @@ jobs:
     outputs:
       digest: ${{ steps.build.outputs.digest }}
     env:
-      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'onyxdotapp/onyx-model-server-cloud' || 'onyxdotapp/onyx-model-server' }}
+      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'callosumdotapp/callosum-model-server-cloud' || 'callosumdotapp/callosum-model-server' }}
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -685,7 +685,7 @@ jobs:
           platforms: linux/amd64
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ONYX_VERSION=${{ github.ref_name }}
+            CALLOSUM_VERSION=${{ github.ref_name }}
           cache-from: |
             type=registry,ref=${{ env.REGISTRY_IMAGE }}:latest
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:model-server-cache-amd64
@@ -710,7 +710,7 @@ jobs:
     outputs:
       digest: ${{ steps.build.outputs.digest }}
     env:
-      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'onyxdotapp/onyx-model-server-cloud' || 'onyxdotapp/onyx-model-server' }}
+      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'callosumdotapp/callosum-model-server-cloud' || 'callosumdotapp/callosum-model-server' }}
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -749,7 +749,7 @@ jobs:
           platforms: linux/arm64
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            ONYX_VERSION=${{ github.ref_name }}
+            CALLOSUM_VERSION=${{ github.ref_name }}
           cache-from: |
             type=registry,ref=${{ env.REGISTRY_IMAGE }}:latest
             type=registry,ref=${{ env.RUNS_ON_ECR_CACHE }}:model-server-cache-arm64
@@ -773,7 +773,7 @@ jobs:
       - extras=ecr-cache
     timeout-minutes: 90
     env:
-      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'onyxdotapp/onyx-model-server-cloud' || 'onyxdotapp/onyx-model-server' }}
+      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'callosumdotapp/callosum-model-server-cloud' || 'callosumdotapp/callosum-model-server' }}
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -823,7 +823,7 @@ jobs:
       - extras=ecr-cache
     timeout-minutes: 90
     env:
-      REGISTRY_IMAGE: onyxdotapp/onyx-web-server
+      REGISTRY_IMAGE: callosumdotapp/callosum-web-server
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -863,7 +863,7 @@ jobs:
       - extras=ecr-cache
     timeout-minutes: 90
     env:
-      REGISTRY_IMAGE: onyxdotapp/onyx-web-server-cloud
+      REGISTRY_IMAGE: callosumdotapp/callosum-web-server-cloud
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -903,7 +903,7 @@ jobs:
       - extras=ecr-cache
     timeout-minutes: 90
     env:
-      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'onyxdotapp/onyx-backend-cloud' || 'onyxdotapp/onyx-backend' }}
+      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'callosumdotapp/callosum-backend-cloud' || 'callosumdotapp/callosum-backend' }}
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 
@@ -950,7 +950,7 @@ jobs:
       - extras=ecr-cache
     timeout-minutes: 90
     env:
-      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'onyxdotapp/onyx-model-server-cloud' || 'onyxdotapp/onyx-model-server' }}
+      REGISTRY_IMAGE: ${{ contains(github.ref_name, 'cloud') && 'callosumdotapp/callosum-model-server-cloud' || 'callosumdotapp/callosum-model-server' }}
     steps:
       - uses: runs-on/action@cd2b598b0515d39d78c38a02d529db87d2196d1e # ratchet:runs-on/action@v2
 

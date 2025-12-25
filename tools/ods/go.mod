@@ -1,4 +1,4 @@
-module github.com/onyx-dot-app/onyx/tools/ods
+module github.com/callosum-dot-app/callosum/tools/ods
 
 go 1.24.11
 

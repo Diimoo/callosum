@@ -6,12 +6,12 @@ import pytest
 import requests
 from requests import HTTPError
 
-from onyx.auth.schemas import UserRole
-from onyx.configs.constants import FASTAPI_USERS_AUTH_COOKIE_NAME
-from onyx.server.documents.models import PaginatedReturn
-from onyx.server.manage.models import UserInfo
-from onyx.server.models import FullUserSnapshot
-from onyx.server.models import InvitedUserSnapshot
+from callosum.auth.schemas import UserRole
+from callosum.configs.constants import FASTAPI_USERS_AUTH_COOKIE_NAME
+from callosum.server.documents.models import PaginatedReturn
+from callosum.server.manage.models import UserInfo
+from callosum.server.models import FullUserSnapshot
+from callosum.server.models import InvitedUserSnapshot
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.constants import GENERAL_HEADERS
 from tests.integration.common_utils.test_models import DATestUser

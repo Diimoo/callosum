@@ -1,6 +1,6 @@
 import { test, expect, Page, Browser } from "@playwright/test";
 import { loginAs, loginAsRandomUser } from "../utils/auth";
-import { OnyxApiClient } from "../utils/onyxApiClient";
+import { CallosumApiClient } from "../utils/callosumApiClient";
 
 // --- Locator Helper Functions ---
 const getNameInput = (page: Page) => page.locator('input[name="name"]');
@@ -93,7 +93,7 @@ test.describe("Assistant Creation and Edit Verification", () => {
           storageState: "admin_auth.json",
         });
         const page = await context.newPage();
-        const cleanupClient = new OnyxApiClient(page);
+        const cleanupClient = new CallosumApiClient(page);
         await cleanupClient.deleteDocumentSet(documentSetId);
         await cleanupClient.deleteCCPair(ccPairId);
         await context.close();
@@ -113,9 +113,9 @@ test.describe("Assistant Creation and Edit Verification", () => {
       await loginAs(page, "admin");
 
       // Create a connector and document set to enable the Knowledge toggle
-      const onyxApiClient = new OnyxApiClient(page);
-      ccPairId = await onyxApiClient.createFileConnector("Test Connector");
-      documentSetId = await onyxApiClient.createDocumentSet(
+      const callosumApiClient = new CallosumApiClient(page);
+      ccPairId = await callosumApiClient.createFileConnector("Test Connector");
+      documentSetId = await callosumApiClient.createDocumentSet(
         "Test Document Set",
         [ccPairId]
       );

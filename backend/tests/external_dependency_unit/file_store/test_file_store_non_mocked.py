@@ -17,17 +17,17 @@ import pytest
 from botocore.exceptions import ClientError
 from sqlalchemy.orm import Session
 
-from onyx.configs.constants import FileOrigin
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.file_store.file_store import S3BackedFileStore
-from onyx.utils.logger import setup_logger
+from callosum.configs.constants import FileOrigin
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.file_store.file_store import S3BackedFileStore
+from callosum.utils.logger import setup_logger
 from shared_configs.contextvars import CURRENT_TENANT_ID_CONTEXTVAR
 from tests.external_dependency_unit.constants import TEST_TENANT_ID
 
 logger = setup_logger()
 
 
-TEST_BUCKET_NAME: str = "onyx-file-store-tests"
+TEST_BUCKET_NAME: str = "callosum-file-store-tests"
 TEST_FILE_PREFIX: str = "test-files"
 
 
@@ -57,7 +57,7 @@ class WorkerResult(TypedDict):
 
 def _get_all_backend_configs() -> List[BackendConfig]:
     """Get configurations for all available backends"""
-    from onyx.configs.app_configs import (
+    from callosum.configs.app_configs import (
         S3_ENDPOINT_URL,
         AWS_REGION_NAME,
     )

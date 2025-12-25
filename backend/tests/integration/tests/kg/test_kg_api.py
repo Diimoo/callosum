@@ -5,19 +5,19 @@ from http import HTTPStatus
 import pytest
 import requests
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import InputType
-from onyx.db.connector import create_connector
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.kg_config import get_kg_config_settings
-from onyx.db.kg_config import set_kg_config_settings
-from onyx.db.models import Connector
-from onyx.server.documents.models import ConnectorBase
-from onyx.server.kg.models import DisableKGConfigRequest
-from onyx.server.kg.models import EnableKGConfigRequest
-from onyx.server.kg.models import EntityType
-from onyx.server.kg.models import KGConfig as KGConfigAPIModel
-from onyx.server.kg.models import SourceAndEntityTypeView
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.models import InputType
+from callosum.db.connector import create_connector
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.kg_config import get_kg_config_settings
+from callosum.db.kg_config import set_kg_config_settings
+from callosum.db.models import Connector
+from callosum.server.documents.models import ConnectorBase
+from callosum.server.kg.models import DisableKGConfigRequest
+from callosum.server.kg.models import EnableKGConfigRequest
+from callosum.server.kg.models import EntityType
+from callosum.server.kg.models import KGConfig as KGConfigAPIModel
+from callosum.server.kg.models import SourceAndEntityTypeView
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.managers.user import UserManager
 from tests.integration.common_utils.reset import reset_all

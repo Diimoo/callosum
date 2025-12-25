@@ -1,6 +1,6 @@
 "use client";
 
-import { OnyxIcon, OnyxLogoTypeIcon } from "@/components/icons/icons";
+import { CallosumIcon, CallosumLogoTypeIcon } from "@/components/icons/icons";
 import { useSettingsContext } from "@/components/settings/SettingsProvider";
 import {
   LOGO_FOLDED_SIZE_PX,
@@ -36,7 +36,7 @@ export default function Logo({ folded, size, className }: LogoProps) {
             className={cn("flex-shrink-0", className)}
           />
         ) : (
-          <OnyxIcon
+          <CallosumIcon
             size={foldedSize}
             className={cn("flex-shrink-0", className)}
           />
@@ -56,13 +56,13 @@ export default function Logo({ folded, size, className }: LogoProps) {
           className={cn("ml-[33px] line-clamp-1 truncate", folded && "hidden")}
           nowrap
         >
-          Powered by Onyx
+          Powered by Callosum
         </Text>
       )}
     </div>
   ) : folded ? (
-    <OnyxIcon size={foldedSize} className={cn("flex-shrink-0", className)} />
+    <CallosumIcon size={foldedSize} className={cn("flex-shrink-0", className)} />
   ) : (
-    <OnyxLogoTypeIcon size={unfoldedSize} className={className} />
+    <CallosumLogoTypeIcon size={unfoldedSize} className={className} />
   );
 }

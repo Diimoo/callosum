@@ -72,10 +72,11 @@ export default function SidebarWrapper({
   return (
     // This extra `div` wrapping needs to be present (for some reason).
     // Without, the widths of the sidebars don't properly get set to the explicitly declared widths (i.e., `4rem` folded and `15rem` unfolded).
-    <div>
+    <div className="h-screen flex items-center">
       <div
         className={cn(
-          "h-screen flex flex-col bg-background-tint-02 py-2 gap-4 group/SidebarWrapper transition-width duration-200 ease-in-out",
+          "flex flex-col bg-background-tint-02 py-2 gap-4 group/SidebarWrapper transition-all duration-300 ease-in-out",
+          "h-[calc(100vh-1rem)] m-2 rounded-2xl border border-border-02 shadow-lg",
 
           // @HERE (size of sidebar)
           //

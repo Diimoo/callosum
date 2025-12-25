@@ -56,7 +56,7 @@ test.describe("Message feedback thumbs controls", () => {
 
     await sendMessage(page, "Share a short fun fact.");
 
-    const aiMessage = page.getByTestId("onyx-ai-message").last();
+    const aiMessage = page.getByTestId("callosum-ai-message").last();
     const likeButton = aiMessage.getByTestId("AIMessage/like-button");
     const dislikeButton = aiMessage.getByTestId("AIMessage/dislike-button");
 

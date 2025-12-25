@@ -1,12 +1,12 @@
-import { OnyxDocument } from "./search/interfaces";
+import { CallosumDocument } from "./search/interfaces";
 
 export function removeDuplicateDocs(
-  documents: OnyxDocument[],
+  documents: CallosumDocument[],
   agentic?: boolean,
   relevance?: any
 ) {
   const seen = new Set<string>();
-  const output: OnyxDocument[] = [];
+  const output: CallosumDocument[] = [];
   documents.forEach((document) => {
     if (
       document.document_id &&

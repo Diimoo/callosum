@@ -1,16 +1,16 @@
-name: onyx
+name: callosum
 
 services:
   api_server:
-    image: onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}
+    image: callosumdotapp/callosum-backend:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile
     command: >
       /bin/sh -c "
       alembic upgrade head &&
-      echo \"Starting Onyx Api Server\" &&
-      uvicorn onyx.main:app --host 0.0.0.0 --port 8080"
+      echo \"Starting Callosum Api Server\" &&
+      uvicorn callosum.main:app --host 0.0.0.0 --port 8080"
     depends_on:
       - relational_db
       - index
@@ -46,10 +46,10 @@ services:
         max-size: "50m"
         max-file: "6"
     volumes:
-      - api_server_logs:/var/log/onyx
+      - api_server_logs:/var/log/callosum
 
   background:
-    image: onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}
+    image: callosumdotapp/callosum-backend:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile
@@ -91,7 +91,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
-      - background_logs:/var/log/onyx
+      - background_logs:/var/log/callosum
     logging:
       driver: json-file
       options:
@@ -107,7 +107,7 @@ services:
     #   - ${CA_CERT_PATH:-./custom-ca.crt}:/etc/ssl/certs/custom-ca.crt:ro
 
   web_server:
-    image: onyxdotapp/onyx-web-server:${IMAGE_TAG:-latest}
+    image: callosumdotapp/callosum-web-server:${IMAGE_TAG:-latest}
     build:
       context: ../../web
       dockerfile: Dockerfile
@@ -132,7 +132,7 @@ services:
         max-file: "6"
 
   mcp_server:
-    image: onyxdotapp/onyx-backend:${IMAGE_TAG:-latest}
+    image: callosumdotapp/callosum-backend:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile
@@ -141,7 +141,7 @@ services:
         echo 'MCP server is disabled (MCP_SERVER_ENABLED=false), skipping...';
         exit 0;
       else
-        exec python -m onyx.mcp_server_main;
+        exec python -m callosum.mcp_server_main;
       fi"
     env_file:
       - path: .env
@@ -168,7 +168,7 @@ services:
         max-size: "50m"
         max-file: "6"
     volumes:
-      - mcp_server_logs:/var/log/onyx
+      - mcp_server_logs:/var/log/callosum
 
   relational_db:
     image: postgres:15.2-alpine
@@ -188,7 +188,7 @@ services:
         max-file: "6"
 
   inference_model_server:
-    image: onyxdotapp/onyx-model-server:${IMAGE_TAG:-latest}
+    image: callosumdotapp/callosum-model-server:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile.model_server
@@ -208,7 +208,7 @@ services:
       # Not necessary, this is just to reduce download time during startup
       - model_cache_huggingface:/app/.cache/huggingface/
       # optional, only for debugging purposes
-      - inference_model_server_logs:/var/log/onyx
+      - inference_model_server_logs:/var/log/callosum
     logging:
       driver: json-file
       options:
@@ -216,7 +216,7 @@ services:
         max-file: "6"
 
   indexing_model_server:
-    image: onyxdotapp/onyx-model-server:${IMAGE_TAG:-latest}
+    image: callosumdotapp/callosum-model-server:${IMAGE_TAG:-latest}
     build:
       context: ../../backend
       dockerfile: Dockerfile.model_server
@@ -238,7 +238,7 @@ services:
       # Not necessary, this is just to reduce download time during startup
       - indexing_huggingface_model_cache:/app/.cache/huggingface/
       # optional, only for debugging purposes
-      - indexing_model_server_logs:/var/log/onyx
+      - indexing_model_server_logs:/var/log/callosum
     logging:
       driver: json-file
       options:
@@ -321,7 +321,7 @@ services:
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
-      MINIO_DEFAULT_BUCKETS: ${S3_FILE_STORE_BUCKET_NAME:-onyx-file-store-bucket}
+      MINIO_DEFAULT_BUCKETS: ${S3_FILE_STORE_BUCKET_NAME:-callosum-file-store-bucket}
     volumes:
       - minio_data:/data
     command: server /data --console-address ":9001"
@@ -342,7 +342,7 @@ services:
       - /data
 
   code-interpreter:
-    image: onyxdotapp/code-interpreter:${CODE_INTERPRETER_IMAGE_TAG:-latest}
+    image: callosumdotapp/code-interpreter:${CODE_INTERPRETER_IMAGE_TAG:-latest}
     entrypoint: ["/bin/bash", "-c"]
     command: >
       "

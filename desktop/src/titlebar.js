@@ -1,13 +1,13 @@
-// Custom title bar for Onyx Desktop
-// This script injects a draggable title bar that matches Onyx design system
+// Custom title bar for Callosum Desktop
+// This script injects a draggable title bar that matches Callosum design system
 
 (function () {
-  console.log("[Onyx Desktop] Title bar script loaded");
+  console.log("[Callosum Desktop] Title bar script loaded");
 
-  const TITLEBAR_ID = "onyx-desktop-titlebar";
+  const TITLEBAR_ID = "callosum-desktop-titlebar";
   const TITLEBAR_HEIGHT = 36;
-  const STYLE_ID = "onyx-desktop-titlebar-style";
-  const VIEWPORT_VAR = "--onyx-desktop-viewport-height";
+  const STYLE_ID = "callosum-desktop-titlebar-style";
+  const VIEWPORT_VAR = "--callosum-desktop-viewport-height";
 
   // Wait for DOM to be ready
   if (document.readyState === "loading") {
@@ -33,7 +33,7 @@
         return;
       } catch (err) {
         console.error(
-          "[Onyx Desktop] Failed to start dragging via invoke:",
+          "[Callosum Desktop] Failed to start dragging via invoke:",
           err,
         );
       }
@@ -48,12 +48,12 @@
         await appWindow.startDragging();
       } catch (err) {
         console.error(
-          "[Onyx Desktop] Failed to start dragging via appWindow:",
+          "[Callosum Desktop] Failed to start dragging via appWindow:",
           err,
         );
       }
     } else {
-      console.error("[Onyx Desktop] No Tauri drag API available.");
+      console.error("[Callosum Desktop] No Tauri drag API available.");
     }
   }
 
@@ -63,50 +63,50 @@
     style.id = STYLE_ID;
     style.textContent = `
       :root {
-        --onyx-desktop-titlebar-height: ${TITLEBAR_HEIGHT}px;
-        --onyx-desktop-viewport-height: 100dvh;
-        --onyx-desktop-safe-height: calc(var(--onyx-desktop-viewport-height) - var(--onyx-desktop-titlebar-height));
+        --callosum-desktop-titlebar-height: ${TITLEBAR_HEIGHT}px;
+        --callosum-desktop-viewport-height: 100dvh;
+        --callosum-desktop-safe-height: calc(var(--callosum-desktop-viewport-height) - var(--callosum-desktop-titlebar-height));
       }
 
       @supports not (height: 100dvh) {
         :root {
-          --onyx-desktop-viewport-height: 100vh;
+          --callosum-desktop-viewport-height: 100vh;
         }
       }
 
       html,
       body {
-        height: var(--onyx-desktop-viewport-height);
-        min-height: var(--onyx-desktop-viewport-height);
+        height: var(--callosum-desktop-viewport-height);
+        min-height: var(--callosum-desktop-viewport-height);
         margin: 0;
         padding: 0;
         overflow: hidden;
       }
 
       body {
-        padding-top: var(--onyx-desktop-titlebar-height) !important;
+        padding-top: var(--callosum-desktop-titlebar-height) !important;
         box-sizing: border-box;
       }
 
       body > div#__next,
       body > div#root,
       body > main {
-        height: var(--onyx-desktop-safe-height);
-        min-height: var(--onyx-desktop-safe-height);
+        height: var(--callosum-desktop-safe-height);
+        min-height: var(--callosum-desktop-safe-height);
         overflow: auto;
       }
 
       /* Override common Tailwind viewport helpers so content fits under the titlebar */
       .h-screen {
-        height: var(--onyx-desktop-safe-height) !important;
+        height: var(--callosum-desktop-safe-height) !important;
       }
 
       .min-h-screen {
-        min-height: var(--onyx-desktop-safe-height) !important;
+        min-height: var(--callosum-desktop-safe-height) !important;
       }
 
       .max-h-screen {
-        max-height: var(--onyx-desktop-safe-height) !important;
+        max-height: var(--callosum-desktop-safe-height) !important;
       }
 
       #${TITLEBAR_ID} {
@@ -115,7 +115,7 @@
         user-select: none !important;
         -webkit-app-region: drag;
         background: rgba(255, 255, 255, 0.85);
-        height: var(--onyx-desktop-titlebar-height);
+        height: var(--callosum-desktop-titlebar-height);
       }
 
       /* Dark mode support */
@@ -148,7 +148,7 @@
       }
     });
 
-    // Apply styles matching Onyx design system with translucent glass effect
+    // Apply styles matching Callosum design system with translucent glass effect
     titleBar.style.cssText = `
       position: fixed;
       top: 0;
@@ -177,7 +177,7 @@
 
   function mountTitleBar() {
     if (!document.body) {
-      console.error("[Onyx Desktop] document.body not found");
+      console.error("[Callosum Desktop] document.body not found");
       return;
     }
 
@@ -193,7 +193,7 @@
     const titleBar = buildTitleBar();
     document.body.insertBefore(titleBar, document.body.firstChild);
     injectStyles();
-    console.log("[Onyx Desktop] Title bar injected");
+    console.log("[Callosum Desktop] Title bar injected");
   }
 
   function syncViewportHeight() {

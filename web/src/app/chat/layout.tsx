@@ -21,9 +21,13 @@ export default async function Layout({ children }: LayoutProps) {
 
   return (
     <ProjectsProvider>
-      <div className="flex flex-row w-full h-full">
+      <div className="flex flex-row w-full h-full bg-background-tint-01 overflow-hidden">
         <AppSidebar />
-        {children}
+        <main className="flex-1 h-full min-w-0 py-2 pr-2 flex flex-col">
+          <div className="flex-1 rounded-2xl border border-border-02 shadow-lg bg-background overflow-hidden relative flex flex-col">
+            {children}
+          </div>
+        </main>
       </div>
     </ProjectsProvider>
   );

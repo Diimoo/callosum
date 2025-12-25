@@ -3,11 +3,11 @@ from typing import Any
 from unittest.mock import MagicMock
 from unittest.mock import patch
 
-from onyx.connectors.google_drive.connector import GoogleDriveConnector
-from onyx.connectors.google_drive.file_retrieval import DriveFileFieldType
-from onyx.connectors.google_drive.file_retrieval import has_link_only_permission
-from onyx.connectors.google_drive.models import DriveRetrievalStage
-from onyx.connectors.google_drive.models import RetrievedDriveFile
+from callosum.connectors.google_drive.connector import GoogleDriveConnector
+from callosum.connectors.google_drive.file_retrieval import DriveFileFieldType
+from callosum.connectors.google_drive.file_retrieval import has_link_only_permission
+from callosum.connectors.google_drive.models import DriveRetrievalStage
+from callosum.connectors.google_drive.models import RetrievedDriveFile
 
 
 def _stub_run_functions(
@@ -79,11 +79,11 @@ def test_connector_skips_link_only_files_when_enabled() -> None:
     with (
         patch.object(connector, "_fetch_drive_items", fetch_mock),
         patch(
-            "onyx.connectors.google_drive.connector.run_functions_tuples_in_parallel",
+            "callosum.connectors.google_drive.connector.run_functions_tuples_in_parallel",
             side_effect=_stub_run_functions,
         ),
         patch(
-            "onyx.connectors.google_drive.connector.convert_drive_item_to_document"
+            "callosum.connectors.google_drive.connector.convert_drive_item_to_document"
         ) as convert_mock,
     ):
         convert_mock.return_value = "doc"
@@ -115,11 +115,11 @@ def test_connector_processes_files_when_option_disabled() -> None:
     with (
         patch.object(connector, "_fetch_drive_items", fetch_mock),
         patch(
-            "onyx.connectors.google_drive.connector.run_functions_tuples_in_parallel",
+            "callosum.connectors.google_drive.connector.run_functions_tuples_in_parallel",
             side_effect=_stub_run_functions,
         ),
         patch(
-            "onyx.connectors.google_drive.connector.convert_drive_item_to_document"
+            "callosum.connectors.google_drive.connector.convert_drive_item_to_document"
         ) as convert_mock,
     ):
         convert_mock.return_value = "doc"

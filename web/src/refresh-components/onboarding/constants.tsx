@@ -60,7 +60,7 @@ export const STEP_NAVIGATION: Record<
 export const FINAL_SETUP_CONFIG: FinalStepItemProps[] = [
   {
     title: "Select web search provider",
-    description: "Enable Onyx to search the internet for information.",
+    description: "Enable Callosum to search the internet for information.",
     icon: SvgGlobe,
     buttonText: "Web Search",
     buttonHref: "/admin/configuration/web-search",
@@ -96,7 +96,7 @@ export const MODAL_CONTENT_MAP: Record<string, any> = {
         </>
       ),
       default_model_name:
-        "This model will be used by Onyx by default for chatGPT.",
+        "This model will be used by Callosum by default for chatGPT.",
     },
   },
   [LLMProviderName.ANTHROPIC]: {
@@ -113,7 +113,7 @@ export const MODAL_CONTENT_MAP: Record<string, any> = {
         </>
       ),
       default_model_name:
-        "This model will be used by Onyx by default for Claude.",
+        "This model will be used by Callosum by default for Claude.",
     },
   },
   [LLMProviderName.OLLAMA_CHAT]: {
@@ -131,7 +131,7 @@ export const MODAL_CONTENT_MAP: Record<string, any> = {
         </>
       ),
       default_model_name:
-        "This model will be used by Onyx by default for Ollama.",
+        "This model will be used by Callosum by default for Ollama.",
     },
   },
   [LLMProviderName.VERTEX_AI]: {
@@ -149,7 +149,7 @@ export const MODAL_CONTENT_MAP: Record<string, any> = {
         </>
       ),
       default_model_name:
-        "This model will be used by Onyx by default for Gemini.",
+        "This model will be used by Callosum by default for Gemini.",
     },
   },
   [LLMProviderName.AZURE]: {
@@ -167,7 +167,7 @@ export const MODAL_CONTENT_MAP: Record<string, any> = {
         </>
       ),
       default_model_name:
-        "This model will be used by Onyx by default for Azure OpenAI.",
+        "This model will be used by Callosum by default for Azure OpenAI.",
     },
   },
   [LLMProviderName.OPENROUTER]: {
@@ -184,7 +184,7 @@ export const MODAL_CONTENT_MAP: Record<string, any> = {
         </>
       ),
       default_model_name:
-        "This model will be used by Onyx by default for OpenRouter.",
+        "This model will be used by Callosum by default for OpenRouter.",
     },
   },
   [LLMProviderName.BEDROCK]: {

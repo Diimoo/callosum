@@ -11,7 +11,7 @@ import { NewTenantInfo } from "@/lib/types";
 import { useRouter } from "next/navigation";
 
 // App domain should not be hardcoded
-const APP_DOMAIN = process.env.NEXT_PUBLIC_APP_DOMAIN || "onyx.app";
+const APP_DOMAIN = process.env.NEXT_PUBLIC_APP_DOMAIN || "callosum.app";
 
 interface NewTenantModalProps {
   tenantInfo: NewTenantInfo;

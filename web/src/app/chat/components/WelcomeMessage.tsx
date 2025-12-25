@@ -21,7 +21,7 @@ export default function WelcomeMessage({
   if (isDefaultAgent) {
     const greeting = useMemo(getRandomGreeting, []);
     content = (
-      <div data-testid="onyx-logo" className="flex flex-row items-center gap-4">
+      <div data-testid="callosum-logo" className="flex flex-row items-center gap-4">
         <Logo folded size={32} />
         <Text headingH2>{greeting}</Text>
       </div>
@@ -52,9 +52,11 @@ export default function WelcomeMessage({
   return (
     <div
       data-testid="chat-intro"
-      className="flex flex-col items-center justify-center"
+      className="flex flex-col items-center justify-center p-6"
     >
-      {content}
+      <div className="bg-background-tint-01 rounded-2xl px-8 py-6 shadow-sm border border-border-01">
+        {content}
+      </div>
     </div>
   );
 }

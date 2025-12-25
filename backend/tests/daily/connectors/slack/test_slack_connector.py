@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from onyx.connectors.slack.connector import SlackConnector
+from callosum.connectors.slack.connector import SlackConnector
 from tests.daily.connectors.utils import load_everything_from_checkpoint_connector
 from tests.daily.connectors.utils import to_sections
 from tests.daily.connectors.utils import to_text_sections

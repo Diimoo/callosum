@@ -17,7 +17,7 @@ from datetime import timezone
 
 import requests
 
-from onyx.auth.schemas import UserRole
+from callosum.auth.schemas import UserRole
 from tests.integration.common_utils.constants import API_SERVER_URL
 from tests.integration.common_utils.managers.pat import PATManager
 from tests.integration.common_utils.managers.user import UserManager
@@ -42,11 +42,11 @@ def test_pat_lifecycle_happy_path(reset: None) -> None:
     assert pat.created_at is not None
     assert pat.expires_at is not None
 
-    assert pat.token.startswith("onyx_pat_")
+    assert pat.token.startswith("callosum_pat_")
     assert len(pat.token) > 20
 
     assert "****" in pat.token_display
-    assert pat.token_display.startswith("onyx_pat_")
+    assert pat.token_display.startswith("callosum_pat_")
 
     # List PATs
     tokens = PATManager.list(user)

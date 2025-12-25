@@ -12,7 +12,7 @@ import {
   openActionManagement,
   waitForUnifiedGreeting,
 } from "@tests/e2e/utils/tools";
-import { OnyxApiClient } from "@tests/e2e/utils/onyxApiClient";
+import { CallosumApiClient } from "@tests/e2e/utils/callosumApiClient";
 
 // Tool-related test selectors now imported from shared utils
 
@@ -59,7 +59,7 @@ test.describe("Default Assistant Tests", () => {
     }) => {
       // First verify greeting appears for default assistant
       const greetingElement = await page.waitForSelector(
-        '[data-testid="onyx-logo"]',
+        '[data-testid="callosum-logo"]',
         { timeout: 5000 }
       );
       expect(greetingElement).toBeTruthy();
@@ -77,16 +77,16 @@ test.describe("Default Assistant Tests", () => {
       await verifyAssistantIsChosen(page, "Custom Test Assistant");
 
       // Greeting should NOT appear for custom assistant
-      const customGreeting = await page.$('[data-testid="onyx-logo"]');
+      const customGreeting = await page.$('[data-testid="callosum-logo"]');
       expect(customGreeting).toBeNull();
     });
   });
 
   test.describe("Default Assistant Branding", () => {
-    test("should display Onyx logo for default assistant", async ({ page }) => {
-      // Look for Onyx logo
+    test("should display Callosum logo for default assistant", async ({ page }) => {
+      // Look for Callosum logo
       const logoElement = await page.waitForSelector(
-        '[data-testid="onyx-logo"]',
+        '[data-testid="callosum-logo"]',
         { timeout: 5000 }
       );
       expect(logoElement).toBeTruthy();
@@ -113,7 +113,7 @@ test.describe("Default Assistant Tests", () => {
       // Wait for assistant to be created and selected
       await verifyAssistantIsChosen(page, "Custom Assistant");
 
-      // Should show assistant name and icon, not Onyx logo
+      // Should show assistant name and icon, not Callosum logo
       const assistantNameElement = await page.waitForSelector(
         '[data-testid="assistant-name-display"]',
         { timeout: 5000 }
@@ -121,8 +121,8 @@ test.describe("Default Assistant Tests", () => {
       const nameText = await assistantNameElement.textContent();
       expect(nameText).toContain("Custom Assistant");
 
-      // Onyx logo should NOT be shown
-      const logoElement = await page.$('[data-testid="onyx-logo"]');
+      // Callosum logo should NOT be shown
+      const logoElement = await page.$('[data-testid="callosum-logo"]');
       expect(logoElement).toBeNull();
     });
   });
@@ -179,7 +179,7 @@ test.describe("Default Assistant Tests", () => {
     test("default assistant should be selected for new chats", async ({
       page,
     }) => {
-      // Verify the input placeholder indicates default assistant (Onyx)
+      // Verify the input placeholder indicates default assistant (Callosum)
       await verifyDefaultAssistantIsChosen(page);
     });
 
@@ -253,7 +253,7 @@ test.describe("Default Assistant Tests", () => {
       await page.goto("http://localhost:3000/chat");
       await page.waitForLoadState("networkidle");
 
-      const apiClient = new OnyxApiClient(page);
+      const apiClient = new CallosumApiClient(page);
       let webSearchProviderId: number | null = null;
       let imageGenProviderId: number | null = null;
 
@@ -457,14 +457,14 @@ test.describe("End-to-End Default Assistant Flow", () => {
 
     // Verify greeting message appears
     const greetingElement = await page.waitForSelector(
-      '[data-testid="onyx-logo"]',
+      '[data-testid="callosum-logo"]',
       { timeout: 5000 }
     );
     expect(greetingElement).toBeTruthy();
 
-    // Verify Onyx logo is displayed
+    // Verify Callosum logo is displayed
     const logoElement = await page.waitForSelector(
-      '[data-testid="onyx-logo"]',
+      '[data-testid="callosum-logo"]',
       { timeout: 5000 }
     );
     expect(logoElement).toBeTruthy();
@@ -474,7 +474,7 @@ test.describe("End-to-End Default Assistant Flow", () => {
 
     // Verify AI response appears
     const aiResponse = await page.waitForSelector(
-      '[data-testid="onyx-ai-message"]',
+      '[data-testid="callosum-ai-message"]',
       { timeout: 10000 }
     );
     expect(aiResponse).toBeTruthy();
@@ -490,7 +490,7 @@ test.describe("End-to-End Default Assistant Flow", () => {
 
     // Verify we're back to default assistant with greeting
     const newGreeting = await page.waitForSelector(
-      '[data-testid="onyx-logo"]',
+      '[data-testid="callosum-logo"]',
       { timeout: 5000 }
     );
     expect(newGreeting).toBeTruthy();

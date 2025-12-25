@@ -83,7 +83,7 @@ const Page = async (props: {
             <Text headingH2 text05>
               {cloud ? "Complete your sign up" : "Create account"}
             </Text>
-            <Text text03>Get started with Onyx</Text>
+            <Text text03>Get started with Callosum</Text>
           </div>
           {cloud && authUrl && (
             <div className="w-full justify-center mt-6">

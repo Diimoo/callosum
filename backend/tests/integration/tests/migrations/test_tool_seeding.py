@@ -1,6 +1,6 @@
 from sqlalchemy import text
 
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
 from tests.integration.common_utils.reset import downgrade_postgres
 from tests.integration.common_utils.reset import upgrade_postgres
 

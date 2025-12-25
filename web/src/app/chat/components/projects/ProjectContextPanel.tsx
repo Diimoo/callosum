@@ -7,7 +7,7 @@ import { useProjectsContext } from "../../projects/ProjectsContext";
 import FilePickerPopover from "@/refresh-components/popovers/FilePickerPopover";
 import type { ProjectFile } from "../../projects/projectsService";
 import { usePopup } from "@/components/admin/connectors/Popup";
-import { MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { MinimalCallosumDocument } from "@/lib/search/interfaces";
 import Button from "@/refresh-components/buttons/Button";
 
 import AddInstructionModal from "@/components/modals/AddInstructionModal";
@@ -25,7 +25,7 @@ import { SvgAddLines, SvgEdit, SvgFiles, SvgFolderOpen } from "@opal/icons";
 export interface ProjectContextPanelProps {
   projectTokenCount?: number;
   availableContextTokens?: number;
-  setPresentingDocument?: (document: MinimalOnyxDocument) => void;
+  setPresentingDocument?: (document: MinimalCallosumDocument) => void;
 }
 export default function ProjectContextPanel({
   projectTokenCount = 0,
@@ -38,12 +38,12 @@ export default function ProjectContextPanel({
   const projectFilesModal = useCreateModal();
   // Edit project name state
   const [isEditingName, setIsEditingName] = useState(false);
-  // Convert ProjectFile to MinimalOnyxDocument format for viewing
+  // Convert ProjectFile to MinimalCallosumDocument format for viewing
   const handleOnView = useCallback(
     (file: ProjectFile) => {
       if (!setPresentingDocument) return;
 
-      const documentForViewer: MinimalOnyxDocument = {
+      const documentForViewer: MinimalCallosumDocument = {
         document_id: `project_file__${file.file_id}`,
         semantic_identifier: file.name,
       };

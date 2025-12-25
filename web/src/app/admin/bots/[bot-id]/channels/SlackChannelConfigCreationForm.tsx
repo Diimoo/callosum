@@ -224,7 +224,7 @@ export const SlackChannelConfigCreationForm = ({
             setPopup({
               message: `Error ${
                 isUpdate ? "updating" : "creating"
-              } OnyxBot config - ${errorMsg}`,
+              } CallosumBot config - ${errorMsg}`,
               type: "error",
             });
           }

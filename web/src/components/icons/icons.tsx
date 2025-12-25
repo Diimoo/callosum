@@ -95,7 +95,7 @@ export interface IconProps {
 export interface LogoIconProps extends IconProps {
   src: string | StaticImageData;
 }
-export type OnyxIconType = (props: IconProps) => JSX.Element;
+export type CallosumIconType = (props: IconProps) => JSX.Element;
 
 export const defaultTailwindCSS = "my-auto flex flex-shrink-0 text-default";
 export const defaultTailwindCSSBlue = "my-auto flex flex-shrink-0 text-link";
@@ -568,7 +568,7 @@ export const NotebookIconSkeleton = ({
     </svg>
   );
 };
-export const OnyxIcon = ({
+export const CallosumIcon = ({
   size = 16,
   className = defaultTailwindCSS,
 }: IconProps) => {
@@ -589,7 +589,7 @@ export const OnyxIcon = ({
     </svg>
   );
 };
-export const OnyxLogoTypeIcon = ({
+export const CallosumLogoTypeIcon = ({
   size = 16,
   className = defaultTailwindCSS,
 }: IconProps) => {

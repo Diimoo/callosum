@@ -14,23 +14,23 @@ from sqlalchemy import inspect
 from sqlalchemy.orm import Session
 from slack_sdk.errors import SlackApiError
 
-from onyx.configs.constants import FederatedConnectorSource
-from onyx.context.search.enums import RecencyBiasSetting
-from onyx.context.search.federated.slack_search import fetch_and_cache_channel_metadata
-from onyx.db.models import DocumentSet
-from onyx.db.models import FederatedConnector
-from onyx.db.models import FederatedConnector__DocumentSet
-from onyx.db.models import LLMProvider
-from onyx.db.models import Persona
-from onyx.db.models import Persona__DocumentSet
-from onyx.db.models import Persona__Tool
-from onyx.db.models import SlackBot
-from onyx.db.models import SlackChannelConfig
-from onyx.db.models import User
-from onyx.onyxbot.slack.listener import process_message
-from onyx.onyxbot.slack.models import ChannelType
-from onyx.db.tools import get_builtin_tool
-from onyx.tools.built_in_tools import SearchTool
+from callosum.configs.constants import FederatedConnectorSource
+from callosum.context.search.enums import RecencyBiasSetting
+from callosum.context.search.federated.slack_search import fetch_and_cache_channel_metadata
+from callosum.db.models import DocumentSet
+from callosum.db.models import FederatedConnector
+from callosum.db.models import FederatedConnector__DocumentSet
+from callosum.db.models import LLMProvider
+from callosum.db.models import Persona
+from callosum.db.models import Persona__DocumentSet
+from callosum.db.models import Persona__Tool
+from callosum.db.models import SlackBot
+from callosum.db.models import SlackChannelConfig
+from callosum.db.models import User
+from callosum.callosumbot.slack.listener import process_message
+from callosum.callosumbot.slack.models import ChannelType
+from callosum.db.tools import get_builtin_tool
+from callosum.tools.built_in_tools import SearchTool
 from tests.external_dependency_unit.conftest import create_test_user
 
 
@@ -285,9 +285,9 @@ class TestSlackBotFederatedSearch:
         """Setup only Slack API mocks - everything else runs live"""
         patches = [
             patch("slack_sdk.WebClient.search_messages"),
-            patch("onyx.context.search.federated.slack_search.query_slack"),
-            patch("onyx.onyxbot.slack.listener.get_channel_type_from_id"),
-            patch("onyx.context.search.utils.get_query_embeddings"),
+            patch("callosum.context.search.federated.slack_search.query_slack"),
+            patch("callosum.callosumbot.slack.listener.get_channel_type_from_id"),
+            patch("callosum.context.search.utils.get_query_embeddings"),
         ]
 
         started_patches = [p.start() for p in patches]
@@ -355,7 +355,7 @@ class TestSlackBotFederatedSearch:
         self, mock_query_slack: Mock, channel_name: str
     ) -> None:
         """Setup query_slack mock to capture filtering parameters"""
-        from onyx.context.search.federated.slack_search import SlackQueryResult
+        from callosum.context.search.federated.slack_search import SlackQueryResult
 
         def mock_query_slack_capture_params(
             query_string: str,
@@ -430,9 +430,9 @@ class TestSlackBotFederatedSearch:
         for p in patches:
             p.stop()
 
-    @patch("onyx.utils.gpu_utils.fast_gpu_status_request", return_value=False)
+    @patch("callosum.utils.gpu_utils.fast_gpu_status_request", return_value=False)
     @patch(
-        "onyx.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
+        "callosum.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
     )
     def test_slack_bot_public_channel_filtering(
         self, mock_vespa: Mock, mock_gpu_status: Mock, db_session: Session
@@ -485,9 +485,9 @@ class TestSlackBotFederatedSearch:
         finally:
             self._teardown_common_mocks(patches)
 
-    @patch("onyx.utils.gpu_utils.fast_gpu_status_request", return_value=False)
+    @patch("callosum.utils.gpu_utils.fast_gpu_status_request", return_value=False)
     @patch(
-        "onyx.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
+        "callosum.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
     )
     def test_slack_bot_private_channel_filtering(
         self, mock_vespa: Mock, mock_gpu_status: Mock, db_session: Session
@@ -540,9 +540,9 @@ class TestSlackBotFederatedSearch:
         finally:
             self._teardown_common_mocks(patches)
 
-    @patch("onyx.utils.gpu_utils.fast_gpu_status_request", return_value=False)
+    @patch("callosum.utils.gpu_utils.fast_gpu_status_request", return_value=False)
     @patch(
-        "onyx.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
+        "callosum.document_index.vespa.index.VespaIndex.hybrid_retrieval", return_value=[]
     )
     def test_slack_bot_dm_filtering(
         self, mock_vespa: Mock, mock_gpu_status: Mock, db_session: Session
@@ -594,8 +594,8 @@ class TestSlackBotFederatedSearch:
             self._teardown_common_mocks(patches)
 
 
-@patch("onyx.context.search.federated.slack_search.get_redis_client")
-@patch("onyx.context.search.federated.slack_search.WebClient")
+@patch("callosum.context.search.federated.slack_search.get_redis_client")
+@patch("callosum.context.search.federated.slack_search.WebClient")
 def test_missing_scope_resilience(
     mock_web_client: Mock, mock_redis_client: Mock
 ) -> None:
@@ -682,8 +682,8 @@ def test_missing_scope_resilience(
     assert result["D9876543210"]["type"] == "im"
 
 
-@patch("onyx.context.search.federated.slack_search.get_redis_client")
-@patch("onyx.context.search.federated.slack_search.WebClient")
+@patch("callosum.context.search.federated.slack_search.get_redis_client")
+@patch("callosum.context.search.federated.slack_search.WebClient")
 def test_multiple_missing_scopes_resilience(
     mock_web_client: Mock, mock_redis_client: Mock
 ) -> None:
@@ -771,7 +771,7 @@ def test_slack_channel_config_eager_loads_persona(db_session: Session) -> None:
     This prevents lazy loading failures when the session context changes later
     in the request handling flow (e.g., in handle_regular_answer).
     """
-    from onyx.db.slack_channel_config import (
+    from callosum.db.slack_channel_config import (
         fetch_slack_channel_config_for_channel_or_default,
     )
 

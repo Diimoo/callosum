@@ -5,7 +5,7 @@ import { SWRConfig } from "swr";
 
 /**
  * Custom render function that wraps components with common providers
- * used throughout the Onyx application.
+ * used throughout the Callosum application.
  */
 
 interface AllProvidersProps {

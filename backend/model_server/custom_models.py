@@ -8,7 +8,7 @@ from transformers import PreTrainedTokenizer  # type: ignore
 
 from model_server.constants import MODEL_WARM_UP_STRING
 try:
-    from model_server.onyx_torch_model import ConnectorClassifier, HybridClassifier
+    from model_server.callosum_torch_model import ConnectorClassifier, HybridClassifier
 except ImportError:
     from model_server.callosum_torch_model import ConnectorClassifier, HybridClassifier
 from model_server.utils import simple_log_function_time

@@ -10,7 +10,7 @@ import (
 
 	log "github.com/sirupsen/logrus"
 
-	"github.com/onyx-dot-app/onyx/tools/ods/internal/paths"
+	"github.com/callosum-dot-app/callosum/tools/ods/internal/paths"
 )
 
 // LazyImportSettings defines settings for which files to ignore when checking for lazy imports.
@@ -70,11 +70,11 @@ func DefaultLazyImportModules() map[string]LazyImportSettings {
 		"transformers":               NewLazyImportSettings("model_server/main.py"),
 		"setfit":                     NewLazyImportSettings(),
 		"unstructured":               NewLazyImportSettings(),
-		"onyx.llm.litellm_singleton": NewLazyImportSettings(),
+		"callosum.llm.litellm_singleton": NewLazyImportSettings(),
 		"litellm": NewLazyImportSettings(
-			"onyx/llm/litellm_singleton/__init__.py",
-			"onyx/llm/litellm_singleton/config.py",
-			"onyx/llm/litellm_singleton/monkey_patches.py",
+			"callosum/llm/litellm_singleton/__init__.py",
+			"callosum/llm/litellm_singleton/config.py",
+			"callosum/llm/litellm_singleton/monkey_patches.py",
 		),
 		"nltk":                NewLazyImportSettings(),
 		"trafilatura":         NewLazyImportSettings(),

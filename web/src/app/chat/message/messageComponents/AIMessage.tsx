@@ -9,7 +9,7 @@ import {
 import { CitationMap } from "@/app/chat/interfaces";
 import { FullChatState } from "@/app/chat/message/messageComponents/interfaces";
 import { FeedbackType } from "@/app/chat/interfaces";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { CallosumDocument } from "@/lib/search/interfaces";
 import CitedSourcesToggle from "@/app/chat/message/messageComponents/CitedSourcesToggle";
 import { TooltipGroup } from "@/components/tooltip/CustomTooltip";
 import { useRef, useState, useEffect, useCallback, RefObject } from "react";
@@ -174,7 +174,7 @@ export default function AIMessage({
   const seenCitationDocIdsRef = useRef<Set<string>>(new Set());
   // CitationMap for immediate rendering: citation_num -> document_id
   const citationMapRef = useRef<CitationMap>({});
-  const documentMapRef = useRef<Map<string, OnyxDocument>>(new Map());
+  const documentMapRef = useRef<Map<string, CallosumDocument>>(new Map());
   // Use composite key "turn_index-tab_index" for grouping to support parallel tool calls
   const groupedPacketsMapRef = useRef<Map<string, Packet[]>>(new Map());
   const groupedPacketsRef = useRef<
@@ -443,7 +443,7 @@ export default function AIMessage({
 
       <div
         // for e2e tests
-        data-testid={displayComplete ? "onyx-ai-message" : undefined}
+        data-testid={displayComplete ? "callosum-ai-message" : undefined}
         className="pb-5 md:pt-5 relative flex"
       >
         <div className="mx-auto w-[min(50rem,100%)] px-4 max-w-message-max">

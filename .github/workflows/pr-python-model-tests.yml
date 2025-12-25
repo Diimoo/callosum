@@ -57,8 +57,8 @@ jobs:
       # successfully.
       - name: Pull Model Server Docker image
         run: |
-          docker pull onyxdotapp/onyx-model-server:latest
-          docker tag onyxdotapp/onyx-model-server:latest onyxdotapp/onyx-model-server:test
+          docker pull callosumdotapp/callosum-model-server:latest
+          docker tag callosumdotapp/callosum-model-server:latest callosumdotapp/callosum-model-server:test
 
       - name: Set up Python
         uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # ratchet:actions/setup-python@v6

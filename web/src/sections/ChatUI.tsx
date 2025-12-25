@@ -11,7 +11,7 @@ import React, {
 } from "react";
 import IconButton from "@/refresh-components/buttons/IconButton";
 import { Message } from "@/app/chat/interfaces";
-import { OnyxDocument, MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { CallosumDocument, MinimalCallosumDocument } from "@/lib/search/interfaces";
 import HumanMessage from "@/app/chat/message/HumanMessage";
 import { ErrorBanner } from "@/app/chat/message/Resubmit";
 import { MinimalPersonaSnapshot } from "@/app/admin/assistants/interfaces";
@@ -43,7 +43,7 @@ export interface ChatUIProps {
   liveAssistant: MinimalPersonaSnapshot | undefined;
   llmManager: LlmManager;
   currentMessageFiles: ProjectFile[];
-  setPresentingDocument: (doc: MinimalOnyxDocument | null) => void;
+  setPresentingDocument: (doc: MinimalCallosumDocument | null) => void;
   onSubmit: (args: {
     message: string;
     messageIdToResend?: number;
@@ -93,7 +93,7 @@ const ChatUI = React.memo(
       const currentChatState = useCurrentChatState();
 
       // Stable fallbacks to avoid changing prop identities on each render
-      const emptyDocs = useMemo<OnyxDocument[]>(() => [], []);
+      const emptyDocs = useMemo<CallosumDocument[]>(() => [], []);
       const emptyChildrenIds = useMemo<number[]>(() => [], []);
 
       const scrollContainerRef = useRef<HTMLDivElement>(null);

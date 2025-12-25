@@ -192,7 +192,7 @@ export default function Settings({ folded }: SettingsProps) {
 
       <Popover open={!!popupState} onOpenChange={handlePopoverOpen}>
         <PopoverTrigger asChild>
-          <div id="onyx-user-dropdown">
+          <div id="callosum-user-dropdown">
             <SidebarTab
               leftIcon={({ className }) => (
                 <Avatar

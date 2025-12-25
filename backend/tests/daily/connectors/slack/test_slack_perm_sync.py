@@ -3,20 +3,20 @@ from collections.abc import Generator
 
 import pytest
 
-from onyx.connectors.models import Document
-from onyx.connectors.models import SlimDocument
-from onyx.connectors.slack.connector import SlackConnector
-from onyx.utils.variable_functionality import global_version
+from callosum.connectors.models import Document
+from callosum.connectors.models import SlimDocument
+from callosum.connectors.slack.connector import SlackConnector
+from callosum.utils.variable_functionality import global_version
 from tests.daily.connectors.utils import load_everything_from_checkpoint_connector
 
 
 PUBLIC_CHANNEL_NAME = "#daily-connector-test-channel"
 PRIVATE_CHANNEL_NAME = "#private-channel"
 PRIVATE_CHANNEL_USERS = [
-    "admin@onyx-test.com",
-    "test_user_1@onyx-test.com",
+    "admin@callosum-test.com",
+    "test_user_1@callosum-test.com",
     # user 2 added via a group
-    "test_user_2@onyx-test.com",
+    "test_user_2@callosum-test.com",
 ]
 
 

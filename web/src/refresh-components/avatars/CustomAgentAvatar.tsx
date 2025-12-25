@@ -8,7 +8,7 @@ import { DEFAULT_AGENT_AVATAR_SIZE_PX } from "@/lib/constants";
 import {
   SvgCheck,
   SvgCode,
-  SvgOnyxOctagon,
+  SvgCallosumOctagon,
   SvgSearch,
   SvgTwoLineSmall,
 } from "@opal/icons";
@@ -35,7 +35,7 @@ function SvgOctagonWrapper({ size, children }: SvgOctagonWrapperProps) {
       <div className="absolute inset-0 flex items-center justify-center">
         {children}
       </div>
-      <SvgOnyxOctagon className="stroke-text-04" height={size} width={size} />
+      <SvgCallosumOctagon className="stroke-text-04" height={size} width={size} />
     </div>
   );
 }

@@ -5,10 +5,10 @@ from datetime import timezone
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import InputType
-from onyx.connectors.sharepoint.connector import SharepointAuthMethod
-from onyx.db.enums import AccessType
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.models import InputType
+from callosum.connectors.sharepoint.connector import SharepointAuthMethod
+from callosum.db.enums import AccessType
 from tests.integration.common_utils.managers.cc_pair import CCPairManager
 from tests.integration.common_utils.managers.connector import ConnectorManager
 from tests.integration.common_utils.managers.credential import CredentialManager
@@ -42,9 +42,9 @@ def sharepoint_test_env_setup() -> Generator[SharepointTestEnvSetupTuple]:
     )
     sp_directory_id = os.environ.get("PERM_SYNC_SHAREPOINT_DIRECTORY_ID")
     sharepoint_sites = "https://danswerai.sharepoint.com/sites/Permisisonsync"
-    admin_email = "admin@onyx.app"
-    user1_email = "subash@onyx.app"
-    user2_email = "raunak@onyx.app"
+    admin_email = "admin@callosum.app"
+    user1_email = "subash@callosum.app"
+    user2_email = "raunak@callosum.app"
 
     if not sp_private_key or not sp_certificate_password or not sp_directory_id:
         pytest.skip("Skipping test because required environment variables are not set")

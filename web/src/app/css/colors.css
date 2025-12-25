@@ -201,15 +201,15 @@
 
 /* Brand Colors */
 :root {
-  /* Onyx / Ink */
-  --onyx-ink-100: #000000;
-  --onyx-ink-95: #1c1c1c;
-  --onyx-ink-90: #333333;
+  /* Callosum / Ink */
+  --callosum-ink-100: #000000;
+  --callosum-ink-95: #1c1c1c;
+  --callosum-ink-90: #333333;
 
-  /* Onyx / Chrome */
-  --onyx-chrome-20: #cacaca;
-  --onyx-chrome-10: #e9e9e9;
-  --onyx-chrome-00: #ffffff;
+  /* Callosum / Chrome */
+  --callosum-chrome-20: #cacaca;
+  --callosum-chrome-10: #e9e9e9;
+  --callosum-chrome-00: #ffffff;
 
   /* Tint (referencing Stone variables) */
   --tint-98: var(--stone-98);
@@ -288,9 +288,9 @@
   --border-inverted-01: var(--grey-80);
 
   /* Theme */
-  --theme-primary-06: var(--onyx-ink-100);
-  --theme-primary-05: var(--onyx-ink-95);
-  --theme-primary-04: var(--onyx-ink-90);
+  --theme-primary-06: var(--callosum-ink-100);
+  --theme-primary-05: var(--callosum-ink-95);
+  --theme-primary-04: var(--callosum-ink-90);
 
   /* Status */
   --status-success-05: var(--green-50);
@@ -421,9 +421,9 @@
   --border-inverted-01: var(--grey-10);
 
   /* Theme */
-  --theme-primary-06: var(--onyx-chrome-00);
-  --theme-primary-05: var(--onyx-chrome-10);
-  --theme-primary-04: var(--onyx-chrome-20);
+  --theme-primary-06: var(--callosum-chrome-00);
+  --theme-primary-05: var(--callosum-chrome-10);
+  --theme-primary-04: var(--callosum-chrome-20);
 
   /* Status */
   --status-success-05: var(--green-50);

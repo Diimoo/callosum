@@ -2,33 +2,33 @@ import time
 
 import pytest
 
-from onyx.background.celery.tasks.kg_processing.kg_indexing import (
+from callosum.background.celery.tasks.kg_processing.kg_indexing import (
     try_creating_kg_processing_task,
 )
-from onyx.background.celery.tasks.kg_processing.utils import (
+from callosum.background.celery.tasks.kg_processing.utils import (
     is_kg_processing_blocked,
 )
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import InputType
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.kg_config import get_kg_config_settings
-from onyx.db.kg_config import set_kg_config_settings
-from onyx.db.models import Connector
-from onyx.db.models import Document
-from onyx.db.models import KGEntity
-from onyx.db.models import KGEntityExtractionStaging
-from onyx.db.models import KGEntityType
-from onyx.db.models import KGRelationship
-from onyx.db.models import KGRelationshipExtractionStaging
-from onyx.db.models import KGStage
-from onyx.kg.models import KGAttributeEntityOption
-from onyx.kg.models import KGAttributeImplicationProperty
-from onyx.kg.models import KGAttributeProperty
-from onyx.kg.models import KGAttributeTrackInfo
-from onyx.kg.models import KGAttributeTrackType
-from onyx.kg.models import KGEntityTypeAttributes
-from onyx.kg.models import KGEntityTypeDefinition
-from onyx.kg.models import KGGroundingType
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.models import InputType
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.kg_config import get_kg_config_settings
+from callosum.db.kg_config import set_kg_config_settings
+from callosum.db.models import Connector
+from callosum.db.models import Document
+from callosum.db.models import KGEntity
+from callosum.db.models import KGEntityExtractionStaging
+from callosum.db.models import KGEntityType
+from callosum.db.models import KGRelationship
+from callosum.db.models import KGRelationshipExtractionStaging
+from callosum.db.models import KGStage
+from callosum.kg.models import KGAttributeEntityOption
+from callosum.kg.models import KGAttributeImplicationProperty
+from callosum.kg.models import KGAttributeProperty
+from callosum.kg.models import KGAttributeTrackInfo
+from callosum.kg.models import KGAttributeTrackType
+from callosum.kg.models import KGEntityTypeAttributes
+from callosum.kg.models import KGEntityTypeDefinition
+from callosum.kg.models import KGGroundingType
 from shared_configs.contextvars import get_current_tenant_id
 from tests.integration.common_utils.managers.api_key import APIKeyManager
 from tests.integration.common_utils.managers.cc_pair import CCPairManager
@@ -48,7 +48,7 @@ def reset_for_test() -> None:
     kg_config_settings.KG_EXPOSED = True
     kg_config_settings.KG_ENABLED = True
     kg_config_settings.KG_VENDOR = "Test"
-    kg_config_settings.KG_VENDOR_DOMAINS = ["onyx-test.com.app", "tester.ai"]
+    kg_config_settings.KG_VENDOR_DOMAINS = ["callosum-test.com.app", "tester.ai"]
     kg_config_settings.KG_IGNORE_EMAIL_DOMAINS = ["gmail.com"]
     kg_config_settings.KG_COVERAGE_START = "2020-01-01"
     set_kg_config_settings(kg_config_settings)
@@ -58,7 +58,7 @@ def reset_for_test() -> None:
 def kg_test_docs() -> tuple[list[str], int, list[KGEntityType]]:
 
     # create admin user
-    admin_user: DATestUser = UserManager.create(email="admin@onyx-test.com.app")
+    admin_user: DATestUser = UserManager.create(email="admin@callosum-test.com.app")
 
     # create a minimal file connector
     cc_pair = CCPairManager.create_from_scratch(

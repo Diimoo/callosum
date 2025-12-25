@@ -8,10 +8,10 @@ from unittest.mock import patch
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import Document
-from onyx.connectors.models import ImageSection
-from onyx.connectors.sharepoint.connector import SharepointConnector
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.models import Document
+from callosum.connectors.models import ImageSection
+from callosum.connectors.sharepoint.connector import SharepointConnector
 from tests.daily.connectors.utils import load_all_docs_from_checkpoint_connector
 
 # NOTE: Sharepoint site for tests is "sharepoint-tests"
@@ -126,7 +126,7 @@ def test_sharepoint_connector_all_sites__docs_only(
     sharepoint_credentials: dict[str, str],
 ) -> None:
     with patch(
-        "onyx.connectors.sharepoint.connector.store_image_and_create_section",
+        "callosum.connectors.sharepoint.connector.store_image_and_create_section",
         mock_store_image,
     ):
         # Initialize connector with no sites
@@ -153,7 +153,7 @@ def test_sharepoint_connector_all_sites__pages_only(
     sharepoint_credentials: dict[str, str],
 ) -> None:
     with patch(
-        "onyx.connectors.sharepoint.connector.store_image_and_create_section",
+        "callosum.connectors.sharepoint.connector.store_image_and_create_section",
         mock_store_image,
     ):
         # Initialize connector with no docs
@@ -180,7 +180,7 @@ def test_sharepoint_connector_specific_folder(
     sharepoint_credentials: dict[str, str],
 ) -> None:
     with patch(
-        "onyx.connectors.sharepoint.connector.store_image_and_create_section",
+        "callosum.connectors.sharepoint.connector.store_image_and_create_section",
         mock_store_image,
     ):
         # Initialize connector with the test site URL and specific folder
@@ -222,7 +222,7 @@ def test_sharepoint_connector_root_folder__docs_only(
     sharepoint_credentials: dict[str, str],
 ) -> None:
     with patch(
-        "onyx.connectors.sharepoint.connector.store_image_and_create_section",
+        "callosum.connectors.sharepoint.connector.store_image_and_create_section",
         mock_store_image,
     ):
         # Initialize connector with the base site URL
@@ -258,7 +258,7 @@ def test_sharepoint_connector_other_library(
     sharepoint_credentials: dict[str, str],
 ) -> None:
     with patch(
-        "onyx.connectors.sharepoint.connector.store_image_and_create_section",
+        "callosum.connectors.sharepoint.connector.store_image_and_create_section",
         mock_store_image,
     ):
         # Initialize connector with the other library
@@ -300,7 +300,7 @@ def test_sharepoint_connector_poll(
     sharepoint_credentials: dict[str, str],
 ) -> None:
     with patch(
-        "onyx.connectors.sharepoint.connector.store_image_and_create_section",
+        "callosum.connectors.sharepoint.connector.store_image_and_create_section",
         mock_store_image,
     ):
         # Initialize connector with the base site URL
@@ -342,7 +342,7 @@ def test_sharepoint_connector_pages(
     sharepoint_credentials: dict[str, str],
 ) -> None:
     with patch(
-        "onyx.connectors.sharepoint.connector.store_image_and_create_section",
+        "callosum.connectors.sharepoint.connector.store_image_and_create_section",
         mock_store_image,
     ):
         connector = SharepointConnector(

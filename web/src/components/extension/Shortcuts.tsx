@@ -116,7 +116,7 @@ export const NewShortCutModal = ({
       const faviconUrl = isValidUrl
         ? `https://www.google.com/s2/favicons?domain=${new URL(
             url
-          ).hostname.replace(/^(cloud\.)?onyx\.app$/, "onyx.app")}&sz=64`
+          ).hostname.replace(/^(cloud\.)?callosum\.app$/, "callosum.app")}&sz=64`
         : "";
       onAdd({ name, url, favicon: faviconUrl });
       onClose();
@@ -142,7 +142,7 @@ export const NewShortCutModal = ({
   const faviconUrl = isValidUrl
     ? `https://www.google.com/s2/favicons?domain=${new URL(
         url
-      ).hostname.replace(/^(cloud\.)?onyx\.app$/, "onyx.app")}&sz=64`
+      ).hostname.replace(/^(cloud\.)?callosum\.app$/, "callosum.app")}&sz=64`
     : "";
 
   return (

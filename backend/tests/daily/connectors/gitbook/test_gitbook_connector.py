@@ -3,8 +3,8 @@ import time
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.gitbook.connector import GitbookConnector
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.gitbook.connector import GitbookConnector
 
 
 @pytest.fixture

@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { SvgArrowExchange, SvgOnyxLogo } from "@opal/icons";
+import { SvgArrowExchange, SvgCallosumLogo } from "@opal/icons";
 type LLMConnectionIconsProps = {
   icon: React.ReactNode;
 };
@@ -12,7 +12,7 @@ const LLMConnectionIconsInner = ({ icon }: LLMConnectionIconsProps) => {
         <SvgArrowExchange className="w-3 h-3 stroke-text-04" />
       </div>
       <div className="w-7 h-7 flex items-center justify-center">
-        <SvgOnyxLogo width={24} height={24} className="fill-text-04" />
+        <SvgCallosumLogo width={24} height={24} className="fill-text-04" />
       </div>
     </div>
   );

@@ -7,18 +7,18 @@ from uuid import UUID
 from pydantic import BaseModel
 from pydantic import Field
 
-from onyx.auth.schemas import UserRole
-from onyx.configs.constants import MessageType
-from onyx.configs.constants import QAFeedbackType
-from onyx.context.search.enums import RecencyBiasSetting
-from onyx.context.search.models import SavedSearchDoc
-from onyx.context.search.models import SearchDoc
-from onyx.db.enums import AccessType
-from onyx.server.documents.models import DocumentSource
-from onyx.server.documents.models import IndexAttemptSnapshot
-from onyx.server.documents.models import IndexingStatus
-from onyx.server.documents.models import InputType
-from onyx.server.query_and_chat.streaming_models import GeneratedImage
+from callosum.auth.schemas import UserRole
+from callosum.configs.constants import MessageType
+from callosum.configs.constants import QAFeedbackType
+from callosum.context.search.enums import RecencyBiasSetting
+from callosum.context.search.models import SavedSearchDoc
+from callosum.context.search.models import SearchDoc
+from callosum.db.enums import AccessType
+from callosum.server.documents.models import DocumentSource
+from callosum.server.documents.models import IndexAttemptSnapshot
+from callosum.server.documents.models import IndexingStatus
+from callosum.server.documents.models import InputType
+from callosum.server.query_and_chat.streaming_models import GeneratedImage
 
 """
 These data models are used to represent the data on the testing side of things.

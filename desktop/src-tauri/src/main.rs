@@ -31,11 +31,11 @@ use window_vibrancy::{apply_vibrancy, NSVisualEffectMaterial};
 // Configuration
 // ============================================================================
 
-const DEFAULT_SERVER_URL: &str = "https://cloud.onyx.app";
+const DEFAULT_SERVER_URL: &str = "https://cloud.callosum.app";
 const CONFIG_FILE_NAME: &str = "config.json";
 #[cfg(target_os = "macos")]
 const TITLEBAR_SCRIPT: &str = include_str!("../../src/titlebar.js");
-const TRAY_ID: &str = "onyx-tray";
+const TRAY_ID: &str = "callosum-tray";
 const TRAY_ICON_BYTES: &[u8] = include_bytes!("../icons/tray-icon.png");
 const TRAY_MENU_OPEN_APP_ID: &str = "tray_open_app";
 const TRAY_MENU_OPEN_CHAT_ID: &str = "tray_open_chat";
@@ -44,7 +44,7 @@ const TRAY_MENU_QUIT_ID: &str = "tray_quit";
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AppConfig {
-    /// The Onyx server URL (default: https://cloud.onyx.app)
+    /// The Callosum server URL (default: https://cloud.callosum.app)
     pub server_url: String,
 
     /// Optional: Custom window title
@@ -53,7 +53,7 @@ pub struct AppConfig {
 }
 
 fn default_window_title() -> String {
-    "Onyx".to_string()
+    "Callosum".to_string()
 }
 
 impl Default for AppConfig {
@@ -67,7 +67,7 @@ impl Default for AppConfig {
 
 /// Get the config directory path
 fn get_config_dir() -> Option<PathBuf> {
-    ProjectDirs::from("app", "onyx", "desktop").map(|dirs| dirs.config_dir().to_path_buf())
+    ProjectDirs::from("app", "callosum", "desktop").map(|dirs| dirs.config_dir().to_path_buf())
 }
 
 /// Get the full config file path
@@ -157,13 +157,13 @@ fn trigger_new_window(app: &AppHandle) {
     let handle = app.clone();
 
     tauri::async_runtime::spawn(async move {
-        let window_label = format!("onyx-{}", uuid::Uuid::new_v4());
+        let window_label = format!("callosum-{}", uuid::Uuid::new_v4());
         let builder = WebviewWindowBuilder::new(
             &handle,
             &window_label,
             WebviewUrl::External(server_url.parse().unwrap()),
         )
-        .title("Onyx")
+        .title("Callosum")
         .inner_size(1200.0, 800.0)
         .min_inner_size(800.0, 600.0)
         .transparent(true);
@@ -189,7 +189,7 @@ fn trigger_new_window(app: &AppHandle) {
 }
 
 fn open_docs() {
-    let url = "https://docs.onyx.app";
+    let url = "https://docs.callosum.app";
     #[cfg(target_os = "macos")]
     {
         let _ = Command::new("open").arg(url).status();
@@ -343,7 +343,7 @@ fn go_forward(window: tauri::WebviewWindow) {
 #[tauri::command]
 async fn new_window(app: AppHandle, state: tauri::State<'_, ConfigState>) -> Result<(), String> {
     let server_url = state.0.read().unwrap().server_url.clone();
-    let window_label = format!("onyx-{}", uuid::Uuid::new_v4());
+    let window_label = format!("callosum-{}", uuid::Uuid::new_v4());
 
     let builder = WebviewWindowBuilder::new(
         &app,
@@ -354,7 +354,7 @@ async fn new_window(app: AppHandle, state: tauri::State<'_, ConfigState>) -> Res
                 .map_err(|e| format!("Invalid URL: {}", e))?,
         ),
     )
-    .title("Onyx")
+    .title("Callosum")
     .inner_size(1200.0, 800.0)
     .min_inner_size(800.0, 600.0)
     .transparent(true);
@@ -482,7 +482,7 @@ fn setup_app_menu(app: &AppHandle) -> tauri::Result<()> {
         true,
         Some("CmdOrCtrl+Shift+N"),
     )?;
-    let docs_item = MenuItem::with_id(app, "open_docs", "Onyx Documentation", true, None::<&str>)?;
+    let docs_item = MenuItem::with_id(app, "open_docs", "Callosum Documentation", true, None::<&str>)?;
 
     if let Some(file_menu) = menu
         .items()?
@@ -522,7 +522,7 @@ fn build_tray_menu(app: &AppHandle) -> tauri::Result<Menu<Wry>> {
     let open_app = MenuItem::with_id(
         app,
         TRAY_MENU_OPEN_APP_ID,
-        "Open Onyx",
+        "Open Callosum",
         true,
         Some("CmdOrCtrl+Shift+Space"),
     )?;
@@ -543,7 +543,7 @@ fn build_tray_menu(app: &AppHandle) -> tauri::Result<Menu<Wry>> {
     )?;
     // Keep it visible/pinned without letting users uncheck (avoids orphaning the tray)
     let _ = show_in_menu_bar.set_enabled(false);
-    let quit = PredefinedMenuItem::quit(app, Some("Quit Onyx"))?;
+    let quit = PredefinedMenuItem::quit(app, Some("Quit Callosum"))?;
 
     MenuBuilder::new(app)
         .item(&open_app)
@@ -575,7 +575,7 @@ fn handle_tray_menu_event(app: &AppHandle, id: &str) {
 }
 
 fn setup_tray_icon(app: &AppHandle) -> tauri::Result<()> {
-    let mut builder = TrayIconBuilder::with_id(TRAY_ID).tooltip("Onyx");
+    let mut builder = TrayIconBuilder::with_id(TRAY_ID).tooltip("Callosum");
 
     let tray_icon = Image::from_bytes(TRAY_ICON_BYTES)
         .ok()
@@ -615,7 +615,7 @@ fn main() {
     let config = load_config();
     let server_url = config.server_url.clone();
 
-    println!("Starting Onyx Desktop");
+    println!("Starting Callosum Desktop");
     println!("Server URL: {}", server_url);
     if let Some(path) = get_config_path() {
         println!("Config file: {:?}", path);

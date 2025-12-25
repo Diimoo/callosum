@@ -6,14 +6,14 @@ from typing import Optional
 
 import nltk  # type: ignore
 
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.engine.sql_engine import SqlEngine
-from onyx.db.search_settings import get_active_search_settings
-from onyx.document_index.factory import get_default_document_index
-from onyx.file_store.file_store import get_default_file_store
-from onyx.indexing.models import IndexingSetting
-from onyx.setup import setup_postgres
-from onyx.setup import setup_vespa
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.engine.sql_engine import SqlEngine
+from callosum.db.search_settings import get_active_search_settings
+from callosum.document_index.factory import get_default_document_index
+from callosum.file_store.file_store import get_default_file_store
+from callosum.indexing.models import IndexingSetting
+from callosum.setup import setup_postgres
+from callosum.setup import setup_vespa
 from shared_configs import configs as shared_configs_module
 from shared_configs.contextvars import CURRENT_TENANT_ID_CONTEXTVAR
 from tests.external_dependency_unit.constants import TEST_TENANT_ID
@@ -29,7 +29,7 @@ def ensure_full_deployment_setup(
 
     - Initializes DB engine and sets tenant context
     - Skips model warm-ups during setup
-    - Runs setup_onyx (Postgres defaults, Vespa indices)
+    - Runs setup_callosum (Postgres defaults, Vespa indices)
     - Initializes file store (best-effort)
     - Ensures Vespa indices exist
     - Installs NLTK stopwords and punkt_tab

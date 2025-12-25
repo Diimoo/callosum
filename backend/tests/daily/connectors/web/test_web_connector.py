@@ -2,9 +2,9 @@ from concurrent.futures import ThreadPoolExecutor
 
 import pytest
 
-from onyx.connectors.models import Document
-from onyx.connectors.web.connector import WEB_CONNECTOR_VALID_SETTINGS
-from onyx.connectors.web.connector import WebConnector
+from callosum.connectors.models import Document
+from callosum.connectors.web.connector import WEB_CONNECTOR_VALID_SETTINGS
+from callosum.connectors.web.connector import WebConnector
 
 EXPECTED_QUOTE = (
     "If you can't explain it to a six year old, you don't understand it yourself."
@@ -76,11 +76,11 @@ def test_web_connector_bot_protection() -> None:
 
 
 def test_web_connector_recursive_www_redirect() -> None:
-    # Check that https://onyx.app can be recursed if re-directed to www.onyx.app
+    # Check that https://callosum.app can be recursed if re-directed to www.callosum.app
     # Run in thread pool to avoid conflict with pytest-asyncio's event loop
     def _run_connector() -> list[Document]:
         connector = WebConnector(
-            base_url="https://onyx.app",
+            base_url="https://callosum.app",
             web_connector_type=WEB_CONNECTOR_VALID_SETTINGS.RECURSIVE.value,
         )
         return [doc for batch in connector.load_from_state() for doc in batch]

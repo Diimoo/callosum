@@ -10,11 +10,11 @@ Usage:
 import json
 import sys
 
-from onyx.db.engine.sql_engine import get_session_with_tenant
-from onyx.db.engine.sql_engine import SqlEngine
-from onyx.db.search_settings import get_current_search_settings
-from onyx.db.search_settings import get_secondary_search_settings
-from onyx.document_index.factory import get_default_document_index
+from callosum.db.engine.sql_engine import get_session_with_tenant
+from callosum.db.engine.sql_engine import SqlEngine
+from callosum.db.search_settings import get_current_search_settings
+from callosum.db.search_settings import get_secondary_search_settings
+from callosum.document_index.factory import get_default_document_index
 
 
 def get_tenant_index_name(tenant_id: str) -> dict[str, str]:

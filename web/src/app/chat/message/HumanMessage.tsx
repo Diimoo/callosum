@@ -47,7 +47,7 @@ function MessageEditing({
     <div className="w-full">
       <div
         className={cn(
-          "w-full h-full border rounded-16 overflow-hidden p-3 flex flex-col gap-2"
+          "w-full h-full border border-border-02 rounded-16 overflow-hidden p-3 flex flex-col gap-2 shadow-md bg-background"
         )}
       >
         <textarea
@@ -149,7 +149,7 @@ export default function HumanMessage({
 
   return (
     <div
-      id="onyx-human-message"
+      id="callosum-human-message"
       className="pt-5 pb-1 w-full lg:px-5 flex justify-center -mr-6 relative"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -172,7 +172,7 @@ export default function HumanMessage({
               <div className="md:max-w-[25rem] flex basis-[100%] md:basis-auto justify-end md:order-1">
                 <div
                   className={
-                    "max-w-[25rem] whitespace-break-spaces rounded-t-16 rounded-bl-16 bg-background-tint-02 py-2 px-3"
+                    "max-w-[25rem] whitespace-break-spaces rounded-t-16 rounded-bl-16 bg-background-tint-02 py-2 px-3 shadow-md border border-border-01"
                   }
                 >
                   <Text mainContentBody>{content}</Text>

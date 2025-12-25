@@ -5,13 +5,13 @@ from datetime import timezone
 
 import httpx
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.mock_connector.connector import MockConnectorCheckpoint
-from onyx.connectors.models import ConnectorFailure
-from onyx.connectors.models import EntityFailure
-from onyx.connectors.models import InputType
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
-from onyx.db.enums import IndexingStatus
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.mock_connector.connector import MockConnectorCheckpoint
+from callosum.connectors.models import ConnectorFailure
+from callosum.connectors.models import EntityFailure
+from callosum.connectors.models import InputType
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.enums import IndexingStatus
 from tests.integration.common_utils.constants import MOCK_CONNECTOR_SERVER_HOST
 from tests.integration.common_utils.constants import MOCK_CONNECTOR_SERVER_PORT
 from tests.integration.common_utils.managers.cc_pair import CCPairManager

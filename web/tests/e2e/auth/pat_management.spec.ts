@@ -19,7 +19,7 @@ test("PAT Complete Workflow", async ({ page }, testInfo) => {
   await page.waitForLoadState("networkidle");
 
   // Click on user dropdown and open settings (same pattern as other tests)
-  await page.locator("#onyx-user-dropdown").click();
+  await page.locator("#callosum-user-dropdown").click();
   await page.getByText("User Settings").first().click();
 
   // Wait for settings modal to appear (first page has Theme section)
@@ -65,12 +65,12 @@ test("PAT Complete Workflow", async ({ page }, testInfo) => {
 
   const tokenDisplay = page
     .locator('[data-testid="token-value"]')
-    .or(page.locator("code").filter({ hasText: "onyx_pat_" }))
+    .or(page.locator("code").filter({ hasText: "callosum_pat_" }))
     .first();
   await tokenDisplay.waitFor({ state: "visible", timeout: 5000 });
 
   const tokenValue = await tokenDisplay.textContent();
-  expect(tokenValue).toContain("onyx_pat_");
+  expect(tokenValue).toContain("callosum_pat_");
 
   // Grant clipboard permissions before copying
   await page.context().grantPermissions(["clipboard-read", "clipboard-write"]);
@@ -155,7 +155,7 @@ test("PAT Multiple Tokens Management", async ({ page }, testInfo) => {
   await page.waitForLoadState("networkidle");
 
   // Click on user dropdown and open settings (same pattern as other tests)
-  await page.locator("#onyx-user-dropdown").click();
+  await page.locator("#callosum-user-dropdown").click();
   await page.getByText("User Settings").first().click();
 
   // Wait for settings modal to appear (first page has Theme section)

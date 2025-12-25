@@ -5,10 +5,10 @@ from typing import Any
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.coda.connector import CodaConnector
-from onyx.connectors.exceptions import CredentialInvalidError
-from onyx.connectors.models import Document
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.coda.connector import CodaConnector
+from callosum.connectors.exceptions import CredentialInvalidError
+from callosum.connectors.models import Document
 
 
 @pytest.fixture

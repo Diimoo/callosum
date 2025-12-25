@@ -4,10 +4,10 @@ from datetime import timezone
 
 import pytest
 
-from onyx.connectors.models import InputType
-from onyx.connectors.slack.models import ChannelType
-from onyx.db.enums import AccessType
-from onyx.server.documents.models import DocumentSource
+from callosum.connectors.models import InputType
+from callosum.connectors.slack.models import ChannelType
+from callosum.db.enums import AccessType
+from callosum.server.documents.models import DocumentSource
 from tests.integration.common_utils.managers.cc_pair import CCPairManager
 from tests.integration.common_utils.managers.connector import ConnectorManager
 from tests.integration.common_utils.managers.credential import CredentialManager
@@ -40,17 +40,17 @@ def test_slack_permission_sync(
 
     # Creating an admin user (first user created is automatically an admin)
     admin_user: DATestUser = UserManager.create(
-        email="admin@onyx-test.com",
+        email="admin@callosum-test.com",
     )
 
     # Creating a non-admin user
     test_user_1: DATestUser = UserManager.create(
-        email="test_user_1@onyx-test.com",
+        email="test_user_1@callosum-test.com",
     )
 
     # Creating a non-admin user
     test_user_2: DATestUser = UserManager.create(
-        email="test_user_2@onyx-test.com",
+        email="test_user_2@callosum-test.com",
     )
 
     slack_client = SlackManager.get_slack_client(os.environ["SLACK_BOT_TOKEN"])
@@ -141,48 +141,48 @@ def test_slack_permission_sync(
 
     # Search as admin with access to both channels
     print("\nSearching as admin user")
-    onyx_doc_message_strings = DocumentSearchManager.search_documents(
+    callosum_doc_message_strings = DocumentSearchManager.search_documents(
         query="favorite number",
         user_performing_action=admin_user,
     )
     print(
         "\n documents retrieved by admin user: ",
-        onyx_doc_message_strings,
+        callosum_doc_message_strings,
     )
 
     # Ensure admin user can see messages from both channels
-    assert public_message in onyx_doc_message_strings
-    assert private_message in onyx_doc_message_strings
+    assert public_message in callosum_doc_message_strings
+    assert private_message in callosum_doc_message_strings
 
     # Search as test_user_2 with access to only the public channel
     print("\n Searching as test_user_2")
-    onyx_doc_message_strings = DocumentSearchManager.search_documents(
+    callosum_doc_message_strings = DocumentSearchManager.search_documents(
         query="favorite number",
         user_performing_action=test_user_2,
     )
     print(
         "\n documents retrieved by test_user_2: ",
-        onyx_doc_message_strings,
+        callosum_doc_message_strings,
     )
 
     # Ensure test_user_2 can only see messages from the public channel
-    assert public_message in onyx_doc_message_strings
-    assert private_message not in onyx_doc_message_strings
+    assert public_message in callosum_doc_message_strings
+    assert private_message not in callosum_doc_message_strings
 
     # Search as test_user_1 with access to both channels
     print("\n Searching as test_user_1")
-    onyx_doc_message_strings = DocumentSearchManager.search_documents(
+    callosum_doc_message_strings = DocumentSearchManager.search_documents(
         query="favorite number",
         user_performing_action=test_user_1,
     )
     print(
         "\n documents retrieved by test_user_1 before being removed from private channel: ",
-        onyx_doc_message_strings,
+        callosum_doc_message_strings,
     )
 
     # Ensure test_user_1 can see messages from both channels
-    assert public_message in onyx_doc_message_strings
-    assert private_message in onyx_doc_message_strings
+    assert public_message in callosum_doc_message_strings
+    assert private_message in callosum_doc_message_strings
 
     # ----------------------MAKE THE CHANGES--------------------------
     print("\n Removing test_user_1 from the private channel")
@@ -212,18 +212,18 @@ def test_slack_permission_sync(
     # Ensure test_user_1 can no longer see messages from the private channel
     # Search as test_user_1 with access to only the public channel
 
-    onyx_doc_message_strings = DocumentSearchManager.search_documents(
+    callosum_doc_message_strings = DocumentSearchManager.search_documents(
         query="favorite number",
         user_performing_action=test_user_1,
     )
     print(
         "\n documents retrieved by test_user_1 after being removed from private channel: ",
-        onyx_doc_message_strings,
+        callosum_doc_message_strings,
     )
 
     # Ensure test_user_1 can only see messages from the public channel
-    assert public_message in onyx_doc_message_strings
-    assert private_message not in onyx_doc_message_strings
+    assert public_message in callosum_doc_message_strings
+    assert private_message not in callosum_doc_message_strings
 
 
 # NOTE(rkuo): it isn't yet clear if the reason these were previously xfail'd
@@ -238,18 +238,18 @@ def test_slack_group_permission_sync(
     slack_test_setup: tuple[ChannelType, ChannelType],
 ) -> None:
     """
-    This test ensures that permission sync overrides onyx group access.
+    This test ensures that permission sync overrides callosum group access.
     """
     public_channel, private_channel = slack_test_setup
 
     # Creating an admin user (first user created is automatically an admin)
     admin_user: DATestUser = UserManager.create(
-        email="admin@onyx-test.com",
+        email="admin@callosum-test.com",
     )
 
     # Creating a non-admin user
     test_user_1: DATestUser = UserManager.create(
-        email="test_user_1@onyx-test.com",
+        email="test_user_1@callosum-test.com",
     )
 
     # Create a user group and adding the non-admin user to it

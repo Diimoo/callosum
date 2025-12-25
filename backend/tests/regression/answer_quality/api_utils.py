@@ -1,16 +1,16 @@
 import requests
 from retry import retry
 
-from onyx.chat.models import ThreadMessage
-from onyx.configs.constants import DocumentSource
-from onyx.configs.constants import MessageType
-from onyx.connectors.models import InputType
-from onyx.context.search.enums import OptionalSearchSetting
-from onyx.context.search.models import IndexFilters
-from onyx.context.search.models import RetrievalDetails
-from onyx.db.enums import IndexingStatus
-from onyx.server.documents.models import ConnectorBase
-from onyx.server.query_and_chat.models import OneShotQARequest
+from callosum.chat.models import ThreadMessage
+from callosum.configs.constants import DocumentSource
+from callosum.configs.constants import MessageType
+from callosum.connectors.models import InputType
+from callosum.context.search.enums import OptionalSearchSetting
+from callosum.context.search.models import IndexFilters
+from callosum.context.search.models import RetrievalDetails
+from callosum.db.enums import IndexingStatus
+from callosum.server.documents.models import ConnectorBase
+from callosum.server.query_and_chat.models import OneShotQARequest
 from tests.regression.answer_quality.cli_utils import get_api_server_host_port
 
 GENERAL_HEADERS = {"Content-Type": "application/json"}

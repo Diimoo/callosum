@@ -69,7 +69,7 @@ def test_web_search_endpoints_with_exa(
     assert open_response.status_code == 200, open_response.text
     open_data = open_response.json()
 
-    assert open_data["provider_type"] == WebContentProviderType.ONYX_WEB_CRAWLER.value
+    assert open_data["provider_type"] == WebContentProviderType.CALLOSUM_WEB_CRAWLER.value
     assert len(open_data["results"]) == len(urls)
     assert all("content" in result for result in open_data["results"])
 
@@ -84,7 +84,7 @@ def test_web_search_endpoints_with_exa(
     assert combined_data["search_provider_type"] == WebSearchProviderType.EXA.value
     assert (
         combined_data["content_provider_type"]
-        == WebContentProviderType.ONYX_WEB_CRAWLER.value
+        == WebContentProviderType.CALLOSUM_WEB_CRAWLER.value
     )
     assert combined_data["search_results"]
 

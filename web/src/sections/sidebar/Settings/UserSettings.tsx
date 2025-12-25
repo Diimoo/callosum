@@ -545,7 +545,7 @@ export default function UserSettings() {
                     onChange={(event) =>
                       updatePersonalizationField("name", event.target.value)
                     }
-                    placeholder="Set how Onyx should refer to you"
+                    placeholder="Set how Callosum should refer to you"
                     className="mt-2"
                   />
                   {personalizationValues.name.length === 0 && (
@@ -572,7 +572,7 @@ export default function UserSettings() {
                   <div>
                     <h3 className="text-lg font-medium">Use memories</h3>
                     <SubLabel>
-                      Allow Onyx to reference stored memories in future chats.
+                      Allow Callosum to reference stored memories in future chats.
                     </SubLabel>
                   </div>
                   <Switch
@@ -602,7 +602,7 @@ export default function UserSettings() {
                         <InputTextArea
                           key={index}
                           value={memory}
-                          placeholder="Write something Onyx should remember"
+                          placeholder="Write something Callosum should remember"
                           onChange={(event) =>
                             updateMemoryAtIndex(index, event.target.value)
                           }

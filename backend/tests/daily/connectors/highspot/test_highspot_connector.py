@@ -8,9 +8,9 @@ from unittest.mock import patch
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.highspot.connector import HighspotConnector
-from onyx.connectors.models import Document
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.highspot.connector import HighspotConnector
+from callosum.connectors.models import Document
 
 
 def load_test_data(file_name: str = "test_highspot_data.json") -> dict:
@@ -44,7 +44,7 @@ def highspot_connector() -> HighspotConnector:
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_highspot_connector_basic(
@@ -83,7 +83,7 @@ def test_highspot_connector_basic(
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_highspot_connector_slim(
@@ -112,7 +112,7 @@ def test_highspot_connector_slim(
 
 @pytest.mark.xfail(reason="Highspot is not returning updated documents as expected.")
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_highspot_connector_poll_source(

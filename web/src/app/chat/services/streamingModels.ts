@@ -1,4 +1,4 @@
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { CallosumDocument } from "@/lib/search/interfaces";
 
 // Base interface for all streaming objects
 interface BaseObj {
@@ -48,7 +48,7 @@ export interface MessageStart extends BaseObj {
   type: "message_start";
   content: string;
 
-  final_documents: OnyxDocument[] | null;
+  final_documents: CallosumDocument[] | null;
 }
 
 export interface MessageDelta extends BaseObj {
@@ -87,7 +87,7 @@ export interface SearchToolQueriesDelta extends BaseObj {
 
 export interface SearchToolDocumentsDelta extends BaseObj {
   type: "search_tool_documents_delta";
-  documents: OnyxDocument[];
+  documents: CallosumDocument[];
 }
 
 export type ImageShape = "square" | "landscape" | "portrait";
@@ -131,7 +131,7 @@ export interface FetchToolUrls extends BaseObj {
 
 export interface FetchToolDocuments extends BaseObj {
   type: "open_url_documents";
-  documents: OnyxDocument[];
+  documents: CallosumDocument[];
 }
 
 // Custom Tool Packets

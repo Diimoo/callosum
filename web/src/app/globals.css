@@ -14,12 +14,12 @@
 @layer base {
   /* BORDER RADII */
   :root {
-    --border-radius-02: 0.125rem;
-    --border-radius-04: 0.25rem;
-    --border-radius-08: 0.5rem;
-    --border-radius-12: 0.75rem;
-    --border-radius-16: 1rem;
-    --border-radius-full: 64rem;
+    --border-radius-02: 0.25rem;
+    --border-radius-04: 0.5rem;
+    --border-radius-08: 0.75rem;
+    --border-radius-12: 1rem;
+    --border-radius-16: 1.5rem;
+    --border-radius-full: 9999px;
   }
 
   /* BACKDROP BLUR */

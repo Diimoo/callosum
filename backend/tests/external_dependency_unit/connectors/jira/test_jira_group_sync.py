@@ -2,14 +2,14 @@ from typing import Any
 
 from sqlalchemy.orm import Session
 
-from ee.onyx.external_permissions.jira.group_sync import jira_group_sync
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import InputType
-from onyx.db.enums import AccessType
-from onyx.db.enums import ConnectorCredentialPairStatus
-from onyx.db.models import Connector
-from onyx.db.models import ConnectorCredentialPair
-from onyx.db.models import Credential
+from ee.callosum.external_permissions.jira.group_sync import jira_group_sync
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.models import InputType
+from callosum.db.enums import AccessType
+from callosum.db.enums import ConnectorCredentialPairStatus
+from callosum.db.models import Connector
+from callosum.db.models import ConnectorCredentialPair
+from callosum.db.models import Credential
 from shared_configs.contextvars import get_current_tenant_id
 from tests.daily.connectors.confluence.models import ExternalUserGroupSet
 
@@ -24,12 +24,12 @@ from tests.daily.connectors.confluence.models import ExternalUserGroupSet
 _EXPECTED_JIRA_GROUPS = [
     ExternalUserGroupSet(
         id="Yuhong Only No Chris Allowed",
-        user_emails={"yuhong@onyx.app"},
+        user_emails={"yuhong@callosum.app"},
         gives_anyone_access=False,
     ),
     ExternalUserGroupSet(
         id="confluence-admins-danswerai",
-        user_emails={"chris@onyx.app", "yuhong@onyx.app"},
+        user_emails={"chris@callosum.app", "yuhong@callosum.app"},
         gives_anyone_access=False,
     ),
     ExternalUserGroupSet(
@@ -40,17 +40,17 @@ _EXPECTED_JIRA_GROUPS = [
     ExternalUserGroupSet(
         id="confluence-users-danswerai",
         user_emails={
-            "chris@onyx.app",
-            "founders@onyx.app",
+            "chris@callosum.app",
+            "founders@callosum.app",
             "hagen@danswer.ai",
-            "pablo@onyx.app",
-            "yuhong@onyx.app",
+            "pablo@callosum.app",
+            "yuhong@callosum.app",
         },
         gives_anyone_access=False,
     ),
     ExternalUserGroupSet(
         id="jira-admins-danswerai",
-        user_emails={"founders@onyx.app", "hagen@danswer.ai", "pablo@onyx.app"},
+        user_emails={"founders@callosum.app", "hagen@danswer.ai", "pablo@callosum.app"},
         gives_anyone_access=False,
     ),
     ExternalUserGroupSet(
@@ -61,19 +61,19 @@ _EXPECTED_JIRA_GROUPS = [
     ExternalUserGroupSet(
         id="jira-users-danswerai",
         user_emails={
-            "chris@onyx.app",
-            "founders@onyx.app",
+            "chris@callosum.app",
+            "founders@callosum.app",
             "hagen@danswer.ai",
-            "pablo@onyx.app",
+            "pablo@callosum.app",
         },
         gives_anyone_access=False,
     ),
     ExternalUserGroupSet(
         id="org-admins",
         user_emails={
-            "chris@onyx.app",
-            "founders@onyx.app",
-            "yuhong@onyx.app",
+            "chris@callosum.app",
+            "founders@callosum.app",
+            "yuhong@callosum.app",
         },
         gives_anyone_access=False,
     ),

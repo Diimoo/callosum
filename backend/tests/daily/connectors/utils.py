@@ -3,16 +3,16 @@ from collections.abc import Iterator
 from typing import cast
 from typing import TypeVar
 
-from onyx.connectors.connector_runner import CheckpointOutputWrapper
-from onyx.connectors.interfaces import CheckpointedConnector
-from onyx.connectors.interfaces import CheckpointedConnectorWithPermSync
-from onyx.connectors.interfaces import CheckpointOutput
-from onyx.connectors.interfaces import SecondsSinceUnixEpoch
-from onyx.connectors.models import ConnectorCheckpoint
-from onyx.connectors.models import ConnectorFailure
-from onyx.connectors.models import Document
-from onyx.connectors.models import ImageSection
-from onyx.connectors.models import TextSection
+from callosum.connectors.connector_runner import CheckpointOutputWrapper
+from callosum.connectors.interfaces import CheckpointedConnector
+from callosum.connectors.interfaces import CheckpointedConnectorWithPermSync
+from callosum.connectors.interfaces import CheckpointOutput
+from callosum.connectors.interfaces import SecondsSinceUnixEpoch
+from callosum.connectors.models import ConnectorCheckpoint
+from callosum.connectors.models import ConnectorFailure
+from callosum.connectors.models import Document
+from callosum.connectors.models import ImageSection
+from callosum.connectors.models import TextSection
 
 _ITERATION_LIMIT = 100_000
 

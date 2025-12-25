@@ -118,11 +118,11 @@ test.describe("First user onboarding flow", () => {
         return true;
       }
 
-      const tryOnyxButton = page
-        .getByRole("button", { name: /Try Onyx while waiting/i })
+      const tryCallosumButton = page
+        .getByRole("button", { name: /Try Callosum while waiting/i })
         .first();
-      if ((await tryOnyxButton.count()) > 0) {
-        await tryOnyxButton.click();
+      if ((await tryCallosumButton.count()) > 0) {
+        await tryCallosumButton.click();
         return true;
       }
       return false;
@@ -145,7 +145,7 @@ test.describe("First user onboarding flow", () => {
     await letsGoButton.click();
 
     await expect(page.getByText("Step 1 of 3")).toBeVisible();
-    await expect(page.getByText("What should Onyx call you?")).toBeVisible();
+    await expect(page.getByText("What should Callosum call you?")).toBeVisible();
 
     const nameInput = page.getByPlaceholder("Your name").first();
     await nameInput.fill("Playwright Tester");
@@ -224,7 +224,7 @@ test.describe("First user onboarding flow", () => {
 
     await expect(page.getByText("Connect your LLM models")).toHaveCount(0);
 
-    const chatInput = page.locator("#onyx-chat-input-textarea");
+    const chatInput = page.locator("#callosum-chat-input-textarea");
     await chatInput.waitFor({ state: "visible", timeout: 10000 });
     await chatInput.fill("Hello from onboarding");
     await expect(chatInput).toHaveValue("Hello from onboarding");

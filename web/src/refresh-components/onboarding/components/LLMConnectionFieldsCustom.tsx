@@ -284,7 +284,7 @@ export const LLMConnectionFieldsCustom: React.FC<Props> = ({
             </FormField.Control>
             <FormField.Message
               messages={{
-                idle: "This model will be used by Onyx by default for this provider. This must be one of the models listed above.",
+                idle: "This model will be used by Callosum by default for this provider. This must be one of the models listed above.",
                 error: meta.error,
               }}
             />

@@ -18,7 +18,7 @@ test.describe("Message Edit and Regenerate Tests", () => {
     await sendMessage(page, "What is 2+2?");
 
     // Test cancel editing
-    let userMessage = page.locator("#onyx-human-message").first();
+    let userMessage = page.locator("#callosum-human-message").first();
     await userMessage.hover();
     let editButton = userMessage
       .locator('[data-testid="HumanMessage/edit-button"]')
@@ -60,7 +60,7 @@ test.describe("Message Edit and Regenerate Tests", () => {
 
     // Verify edited message is displayed
     messageContent = await page
-      .locator("#onyx-human-message")
+      .locator("#callosum-human-message")
       .first()
       .textContent();
     expect(messageContent).toContain("What is 3+3?");
@@ -71,7 +71,7 @@ test.describe("Message Edit and Regenerate Tests", () => {
     await expect(messageSwitcher).toContainText("2/2");
 
     // Edit again to create a third version
-    userMessage = page.locator("#onyx-human-message").first();
+    userMessage = page.locator("#callosum-human-message").first();
     await userMessage.hover();
     editButton = userMessage
       .locator('[data-testid="HumanMessage/edit-button"]')
@@ -146,11 +146,11 @@ test.describe("Message Edit and Regenerate Tests", () => {
 
     // Send initial message
     await sendMessage(page, "hi! Respond with no more than a sentence");
-    await page.waitForSelector('[data-testid="onyx-ai-message"]');
+    await page.waitForSelector('[data-testid="callosum-ai-message"]');
     await page.waitForTimeout(3000);
 
     // Capture the original AI response text (just the message content, not buttons/switcher)
-    const aiMessage = page.locator('[data-testid="onyx-ai-message"]').first();
+    const aiMessage = page.locator('[data-testid="callosum-ai-message"]').first();
     // Target the actual message content div (the one with select-text class)
     const messageContent = aiMessage.locator(".select-text").first();
     const originalResponseText = await messageContent.textContent();

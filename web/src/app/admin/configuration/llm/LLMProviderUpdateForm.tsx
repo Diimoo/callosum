@@ -108,7 +108,7 @@ export function LLMProviderUpdateForm({
   setPopup?: (popup: PopupSpec) => void;
   hideSuccess?: boolean;
 
-  // Set this when this is the first time the user is setting Onyx up.
+  // Set this when this is the first time the user is setting Callosum up.
   firstTimeConfiguration?: boolean;
 }) {
   const { mutate } = useSWRConfig();

@@ -10,7 +10,7 @@ from typing import cast
 import pytest
 from sqlalchemy import text
 
-from onyx.db.engine.sql_engine import get_session_with_current_tenant
+from callosum.db.engine.sql_engine import get_session_with_current_tenant
 from tests.integration.common_utils.reset import downgrade_postgres
 from tests.integration.common_utils.reset import upgrade_postgres
 
@@ -247,7 +247,7 @@ def test_chat_sessions_migration() -> None:
             text(
                 """
                 INSERT INTO chat_session (
-                    id, persona_id, description, deleted, user_id, shared_status, onyxbot_flow
+                    id, persona_id, description, deleted, user_id, shared_status, callosumbot_flow
                 ) VALUES
                     ('10010000-0000-0000-0000-000000000000'::uuid, 0, 'Search session', false, null, 'private', false),
                     ('10020000-0000-0000-0000-000000000000'::uuid, -1, 'General session', false, null, 'private', false),

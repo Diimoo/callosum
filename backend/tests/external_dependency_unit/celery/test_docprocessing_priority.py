@@ -16,20 +16,20 @@ from uuid import uuid4
 import pytest
 from sqlalchemy.orm import Session
 
-from onyx.background.indexing.run_docfetching import connector_document_extraction
-from onyx.configs.constants import DocumentSource
-from onyx.configs.constants import OnyxCeleryPriority
-from onyx.connectors.models import InputType
-from onyx.db.enums import AccessType
-from onyx.db.enums import ConnectorCredentialPairStatus
-from onyx.db.enums import EmbeddingPrecision
-from onyx.db.enums import IndexingStatus
-from onyx.db.enums import IndexModelStatus
-from onyx.db.models import Connector
-from onyx.db.models import ConnectorCredentialPair
-from onyx.db.models import Credential
-from onyx.db.models import IndexAttempt
-from onyx.db.models import SearchSettings
+from callosum.background.indexing.run_docfetching import connector_document_extraction
+from callosum.configs.constants import DocumentSource
+from callosum.configs.constants import CallosumCeleryPriority
+from callosum.connectors.models import InputType
+from callosum.db.enums import AccessType
+from callosum.db.enums import ConnectorCredentialPairStatus
+from callosum.db.enums import EmbeddingPrecision
+from callosum.db.enums import IndexingStatus
+from callosum.db.enums import IndexModelStatus
+from callosum.db.models import Connector
+from callosum.db.models import ConnectorCredentialPair
+from callosum.db.models import Credential
+from callosum.db.models import IndexAttempt
+from callosum.db.models import SearchSettings
 from tests.external_dependency_unit.constants import TEST_TENANT_ID
 
 
@@ -137,22 +137,22 @@ class TestDocprocessingPriorityInDocumentExtraction:
         "has_successful_index,expected_priority",
         [
             # First-time indexing (no last_successful_index_time) should get HIGH priority
-            (False, OnyxCeleryPriority.HIGH),
+            (False, CallosumCeleryPriority.HIGH),
             # Re-indexing (has last_successful_index_time) should get MEDIUM priority
-            (True, OnyxCeleryPriority.MEDIUM),
+            (True, CallosumCeleryPriority.MEDIUM),
         ],
     )
-    @patch("onyx.background.indexing.run_docfetching.get_document_batch_storage")
-    @patch("onyx.background.indexing.run_docfetching.MemoryTracer")
-    @patch("onyx.background.indexing.run_docfetching._get_connector_runner")
+    @patch("callosum.background.indexing.run_docfetching.get_document_batch_storage")
+    @patch("callosum.background.indexing.run_docfetching.MemoryTracer")
+    @patch("callosum.background.indexing.run_docfetching._get_connector_runner")
     @patch(
-        "onyx.background.indexing.run_docfetching.get_recent_completed_attempts_for_cc_pair"
+        "callosum.background.indexing.run_docfetching.get_recent_completed_attempts_for_cc_pair"
     )
     @patch(
-        "onyx.background.indexing.run_docfetching.get_last_successful_attempt_poll_range_end"
+        "callosum.background.indexing.run_docfetching.get_last_successful_attempt_poll_range_end"
     )
-    @patch("onyx.background.indexing.run_docfetching.save_checkpoint")
-    @patch("onyx.background.indexing.run_docfetching.get_latest_valid_checkpoint")
+    @patch("callosum.background.indexing.run_docfetching.save_checkpoint")
+    @patch("callosum.background.indexing.run_docfetching.get_latest_valid_checkpoint")
     def test_docprocessing_priority_based_on_last_successful_index_time(
         self,
         mock_get_latest_valid_checkpoint: MagicMock,
@@ -164,7 +164,7 @@ class TestDocprocessingPriorityInDocumentExtraction:
         mock_get_batch_storage: MagicMock,
         db_session: Session,
         has_successful_index: bool,
-        expected_priority: OnyxCeleryPriority,
+        expected_priority: CallosumCeleryPriority,
     ) -> None:
         """
         Test that docprocessing tasks get the correct priority based on

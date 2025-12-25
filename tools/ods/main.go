@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/onyx-dot-app/onyx/tools/ods/cmd"
+	"github.com/callosum-dot-app/callosum/tools/ods/cmd"
 )
 
 var (

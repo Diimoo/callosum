@@ -1,4 +1,4 @@
-"""Generate OpenAPI schema and Python client for Onyx API.
+"""Generate OpenAPI schema and Python client for Callosum API.
 
 This script is bundled with the ods wheel and executed by the Go binary
 to generate the OpenAPI schema without starting the full API server.
@@ -28,11 +28,11 @@ def generate_schema(output_path: str) -> bool:
     try:
         # Import here to avoid requiring backend dependencies when not generating schema
         from fastapi.openapi.utils import get_openapi
-        from onyx.main import app as app_fn  # type: ignore
+        from callosum.main import app as app_fn  # type: ignore
     except ImportError as e:
         print(f"Error: Failed to import required modules: {e}", file=sys.stderr)
         print(
-            "Make sure you are running from a venv with onyx[backend] installed.",
+            "Make sure you are running from a venv with callosum[backend] installed.",
             file=sys.stderr,
         )
         return False
@@ -71,7 +71,7 @@ def generate_client(openapi_json_path: str, output_dir: str | None = None) -> bo
     Returns True on success, False on failure.
     """
     if output_dir is None:
-        output_dir = str(Path(openapi_json_path).parent / "onyx_openapi_client")
+        output_dir = str(Path(openapi_json_path).parent / "callosum_openapi_client")
 
     cmd = [
         "openapi-generator-cli",
@@ -83,7 +83,7 @@ def generate_client(openapi_json_path: str, output_dir: str | None = None) -> bo
         "-o",
         output_dir,
         "--package-name",
-        "onyx_openapi_client",
+        "callosum_openapi_client",
         "--skip-validate-spec",
         "--openapi-normalizer",
         "SIMPLIFY_ONEOF_ANYOF=true,SET_OAS3_NULLABLE=true",
@@ -105,7 +105,7 @@ def generate_client(openapi_json_path: str, output_dir: str | None = None) -> bo
 
 def main() -> int:  # noqa: PLR0911
     parser = argparse.ArgumentParser(
-        description="Generate OpenAPI schema and Python client for Onyx API"
+        description="Generate OpenAPI schema and Python client for Callosum API"
     )
     subparsers = parser.add_subparsers(dest="command", help="Commands")
 

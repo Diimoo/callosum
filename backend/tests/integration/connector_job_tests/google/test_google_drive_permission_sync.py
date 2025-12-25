@@ -7,16 +7,16 @@ from uuid import uuid4
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.google_utils.resources import GoogleDriveService
-from onyx.connectors.google_utils.shared_constants import (
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.google_utils.resources import GoogleDriveService
+from callosum.connectors.google_utils.shared_constants import (
     DB_CREDENTIALS_DICT_SERVICE_ACCOUNT_KEY,
 )
-from onyx.connectors.google_utils.shared_constants import (
+from callosum.connectors.google_utils.shared_constants import (
     DB_CREDENTIALS_PRIMARY_ADMIN_KEY,
 )
-from onyx.connectors.models import InputType
-from onyx.db.enums import AccessType
+from callosum.connectors.models import InputType
+from callosum.db.enums import AccessType
 from tests.integration.common_utils.managers.cc_pair import CCPairManager
 from tests.integration.common_utils.managers.connector import ConnectorManager
 from tests.integration.common_utils.managers.credential import CredentialManager
@@ -42,11 +42,11 @@ def google_drive_test_env_setup() -> Generator[
     None,
 ]:
     # Creating an admin user (first user created is automatically an admin)
-    admin_user: DATestUser = UserManager.create(email="admin@onyx-test.com")
+    admin_user: DATestUser = UserManager.create(email="admin@callosum-test.com")
     # Creating a non-admin user
-    test_user_1: DATestUser = UserManager.create(email="test_user_1@onyx-test.com")
+    test_user_1: DATestUser = UserManager.create(email="test_user_1@callosum-test.com")
     # Creating a non-admin user
-    test_user_2: DATestUser = UserManager.create(email="test_user_2@onyx-test.com")
+    test_user_2: DATestUser = UserManager.create(email="test_user_2@callosum-test.com")
 
     service_account_key = os.environ["FULL_CONTROL_DRIVE_SERVICE_ACCOUNT"]
     drive_id: str | None = None
@@ -67,7 +67,7 @@ def google_drive_test_env_setup() -> Generator[
             drive_service, admin_user.email, test_id
         )
 
-        # Setup Onyx infrastructure
+        # Setup Callosum infrastructure
         LLMProviderManager.create(user_performing_action=admin_user)
 
         before = datetime.now(timezone.utc)

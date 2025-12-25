@@ -66,7 +66,7 @@ function Main() {
           <div className="flex flex-col gap-2">
             <Text mainContentBody text04 className="leading-relaxed">
               Unstructured extracts and transforms complex data from formats
-              like .pdf, .docx, .png, .pptx, etc. into clean text for Onyx to
+              like .pdf, .docx, .png, .pptx, etc. into clean text for Callosum to
               ingest. Provide an API key to enable Unstructured document
               processing.
             </Text>

@@ -77,7 +77,7 @@ export default function SimplifiedChatInputBar({
 
   return (
     <div
-      id="onyx-chat-input"
+      id="callosum-chat-input"
       className="
             w-full
             relative
@@ -226,7 +226,7 @@ export default function SimplifiedChatInputBar({
       </div>
       <div className="absolute bottom-2 mobile:right-4 desktop:right-4">
         <IconButton
-          id="onyx-chat-input-send-button"
+          id="callosum-chat-input-send-button"
           icon={SvgArrowUp}
           onClick={() => {
             if (message) {

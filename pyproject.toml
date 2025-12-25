@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "onyx"
+name = "callosum"
 version = "0.0.0"
 # TODO(jamison): Upgrade dependencies until they're compatible with python >3.13.
 requires-python = ">=3.11,<3.13"
@@ -141,7 +141,7 @@ dev = [
     "matplotlib==3.10.8",
     "mypy-extensions==1.0.0",
     "mypy==1.13.0",
-    "onyx-devtools==0.2.0",
+    "callosum-devtools==0.2.0",
     "openapi-generator-cli==7.17.0",
     "pandas-stubs==2.2.3.241009",
     "pre-commit==3.2.2",
@@ -193,4 +193,4 @@ members = ["backend", "tools/ods"]
 
 [tool.setuptools.packages.find]
 where = ["backend"]
-include = ["onyx*", "tests*"]
+include = ["callosum*", "tests*"]

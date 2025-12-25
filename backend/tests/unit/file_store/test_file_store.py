@@ -18,9 +18,9 @@ from sqlalchemy.orm import Session
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql import func
 
-from onyx.configs.constants import FileOrigin
-from onyx.file_store.file_store import get_default_file_store
-from onyx.file_store.file_store import S3BackedFileStore
+from callosum.configs.constants import FileOrigin
+from callosum.file_store.file_store import get_default_file_store
+from callosum.file_store.file_store import S3BackedFileStore
 
 
 class DBBaseTest(DeclarativeBase):
@@ -129,7 +129,7 @@ class TestExternalStorageFileStore:
     def test_s3_bucket_name_configuration(self) -> None:
         """Test S3 bucket name configuration"""
         with patch(
-            "onyx.file_store.file_store.S3_FILE_STORE_BUCKET_NAME", "my-test-bucket"
+            "callosum.file_store.file_store.S3_FILE_STORE_BUCKET_NAME", "my-test-bucket"
         ):
             file_store = S3BackedFileStore(bucket_name="my-test-bucket")
             bucket_name: str = file_store._get_bucket_name()
@@ -138,22 +138,22 @@ class TestExternalStorageFileStore:
     def test_s3_key_generation_default_prefix(self) -> None:
         """Test S3 key generation with default prefix"""
         with (
-            patch("onyx.file_store.file_store.S3_FILE_STORE_PREFIX", "onyx-files"),
+            patch("callosum.file_store.file_store.S3_FILE_STORE_PREFIX", "callosum-files"),
             patch(
-                "onyx.file_store.file_store.get_current_tenant_id",
+                "callosum.file_store.file_store.get_current_tenant_id",
                 return_value="test-tenant",
             ),
         ):
             file_store = S3BackedFileStore(bucket_name="test-bucket")
             s3_key: str = file_store._get_s3_key("test-file.txt")
-            assert s3_key == "onyx-files/test-tenant/test-file.txt"
+            assert s3_key == "callosum-files/test-tenant/test-file.txt"
 
     def test_s3_key_generation_custom_prefix(self) -> None:
         """Test S3 key generation with custom prefix"""
         with (
-            patch("onyx.file_store.file_store.S3_FILE_STORE_PREFIX", "custom-prefix"),
+            patch("callosum.file_store.file_store.S3_FILE_STORE_PREFIX", "custom-prefix"),
             patch(
-                "onyx.file_store.file_store.get_current_tenant_id",
+                "callosum.file_store.file_store.get_current_tenant_id",
                 return_value="test-tenant",
             ),
         ):
@@ -165,32 +165,32 @@ class TestExternalStorageFileStore:
 
     def test_s3_key_generation_with_different_tenant_ids(self) -> None:
         """Test S3 key generation with different tenant IDs"""
-        with patch("onyx.file_store.file_store.S3_FILE_STORE_PREFIX", "onyx-files"):
+        with patch("callosum.file_store.file_store.S3_FILE_STORE_PREFIX", "callosum-files"):
             file_store = S3BackedFileStore(bucket_name="test-bucket")
 
             # Test with tenant ID "tenant-1"
             with patch(
-                "onyx.file_store.file_store.get_current_tenant_id",
+                "callosum.file_store.file_store.get_current_tenant_id",
                 return_value="tenant-1",
             ):
                 s3_key = file_store._get_s3_key("document.pdf")
-                assert s3_key == "onyx-files/tenant-1/document.pdf"
+                assert s3_key == "callosum-files/tenant-1/document.pdf"
 
             # Test with tenant ID "tenant-2"
             with patch(
-                "onyx.file_store.file_store.get_current_tenant_id",
+                "callosum.file_store.file_store.get_current_tenant_id",
                 return_value="tenant-2",
             ):
                 s3_key = file_store._get_s3_key("document.pdf")
-                assert s3_key == "onyx-files/tenant-2/document.pdf"
+                assert s3_key == "callosum-files/tenant-2/document.pdf"
 
             # Test with default tenant (public)
             with patch(
-                "onyx.file_store.file_store.get_current_tenant_id",
+                "callosum.file_store.file_store.get_current_tenant_id",
                 return_value="public",
             ):
                 s3_key = file_store._get_s3_key("document.pdf")
-                assert s3_key == "onyx-files/public/document.pdf"
+                assert s3_key == "callosum-files/public/document.pdf"
 
     @patch("boto3.client")
     def test_s3_save_file_mock(
@@ -208,15 +208,15 @@ class TestExternalStorageFileStore:
 
         with (
             patch(
-                "onyx.file_store.file_store.S3_FILE_STORE_BUCKET_NAME", "test-bucket"
+                "callosum.file_store.file_store.S3_FILE_STORE_BUCKET_NAME", "test-bucket"
             ),
-            patch("onyx.file_store.file_store.S3_FILE_STORE_PREFIX", "onyx-files"),
-            patch("onyx.file_store.file_store.S3_AWS_ACCESS_KEY_ID", "test-key"),
-            patch("onyx.file_store.file_store.S3_AWS_SECRET_ACCESS_KEY", "test-secret"),
+            patch("callosum.file_store.file_store.S3_FILE_STORE_PREFIX", "callosum-files"),
+            patch("callosum.file_store.file_store.S3_AWS_ACCESS_KEY_ID", "test-key"),
+            patch("callosum.file_store.file_store.S3_AWS_SECRET_ACCESS_KEY", "test-secret"),
         ):
 
             # Mock the database operation to avoid SQLAlchemy issues
-            with patch("onyx.db.file_record.upsert_filerecord") as mock_upsert:
+            with patch("callosum.db.file_record.upsert_filerecord") as mock_upsert:
                 mock_upsert.return_value = Mock()
 
                 file_store = S3BackedFileStore(bucket_name="test-bucket")
@@ -235,7 +235,7 @@ class TestExternalStorageFileStore:
                 mock_s3_client.put_object.assert_called_once()
                 call_args = mock_s3_client.put_object.call_args
                 assert call_args[1]["Bucket"] == "test-bucket"
-                assert call_args[1]["Key"] == "onyx-files/public/test-file.txt"
+                assert call_args[1]["Key"] == "callosum-files/public/test-file.txt"
                 assert call_args[1]["ContentType"] == "text/plain"
 
     def test_minio_client_initialization(self) -> None:

@@ -43,7 +43,7 @@ const NameStepInner = ({
         </div>
         <div>
           <Text text04 mainUiAction>
-            What should Onyx call you?
+            What should Callosum call you?
           </Text>
           <Text text03 secondaryBody>
             We will display this name in the app.

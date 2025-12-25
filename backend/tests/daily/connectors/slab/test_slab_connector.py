@@ -5,9 +5,9 @@ from pathlib import Path
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.models import Document
-from onyx.connectors.slab.connector import SlabConnector
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.models import Document
+from callosum.connectors.slab.connector import SlabConnector
 
 
 def load_test_data(file_name: str = "test_slab_data.json") -> dict[str, str]:
@@ -19,7 +19,7 @@ def load_test_data(file_name: str = "test_slab_data.json") -> dict[str, str]:
 @pytest.fixture
 def slab_connector() -> SlabConnector:
     connector = SlabConnector(
-        base_url="https://onyx-test.slab.com/",
+        base_url="https://callosum-test.slab.com/",
     )
     connector.load_credentials(
         {

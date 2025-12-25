@@ -22,21 +22,21 @@
 # from pydantic import TypeAdapter
 # from sqlalchemy.orm import Session
 
-# from onyx.chat.turn.models import ChatTurnContext
-# from onyx.configs.app_configs import CODE_INTERPRETER_BASE_URL
-# from onyx.file_store.models import ChatFileType
-# from onyx.file_store.models import InMemoryChatFile
-# from onyx.file_store.utils import get_default_file_store
-# from onyx.server.query_and_chat.streaming_models import Packet
-# from onyx.server.query_and_chat.streaming_models import PythonToolDelta
-# from onyx.server.query_and_chat.streaming_models import PythonToolStart
-# from onyx.tools.tool_implementations.python.python_tool import PythonTool
-# from onyx.tools.tool_implementations_v2.code_interpreter_client import (
+# from callosum.chat.turn.models import ChatTurnContext
+# from callosum.configs.app_configs import CODE_INTERPRETER_BASE_URL
+# from callosum.file_store.models import ChatFileType
+# from callosum.file_store.models import InMemoryChatFile
+# from callosum.file_store.utils import get_default_file_store
+# from callosum.server.query_and_chat.streaming_models import Packet
+# from callosum.server.query_and_chat.streaming_models import PythonToolDelta
+# from callosum.server.query_and_chat.streaming_models import PythonToolStart
+# from callosum.tools.tool_implementations.python.python_tool import PythonTool
+# from callosum.tools.tool_implementations_v2.code_interpreter_client import (
 #     CodeInterpreterClient,
 # )
-# from onyx.tools.tool_implementations_v2.python import _python_execution_core
-# from onyx.tools.tool_implementations_v2.python import python
-# from onyx.tools.tool_implementations_v2.tool_result_models import (
+# from callosum.tools.tool_implementations_v2.python import _python_execution_core
+# from callosum.tools.tool_implementations_v2.python import python
+# from callosum.tools.tool_implementations_v2.tool_result_models import (
 #     LlmPythonExecutionResult,
 # )
 
@@ -89,7 +89,7 @@
 
 #     # Mock get_tool_by_name
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         mock_tool = Mock()
 #         mock_tool.id = 1
@@ -150,7 +150,7 @@
 
 #     # Mock get_tool_by_name
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         mock_tool = Mock()
 #         mock_tool.id = 1
@@ -184,7 +184,7 @@
 
 #     # Mock get_tool_by_name
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         mock_tool = Mock()
 #         mock_tool.id = 1
@@ -219,7 +219,7 @@
 
 #     # Mock get_tool_by_name
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         mock_tool = Mock()
 #         mock_tool.id = 1
@@ -227,7 +227,7 @@
 
 #         # Mock the config to use a short timeout
 #         with patch(
-#             "onyx.tools.tool_implementations_v2.python.CODE_INTERPRETER_DEFAULT_TIMEOUT_MS",
+#             "callosum.tools.tool_implementations_v2.python.CODE_INTERPRETER_DEFAULT_TIMEOUT_MS",
 #             1000,
 #         ):
 #             # Execute code
@@ -259,7 +259,7 @@
 
 #     # Mock only get_tool_by_name (database lookup)
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         mock_tool = Mock()
 #         mock_tool.id = 1
@@ -330,7 +330,7 @@
 
 #     # Mock only get_tool_by_name (database lookup)
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         mock_tool = Mock()
 #         mock_tool.id = 1
@@ -373,7 +373,7 @@
 
 #     # Mock get_tool_by_name
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         mock_tool = Mock()
 #         mock_tool.id = 42
@@ -418,7 +418,7 @@
 # def test_python_tool_availability_with_url_set(db_session: Session) -> None:
 #     """Test PythonTool.is_available() returns True when URL is configured."""
 #     with patch(
-#         "onyx.tools.tool_implementations.python.python_tool.CODE_INTERPRETER_BASE_URL",
+#         "callosum.tools.tool_implementations.python.python_tool.CODE_INTERPRETER_BASE_URL",
 #         "http://localhost:8000",
 #     ):
 #         assert PythonTool.is_available(db_session) is True
@@ -427,13 +427,13 @@
 # def test_python_tool_availability_without_url(db_session: Session) -> None:
 #     """Test PythonTool.is_available() returns False when URL is not configured."""
 #     with patch(
-#         "onyx.tools.tool_implementations.python.python_tool.CODE_INTERPRETER_BASE_URL",
+#         "callosum.tools.tool_implementations.python.python_tool.CODE_INTERPRETER_BASE_URL",
 #         None,
 #     ):
 #         assert PythonTool.is_available(db_session) is False
 
 #     with patch(
-#         "onyx.tools.tool_implementations.python.python_tool.CODE_INTERPRETER_BASE_URL",
+#         "callosum.tools.tool_implementations.python.python_tool.CODE_INTERPRETER_BASE_URL",
 #         "",
 #     ):
 #         assert PythonTool.is_available(db_session) is False
@@ -448,10 +448,10 @@
 
 #     # Mock get_tool_by_name and patch CodeInterpreterClient to use our fixture
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         with patch(
-#             "onyx.tools.tool_implementations_v2.python.CodeInterpreterClient"
+#             "callosum.tools.tool_implementations_v2.python.CodeInterpreterClient"
 #         ) as mock_client_class:
 #             mock_tool = Mock()
 #             mock_tool.id = 1
@@ -487,11 +487,11 @@
 
 #     # Mock get_tool_by_name
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         # Set a small truncation limit for testing
 #         with patch(
-#             "onyx.tools.tool_implementations_v2.python.CODE_INTERPRETER_MAX_OUTPUT_LENGTH",
+#             "callosum.tools.tool_implementations_v2.python.CODE_INTERPRETER_MAX_OUTPUT_LENGTH",
 #             5000,
 #         ):
 #             mock_tool = Mock()
@@ -531,7 +531,7 @@
 
 #     # Mock only get_tool_by_name (database lookup)
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         mock_tool = Mock()
 #         mock_tool.id = 1
@@ -650,7 +650,7 @@
 
 #     # Mock only get_tool_by_name (database lookup)
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         mock_tool = Mock()
 #         mock_tool.id = 1
@@ -845,7 +845,7 @@
 
 #     # Mock only get_tool_by_name (database lookup)
 #     with patch(
-#         "onyx.tools.tool_implementations_v2.python.get_tool_by_name"
+#         "callosum.tools.tool_implementations_v2.python.get_tool_by_name"
 #     ) as mock_get_tool:
 #         mock_tool = Mock()
 #         mock_tool.id = 1

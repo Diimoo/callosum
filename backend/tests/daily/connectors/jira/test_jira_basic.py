@@ -4,9 +4,9 @@ from unittest.mock import patch
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.jira.connector import JiraConnector
-from onyx.connectors.models import Document
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.jira.connector import JiraConnector
+from callosum.connectors.models import Document
 from tests.daily.connectors.utils import load_all_docs_from_checkpoint_connector
 
 
@@ -59,7 +59,7 @@ def jira_connector_with_jql() -> JiraConnector:
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_jira_connector_basic(reset: None, jira_connector: JiraConnector) -> None:
@@ -67,7 +67,7 @@ def test_jira_connector_basic(reset: None, jira_connector: JiraConnector) -> Non
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_jira_connector_basic_scoped(
@@ -109,8 +109,8 @@ def _test_jira_connector_basic(jira_connector: JiraConnector) -> None:
         "assignee": "Chris Weaver",
         "issuetype": "Story",
         "created": "2025-04-16T16:44:06.716-0700",
-        "reporter_email": "chris@onyx.app",
-        "assignee_email": "chris@onyx.app",
+        "reporter_email": "chris@callosum.app",
+        "assignee_email": "chris@callosum.app",
         "project_name": "DailyConnectorTestProject",
         "project": "AS",
         "parent": "AS-4",
@@ -126,7 +126,7 @@ def _test_jira_connector_basic(jira_connector: JiraConnector) -> None:
     section = story.sections[0]
     assert (
         section.text
-        == "This is a critical request for super-human answer quality in Onyx! We need magic!\n"
+        == "This is a critical request for super-human answer quality in Callosum! We need magic!\n"
     )
     assert section.link == "https://danswerai.atlassian.net/browse/AS-3"
 
@@ -137,12 +137,12 @@ def _test_jira_connector_basic(jira_connector: JiraConnector) -> None:
     assert epic.metadata == {
         "priority": "Medium",
         "status": "Backlog",
-        "reporter": "Founder Onyx",
+        "reporter": "Founder Callosum",
         "assignee": "Chris Weaver",
         "issuetype": "Epic",
         "created": "2025-04-16T16:55:53.068-0700",
-        "reporter_email": "founders@onyx.app",
-        "assignee_email": "chris@onyx.app",
+        "reporter_email": "founders@callosum.app",
+        "assignee_email": "chris@callosum.app",
         "project_name": "DailyConnectorTestProject",
         "project": "AS",
         "key": "AS-4",
@@ -160,7 +160,7 @@ def _test_jira_connector_basic(jira_connector: JiraConnector) -> None:
 
 
 @patch(
-    "onyx.file_processing.extract_file_text.get_unstructured_api_key",
+    "callosum.file_processing.extract_file_text.get_unstructured_api_key",
     return_value=None,
 )
 def test_jira_connector_with_jql(

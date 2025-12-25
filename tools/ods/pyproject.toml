@@ -3,13 +3,13 @@ requires = ["hatchling", "go-bin~=1.24.11", "manygo"]
 build-backend = "hatchling.build"
 
 [project]
-name = "onyx-devtools"
-description = "Developer utilities for working on onyx.app"
-authors = [{ name = "Onyx AI", email = "founders@onyx.app" }]
+name = "callosum-devtools"
+description = "Developer utilities for working on callosum.app"
+authors = [{ name = "Callosum AI", email = "founders@callosum.app" }]
 readme = "README.md"
 requires-python = ">=3.9"
 keywords = [
-  "onyx", "cli", "devtools", "tools", "tooling",
+  "callosum", "cli", "devtools", "tools", "tooling",
 ]
 classifiers = [
     "Programming Language :: Go",
@@ -24,7 +24,7 @@ dependencies = [
 
 
 [project.urls]
-Repository = "https://github.com/onyx-dot-app/onyx"
+Repository = "https://github.com/callosum-dot-app/callosum"
 
 [tool.hatch.build]
 include = ["go.mod", "go.sum", "main.go", "**/*.go", "**/*.py"]

@@ -3,8 +3,8 @@ import time
 
 import pytest
 
-from onyx.configs.constants import DocumentSource
-from onyx.connectors.bitbucket.connector import BitbucketConnector
+from callosum.configs.constants import DocumentSource
+from callosum.connectors.bitbucket.connector import BitbucketConnector
 from tests.daily.connectors.utils import load_all_docs_from_checkpoint_connector
 
 

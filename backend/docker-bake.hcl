@@ -3,15 +3,15 @@ group "default" {
 }
 
 variable "BACKEND_REPOSITORY" {
-  default = "onyxdotapp/onyx-backend"
+  default = "callosumdotapp/callosum-backend"
 }
 
 variable "MODEL_SERVER_REPOSITORY" {
-  default = "onyxdotapp/onyx-model-server"
+  default = "callosumdotapp/callosum-model-server"
 }
 
 variable "INTEGRATION_REPOSITORY" {
-  default = "onyxdotapp/onyx-integration"
+  default = "callosumdotapp/callosum-integration"
 }
 
 variable "TAG" {

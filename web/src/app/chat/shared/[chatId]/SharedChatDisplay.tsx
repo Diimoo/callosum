@@ -8,9 +8,9 @@ import { getLatestMessageChain } from "@/app/chat/services/messageTree";
 import HumanMessage from "@/app/chat/message/HumanMessage";
 import AIMessage from "@/app/chat/message/messageComponents/AIMessage";
 import { Callout } from "@/components/ui/callout";
-import OnyxInitializingLoader from "@/components/OnyxInitializingLoader";
+import CallosumInitializingLoader from "@/components/CallosumInitializingLoader";
 import { Persona } from "@/app/admin/assistants/interfaces";
-import { MinimalOnyxDocument } from "@/lib/search/interfaces";
+import { MinimalCallosumDocument } from "@/lib/search/interfaces";
 import TextView from "@/components/chat/TextView";
 import { UNNAMED_CHAT } from "@/lib/constants";
 import Text from "@/refresh-components/texts/Text";
@@ -26,7 +26,7 @@ export default function SharedChatDisplay({
   persona,
 }: SharedChatDisplayProps) {
   const [presentingDocument, setPresentingDocument] =
-    useState<MinimalOnyxDocument | null>(null);
+    useState<MinimalCallosumDocument | null>(null);
 
   const isMounted = useOnMount();
 
@@ -122,7 +122,7 @@ export default function SharedChatDisplay({
           </div>
         ) : (
           <div className="h-full w-full flex items-center justify-center">
-            <OnyxInitializingLoader />
+            <CallosumInitializingLoader />
           </div>
         )}
       </div>

@@ -1,7 +1,7 @@
 {
-  "name": "onyx-desktop",
+  "name": "callosum-desktop",
   "version": "0.0.0-dev",
-  "description": "Lightweight desktop app for Onyx Cloud",
+  "description": "Lightweight desktop app for Callosum Cloud",
   "scripts": {
     "dev": "tauri dev",
     "build": "tauri build",

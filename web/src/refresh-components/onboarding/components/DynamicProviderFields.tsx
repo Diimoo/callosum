@@ -255,7 +255,7 @@ export default function DynamicProviderFields({
                     idle:
                       override?.description ||
                       modalContent?.field_metadata?.default_model_name ||
-                      "This model will be used by Onyx by default.",
+                      "This model will be used by Callosum by default.",
                     error: meta.error,
                   }}
                 />

@@ -3,7 +3,7 @@ from collections.abc import Generator
 
 import pytest
 
-from onyx.connectors.slack.models import ChannelType
+from callosum.connectors.slack.models import ChannelType
 from tests.integration.connector_job_tests.slack.slack_api_utils import SlackManager
 
 # from tests.load_env_vars import load_env_vars
@@ -15,7 +15,7 @@ from tests.integration.connector_job_tests.slack.slack_api_utils import SlackMan
 def slack_test_setup() -> Generator[tuple[ChannelType, ChannelType], None, None]:
     slack_client = SlackManager.get_slack_client(os.environ["SLACK_BOT_TOKEN"])
     user_map = SlackManager.build_slack_user_email_id_map(slack_client)
-    admin_user_id = user_map["admin@onyx-test.com"]
+    admin_user_id = user_map["admin@callosum-test.com"]
 
     (
         public_channel,

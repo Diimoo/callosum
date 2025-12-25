@@ -53,7 +53,7 @@ export default function NRFPage({
     defaultDarkBackgroundUrl,
     shortcuts: shortCuts,
     setShortcuts: setShortCuts,
-    setUseOnyxAsNewTab,
+    setUseCallosumAsNewTab,
     showShortcuts,
   } = useNRFPreferences();
 
@@ -103,12 +103,12 @@ export default function NRFPage({
     setSettingsOpen((prev) => !prev);
   };
 
-  // If user toggles the "Use Onyx" switch to off, prompt a modal
-  const handleUseOnyxToggle = (checked: boolean) => {
+  // If user toggles the "Use Callosum" switch to off, prompt a modal
+  const handleUseCallosumToggle = (checked: boolean) => {
     if (!checked) {
       setShowTurnOffModal(true);
     } else {
-      setUseOnyxAsNewTab(true);
+      setUseCallosumAsNewTab(true);
       sendSetDefaultNewTabMessage(true);
     }
   };
@@ -154,7 +154,7 @@ export default function NRFPage({
   };
 
   const confirmTurnOff = () => {
-    setUseOnyxAsNewTab(false);
+    setUseCallosumAsNewTab(false);
     setShowTurnOffModal(false);
     sendSetDefaultNewTabMessage(false);
   };
@@ -220,8 +220,8 @@ export default function NRFPage({
                 }`}
               >
                 {isNight
-                  ? "End your day with Onyx"
-                  : "Start your day with Onyx"}
+                  ? "End your day with Callosum"
+                  : "Start your day with Callosum"}
               </h1>
 
               <SimplifiedChatInputBar
@@ -293,17 +293,17 @@ export default function NRFPage({
       <SettingsPanel
         settingsOpen={settingsOpen}
         toggleSettings={toggleSettings}
-        handleUseOnyxToggle={handleUseOnyxToggle}
+        handleUseCallosumToggle={handleUseCallosumToggle}
       />
 
       <Dialog open={showTurnOffModal} onOpenChange={setShowTurnOffModal}>
         <DialogContent className="w-fit max-w-[95%]">
           <DialogHeader>
-            <DialogTitle>Turn off Onyx new tab page?</DialogTitle>
+            <DialogTitle>Turn off Callosum new tab page?</DialogTitle>
             <DialogDescription>
               You&apos;ll see your browser&apos;s default new tab page instead.
               <br />
-              You can turn it back on anytime in your Onyx settings.
+              You can turn it back on anytime in your Callosum settings.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="flex gap-2 justify-center">
@@ -323,7 +323,7 @@ export default function NRFPage({
           <Modal.Content small>
             <Modal.Header
               icon={SvgUser}
-              title="Welcome to Onyx"
+              title="Welcome to Callosum"
               onClose={() => setShowLoginModal(false)}
             />
             <Modal.Body>

@@ -17,7 +17,7 @@ import {
   shouldSubmitOnLoad,
 } from "../services/searchParams";
 import { FilterManager } from "@/lib/hooks";
-import { OnyxDocument } from "@/lib/search/interfaces";
+import { CallosumDocument } from "@/lib/search/interfaces";
 import {
   useChatSessionStore,
   useCurrentMessageHistory,
@@ -37,7 +37,7 @@ interface UseChatSessionControllerProps {
 
   // UI state setters
   setSelectedAssistantFromId: (assistantId: number | null) => void;
-  setSelectedDocuments: (documents: OnyxDocument[]) => void;
+  setSelectedDocuments: (documents: CallosumDocument[]) => void;
   setCurrentMessageFiles: (
     files: ProjectFile[] | ((prev: ProjectFile[]) => ProjectFile[])
   ) => void;

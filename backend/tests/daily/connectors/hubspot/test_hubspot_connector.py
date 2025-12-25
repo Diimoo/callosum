@@ -7,10 +7,10 @@ from unittest.mock import patch
 
 import pytest
 
-from onyx.connectors.hubspot.connector import AVAILABLE_OBJECT_TYPES
-from onyx.connectors.hubspot.connector import HubSpotConnector
-from onyx.connectors.models import ConnectorMissingCredentialError
-from onyx.connectors.models import Document
+from callosum.connectors.hubspot.connector import AVAILABLE_OBJECT_TYPES
+from callosum.connectors.hubspot.connector import HubSpotConnector
+from callosum.connectors.models import ConnectorMissingCredentialError
+from callosum.connectors.models import Document
 
 
 class TestHubSpotConnector:
@@ -542,7 +542,7 @@ class TestHubSpotConnector:
 
         # Mock the API calls and associated object methods
         with (
-            patch("onyx.connectors.hubspot.connector.HubSpot") as MockHubSpot,
+            patch("callosum.connectors.hubspot.connector.HubSpot") as MockHubSpot,
             patch.object(connector, "_paginated_results") as mock_paginated,
             patch.object(connector, "_get_associated_objects", return_value=[]),
             patch.object(connector, "_get_associated_notes", return_value=[]),

@@ -5,18 +5,18 @@ from unittest.mock import MagicMock
 import pytest
 from sqlalchemy.orm import Session
 
-from onyx.chat.models import AnswerStreamPart
-from onyx.chat.models import MessageResponseIDInfo
-from onyx.chat.models import StreamingError
-from onyx.chat.process_message import stream_chat_message_objects
-from onyx.context.search.models import RetrievalDetails
-from onyx.db.chat import create_chat_session
-from onyx.db.models import RecencyBiasSetting
-from onyx.db.models import User
-from onyx.db.persona import upsert_persona
-from onyx.server.query_and_chat.models import CreateChatMessageRequest
-from onyx.server.query_and_chat.streaming_models import AgentResponseDelta
-from onyx.server.query_and_chat.streaming_models import Packet
+from callosum.chat.models import AnswerStreamPart
+from callosum.chat.models import MessageResponseIDInfo
+from callosum.chat.models import StreamingError
+from callosum.chat.process_message import stream_chat_message_objects
+from callosum.context.search.models import RetrievalDetails
+from callosum.db.chat import create_chat_session
+from callosum.db.models import RecencyBiasSetting
+from callosum.db.models import User
+from callosum.db.persona import upsert_persona
+from callosum.server.query_and_chat.models import CreateChatMessageRequest
+from callosum.server.query_and_chat.streaming_models import AgentResponseDelta
+from callosum.server.query_and_chat.streaming_models import Packet
 from tests.external_dependency_unit.answer.conftest import ensure_default_llm_provider
 from tests.external_dependency_unit.conftest import create_test_user
 
@@ -103,7 +103,7 @@ def test_stream_chat_message_objects_without_web_search(
     chat_request = CreateChatMessageRequest(
         chat_session_id=chat_session.id,
         parent_message_id=None,
-        message="run a web search for 'Onyx'",
+        message="run a web search for 'Callosum'",
         file_descriptors=[],
         prompt_override=None,
         search_doc_ids=None,

@@ -19,7 +19,7 @@ services:
 
   relational_db:
     ports:
-      - "5432:5432"
+      - "5434:5432"
 
   index:
     ports:
@@ -28,7 +28,7 @@ services:
 
   cache:
     ports:
-      - "6379:6379"
+      - "6381:6379"
 
   minio:
     # use different ports to avoid conflicts with model servers
