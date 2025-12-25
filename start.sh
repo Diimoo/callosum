@@ -79,7 +79,7 @@ else
     export S3_ENDPOINT="http://localhost:9004"
     export AWS_ACCESS_KEY_ID=minioadmin
     export AWS_SECRET_ACCESS_KEY=minioadmin
-    nohup uv run uvicorn onyx.main:app --host 0.0.0.0 --port 8082 --reload > /tmp/callosum-api.log 2>&1 &
+    nohup "$SCRIPT_DIR/.venv/bin/python" -m uvicorn callosum.main:app --host 0.0.0.0 --port 8082 --reload > /tmp/callosum-api.log 2>&1 &
     echo -e "${GREEN}API Server starting on port 8082${NC}"
     cd "$SCRIPT_DIR"
 fi
@@ -92,7 +92,7 @@ else
     cd "$SCRIPT_DIR/backend"
     export POSTGRES_PORT=5434
     export REDIS_PORT=6381
-    nohup uv run uvicorn model_server.main:app --host 0.0.0.0 --port 9002 --reload > /tmp/callosum-model.log 2>&1 &
+    nohup "$SCRIPT_DIR/.venv/bin/python" -m uvicorn model_server.main:app --host 0.0.0.0 --port 9002 --reload > /tmp/callosum-model.log 2>&1 &
     echo -e "${GREEN}Model Server starting on port 9002${NC}"
     cd "$SCRIPT_DIR"
 fi
