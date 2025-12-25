@@ -27,11 +27,38 @@ check_port() {
     fi
 }
 
+# Function to restore original dev compose file
+restore_dev_compose() {
+    if [ -f "$COMPOSE_DIR/docker-compose.dev.yml.backup" ]; then
+        mv "$COMPOSE_DIR/docker-compose.dev.yml.backup" "$COMPOSE_DIR/docker-compose.dev.yml"
+    fi
+}
+
 # Start Docker services (Postgres, Redis, MinIO, Vespa)
 echo -e "\n${YELLOW}[1/4] Starting Docker services...${NC}"
 COMPOSE_DIR="deployment/docker_compose"
 if [ -f "$COMPOSE_DIR/docker-compose.yml" ] && [ -f "$COMPOSE_DIR/docker-compose.dev.yml" ]; then
+    # Create backup of dev compose file
+    cp "$COMPOSE_DIR/docker-compose.dev.yml" "$COMPOSE_DIR/docker-compose.dev.yml.backup"
+    
+    # Check for port conflicts and use alternative ports if needed
+    if check_port 6381; then
+        echo -e "${YELLOW}Port 6381 already in use, using alternative Redis port 6382${NC}"
+        sed -i 's/6381:6379/6382:6379/' "$COMPOSE_DIR/docker-compose.dev.yml"
+        export REDIS_PORT=6382
+    fi
+    
+    if check_port 8081; then
+        echo -e "${YELLOW}Port 8081 already in use, using alternative Vespa ports 8082/19072${NC}"
+        sed -i 's/8081:8081/8082:8081/' "$COMPOSE_DIR/docker-compose.dev.yml"
+        sed -i 's/19071:19071/19072:19071/' "$COMPOSE_DIR/docker-compose.dev.yml"
+    fi
+    
     docker compose -f "$COMPOSE_DIR/docker-compose.yml" -f "$COMPOSE_DIR/docker-compose.dev.yml" up -d relational_db cache minio index
+    
+    # Restore original dev compose file
+    restore_dev_compose
+    
     echo -e "${GREEN}Docker services started${NC}"
 else
     echo -e "${YELLOW}Docker compose files not found, skipping Docker services${NC}"
