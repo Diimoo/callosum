@@ -1004,7 +1004,7 @@ sqlalchemy==2.0.15
     #   fastapi-users-db-sqlalchemy
     #   langchain
     #   callosum
-sse-starlette==3.0.3
+sse-starlette==3.0.4
     # via mcp
 sseclient-py==1.8.0
     # via braintrust
