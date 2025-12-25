@@ -43,12 +43,12 @@ kill_port 9002 "Model Server"
 
 # Stop Docker services
 echo -e "\n${YELLOW}[4/4] Stopping Docker services...${NC}"
-if [ -f "deployment/docker_compose/docker-compose.dev.yml" ]; then
-    docker compose -f deployment/docker_compose/docker-compose.dev.yml down 2>/dev/null || \
-    docker-compose -f deployment/docker_compose/docker-compose.dev.yml down 2>/dev/null || true
+COMPOSE_DIR="deployment/docker_compose"
+if [ -f "$COMPOSE_DIR/docker-compose.yml" ] && [ -f "$COMPOSE_DIR/docker-compose.dev.yml" ]; then
+    docker compose -f "$COMPOSE_DIR/docker-compose.yml" -f "$COMPOSE_DIR/docker-compose.dev.yml" down 2>/dev/null || true
     echo -e "${GREEN}Docker services stopped${NC}"
 else
-    echo -e "${YELLOW}No docker-compose.dev.yml found, skipping Docker services${NC}"
+    echo -e "${YELLOW}Docker compose files not found, skipping Docker services${NC}"
 fi
 
 echo -e "\n${GREEN}========================================${NC}"

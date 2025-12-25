@@ -29,12 +29,12 @@ check_port() {
 
 # Start Docker services (Postgres, Redis, MinIO, Vespa)
 echo -e "\n${YELLOW}[1/4] Starting Docker services...${NC}"
-if [ -f "deployment/docker_compose/docker-compose.dev.yml" ]; then
-    docker compose -f deployment/docker_compose/docker-compose.dev.yml up -d postgres redis minio vespa 2>/dev/null || \
-    docker-compose -f deployment/docker_compose/docker-compose.dev.yml up -d postgres redis minio vespa
+COMPOSE_DIR="deployment/docker_compose"
+if [ -f "$COMPOSE_DIR/docker-compose.yml" ] && [ -f "$COMPOSE_DIR/docker-compose.dev.yml" ]; then
+    docker compose -f "$COMPOSE_DIR/docker-compose.yml" -f "$COMPOSE_DIR/docker-compose.dev.yml" up -d relational_db cache minio index
     echo -e "${GREEN}Docker services started${NC}"
 else
-    echo -e "${YELLOW}No docker-compose.dev.yml found, skipping Docker services${NC}"
+    echo -e "${YELLOW}Docker compose files not found, skipping Docker services${NC}"
 fi
 
 # Wait for services to be ready
