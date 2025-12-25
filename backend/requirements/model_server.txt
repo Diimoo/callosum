@@ -434,7 +434,7 @@ scipy==1.16.3
     # via
     #   scikit-learn
     #   sentence-transformers
-sentence-transformers==4.0.2
+sentence-transformers==5.2.0
     # via
     #   onyx
     #   setfit
