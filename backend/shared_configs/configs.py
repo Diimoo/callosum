@@ -42,15 +42,18 @@ INFORMATION_CONTENT_MODEL_VERSION = "onyx-dot-app/information-content-model"
 INFORMATION_CONTENT_MODEL_TAG: str | None = None
 
 # Bi-Encoder, other details
-DOC_EMBEDDING_CONTEXT_SIZE = 512
+# Qwen3-Embedding-8B supports up to 32k context, using 8192 for optimal balance
+# between retrieval quality and memory usage
+DOC_EMBEDDING_CONTEXT_SIZE = int(os.environ.get("DOC_EMBEDDING_CONTEXT_SIZE") or 8192)
 
 # Used to distinguish alternative indices
 ALT_INDEX_SUFFIX = "__danswer_alt_index"
 
 # Used for loading defaults for automatic deployments and dev flows
 # For local, use: mixedbread-ai/mxbai-rerank-xsmall-v1
+# Qwen3-Reranker-8B pairs optimally with Qwen3-Embedding-8B for best retrieval
 DEFAULT_CROSS_ENCODER_MODEL_NAME = (
-    os.environ.get("DEFAULT_CROSS_ENCODER_MODEL_NAME") or None
+    os.environ.get("DEFAULT_CROSS_ENCODER_MODEL_NAME") or "Qwen/Qwen3-Reranker-8B"
 )
 DEFAULT_CROSS_ENCODER_API_KEY = os.environ.get("DEFAULT_CROSS_ENCODER_API_KEY") or None
 DEFAULT_CROSS_ENCODER_PROVIDER_TYPE = (

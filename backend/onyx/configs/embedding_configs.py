@@ -122,6 +122,17 @@ _BASE_EMBEDDING_MODELS = [
         dim=384,
         index_name="danswer_chunk_intfloat_multilingual_e5_small",
     ),
+    # State-of-the-art embedding models (8B class)
+    _BaseEmbeddingModel(
+        name="Qwen/Qwen3-Embedding-8B",
+        dim=4096,
+        index_name="danswer_chunk_qwen3_embedding_8b",
+    ),
+    _BaseEmbeddingModel(
+        name="nvidia/llama-embed-nemotron-8b",
+        dim=4096,
+        index_name="danswer_chunk_llama_embed_nemotron_8b",
+    ),
 ]
 
 # Automatically generate both FLOAT and BFLOAT16 versions of all models
