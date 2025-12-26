@@ -511,7 +511,7 @@ types-pytz==2023.3.1.1
     #   pandas-stubs
 types-pyyaml==6.0.12.11
     # via onyx
-types-regex==2023.3.23.1
+types-regex==2025.11.3.20251106
     # via onyx
 types-requests==2.32.0.20250328
     # via
