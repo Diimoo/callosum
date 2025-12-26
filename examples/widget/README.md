@@ -1,70 +1,96 @@
-# Onyx Chat Bot Widget
+# Onyx Chat Widget Example
 
-Note: The widget requires a Onyx API key, which is a paid (cloud/enterprise) feature.
+A minimal example demonstrating how to embed an Onyx chat widget in a Next.js application.
 
-This is a code example for how you can use Onyx's APIs to build a chat bot widget for a website! The main code to look at can be found in `src/app/widget/Widget.tsx`.
+## Overview
 
-## Getting Started
+This example shows how to integrate with the Onyx chat API to create a streaming chat interface. It demonstrates:
 
-To get the widget working on your webpage, follow these steps:
+- Creating chat sessions via the Onyx API
+- Sending messages and handling streaming responses
+- Parsing chunked JSON responses
+- Rendering markdown in chat messages
 
-### 1. Install Dependencies
+## Prerequisites
 
-Ensure you have the necessary dependencies installed. From the `examples/widget/README.md` file:
+- Node.js 18+
+- An Onyx instance (cloud or self-hosted)
+- An Onyx API key
+
+## Setup
+
+1. Install dependencies:
 
 ```bash
-npm i
+npm install
 ```
 
-### 2. Set Environment Variables
-
-Make sure to set the environment variables `NEXT_PUBLIC_API_URL` and `NEXT_PUBLIC_API_KEY` in a `.env` file at the root of your project:
+2. Configure environment variables:
 
 ```bash
-NEXT_PUBLIC_API_URL=
-NEXT_PUBLIC_API_KEY=
+cp .env.example .env
 ```
 
-### 3. Run the Development Server
+Edit `.env` with your Onyx instance details:
 
-Start the development server to see the widget in action.
+```
+NEXT_PUBLIC_API_URL=https://your-onyx-instance.com
+NEXT_PUBLIC_API_KEY=your_api_key_here
+```
+
+3. Start the development server:
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000)
 
-### 4. Integrate the Widget
+## Project Structure
 
-To integrate the widget into your webpage, you can use the `ChatWidget` component. Here’s an example of how to include it in a page component:
+```
+examples/widget/
+├── src/
+│   └── app/
+│       ├── page.tsx           # Main page with widget
+│       ├── layout.tsx         # App layout
+│       ├── globals.css        # Global styles
+│       └── widget/
+│           └── Widget.tsx     # Chat widget component
+├── .env.example               # Environment template
+├── package.json
+└── README.md
+```
 
-```jsx
-import ChatWidget from "path/to/ChatWidget";
-function MyPage() {
-  return (
-    <div>
-      <h1>My Webpage</h1>
-      <ChatWidget />
-    </div>
-  );
+## Key Features
+
+### Streaming Responses
+
+The widget handles streaming responses from the Onyx API, processing chunked JSON data in real-time:
+
+```typescript
+async function* handleStream<T>(streamingResponse: Response) {
+  const reader = streamingResponse.body?.getReader();
+  // Process chunks as they arrive
 }
-export default MyPage;
 ```
 
-### 5. Deploy
+### API Integration
 
-Once you are satisfied with the widget, you can build and start the application for production:
+The widget integrates with these Onyx API endpoints:
 
-```bash
-npm run build
-npm run start
-```
+- `POST /chat/create-chat-session` - Create a new chat session
+- `POST /chat/send-message` - Send messages and receive streaming responses
 
-### Custom Styling and Configuration
+## Customization
 
-If you need to customize the widget, you can modify the `ChatWidget` component in the `examples/widget/src/app/widget/Widget.tsx` file.
+The widget component in `src/app/widget/Widget.tsx` can be customized to match your application's design. Key areas to modify:
 
-By following these steps, you should be able to get the chat widget working on your webpage.
+- Styling via Tailwind CSS classes
+- Message rendering and formatting
+- Error handling and loading states
 
-If you want to get fancier, then take a peek at the Chat implementation within Onyx itself [here](https://github.com/onyx-dot-app/onyx/blob/main/web/src/app/chat/ChatPage.tsx#L82).
+## Learn More
+
+- [Onyx Documentation](https://docs.onyx.app)
+- [Onyx API Reference](https://docs.onyx.app/apis)

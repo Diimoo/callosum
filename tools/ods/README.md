@@ -1,100 +1,119 @@
-# Onyx Developer Script
+# Onyx Developer Tools (ods)
 
-[![Deploy Status](https://github.com/onyx-dot-app/onyx/actions/workflows/release-devtools.yml/badge.svg)](https://github.com/onyx-dot-app/onyx/actions/workflows/release-devtools.yml)
-[![PyPI](https://img.shields.io/pypi/v/onyx-devtools.svg)](https://pypi.org/project/onyx-devtools/)
-
-`ods` is [onyx.app](https://github.com/onyx-dot-app/onyx)'s devtools utility script.
-It is packaged as a python [wheel](https://packaging.python.org/en/latest/discussions/package-formats/) and available from [PyPI](https://pypi.org/project/onyx-devtools/).
+A CLI tool providing developer utilities for working on [Onyx](https://onyx.app).
 
 ## Installation
 
-A stable version of `ods` is provided in the default [python venv](https://github.com/onyx-dot-app/onyx/blob/main/CONTRIBUTING.md#backend-python-requirements)
-which is synced automatically if you have [pre-commit](https://github.com/onyx-dot-app/onyx/blob/main/CONTRIBUTING.md#formatting-and-linting)
-hooks installed.
+```bash
+# Install via pip (includes Go binary)
+pip install onyx-devtools
 
-While inside the Onyx repository, activate the root project's venv,
-
-```shell
-source .venv/bin/activate
+# Or install from source
+cd tools/ods
+pip install -e .
 ```
 
-If you prefer to use the latest version of `ods` and _not_ the stable version in the `pyproject.toml`,
+## Commands
 
-```shell
-uvx --from onyx-devtools ods
+### OpenAPI Schema & Client Generation
+
+Generate OpenAPI schema and Python client for integration testing:
+
+```bash
+# Generate OpenAPI schema
+ods openapi schema
+
+# Generate Python client from schema
+ods openapi client
+
+# Generate both schema and client
+ods openapi all
+
+# Custom output paths
+ods openapi schema -o ./api.json
+ods openapi client -o ./my_client
 ```
 
-### Autocomplete
+### Database Operations
 
-`ods` provides autocomplete for `bash`, `fish`, `powershell` and `zsh` shells.
+Manage local development databases:
 
-For more information, see `ods completion <shell> --help` for your respective `<shell>`.
+```bash
+# Run database migrations
+ods db migrate
 
-#### zsh
+# Dump database to file
+ods db dump
 
-*Linux*
+# Restore database from file
+ods db restore
 
-```shell
-ods completion zsh | sudo tee "${fpath[1]}/_ods" > /dev/null
+# Drop database
+ods db drop
 ```
 
-*macOS*
+### Cherry-Pick Tool
 
-```shell
-ods completion zsh > $(brew --prefix)/share/zsh/site-functions/_ods
+Assist with cherry-picking commits across branches:
+
+```bash
+ods cherry-pick <commit-sha>
 ```
 
-#### bash
+### Check Lazy Imports
 
-```shell
-ods completion bash | sudo tee /etc/bash_completion.d/ods > /dev/null
+Validate lazy import patterns in the codebase:
+
+```bash
+ods check-lazy-imports
 ```
 
-_Note: bash completion requires the [bash-completion](https://github.com/scop/bash-completion/) package be installed._
+## Development
 
-## Upgrading
+The tool is written in Go and distributed as a Python package with pre-built binaries.
 
-To upgrade the stable version, upgrade it as you would any other [requirement](https://github.com/onyx-dot-app/onyx/tree/main/backend/requirements#readme).
+### Building from Source
 
-## Building from source
+```bash
+cd tools/ods
 
-Generally, `go build .` or `go install .` are sufficient.
+# Build Go binary
+go build -o ods .
 
-`go build .` will output a `tools/ods/ods` binary which you can call normally,
-
-```shell
-./ods --version
+# Run directly
+./ods --help
 ```
 
-while `go install .` will output to your [GOPATH](https://go.dev/wiki/SettingGOPATH) (defaults `~/go/bin/ods`),
+### Project Structure
 
-```shell
-~/go/bin/ods --version
+```
+tools/ods/
+├── main.go              # Entry point
+├── cmd/                 # Command implementations
+│   ├── root.go          # Root command
+│   ├── openapi.go       # OpenAPI commands
+│   ├── db.go            # Database parent command
+│   ├── db_migrate.go    # Migration command
+│   ├── db_dump.go       # Dump command
+│   ├── db_restore.go    # Restore command
+│   ├── db_drop.go       # Drop command
+│   └── cherry-pick.go   # Cherry-pick command
+├── internal/            # Internal packages
+├── go.mod               # Go dependencies
+├── pyproject.toml       # Python package config
+└── hatch_build.py       # Build hook for Go binary
 ```
 
-_Typically, `GOPATH` is added to your shell's `PATH`, but this may be confused easily during development
-with the pip version of `ods` installed in the Onyx venv._
+## Debug Mode
 
-To build the wheel,
+Enable debug logging:
 
-```shell
-uv build --wheel
+```bash
+ods --debug <command>
 ```
 
-To build and install the wheel,
+## Version
 
-```shell
-uv pip install .
+```bash
+ods --version
 ```
-
-## Deploy
-
-Releases are deployed automatically when git tags prefaced with `ods/` are pushed to [GitHub](https://github.com/onyx-dot-app/onyx/tags).
-
-The [release-tag](https://pypi.org/project/release-tag/) package can be used to calculate and push the next tag automatically,
-
-```shell
-tag --prefix ods
-```
-
-See also, [`.github/workflows/release-devtools.yml`](https://github.com/onyx-dot-app/onyx/blob/main/.github/workflows/release-devtools.yml).

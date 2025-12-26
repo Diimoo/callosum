@@ -1,67 +1,74 @@
-<!-- ONYX_METADATA={"link": "https://github.com/onyx-dot-app/onyx/blob/main/backend/alembic/README.md"} -->
+# Alembic Migrations
 
-# Alembic DB Migrations
+This directory contains database migrations for the main Onyx schema using [Alembic](https://alembic.sqlalchemy.org/).
 
-These files are for creating/updating the tables in the Relational DB (Postgres).
-Onyx migrations use a generic single-database configuration with an async dbapi.
+## Overview
 
-## To generate new migrations:
+Alembic manages schema changes for the PostgreSQL database. In multi-tenant mode, migrations can be applied to all tenant schemas or specific schemas.
 
-From onyx/backend, run:
-`alembic revision -m <DESCRIPTION_OF_MIGRATION>`
+## Directory Structure
 
-Note: you cannot use the `--autogenerate` flag as the automatic schema parsing does not work.
-
-Manually populate the upgrade and downgrade in your new migration.
-
-More info can be found here: https://alembic.sqlalchemy.org/en/latest/autogenerate.html
-
-## Running migrations
-
-To run all un-applied migrations:
-`alembic upgrade head`
-
-To undo migrations:
-`alembic downgrade -X`
-where X is the number of migrations you want to undo from the current state
-
-### Multi-tenant migrations
-
-For multi-tenant deployments, you can use additional options:
-
-**Upgrade all tenants:**
-```bash
-alembic -x upgrade_all_tenants=true upgrade head
+```
+alembic/
+├── env.py              # Migration environment configuration
+├── script.py.mako      # Template for new migration files
+├── versions/           # Migration files
+└── README.md
 ```
 
-**Upgrade specific schemas:**
-```bash
-# Single schema
-alembic -x schemas=tenant_12345678-1234-1234-1234-123456789012 upgrade head
+## Running Migrations
 
-# Multiple schemas (comma-separated)
-alembic -x schemas=tenant_12345678-1234-1234-1234-123456789012,public,another_tenant upgrade head
+### Single-Tenant Mode
+
+```bash
+# Upgrade to the latest revision
+alembic upgrade head
+
+# Downgrade one revision
+alembic downgrade -1
 ```
 
-**Upgrade tenants within an alphabetical range:**
+### Multi-Tenant Mode
+
+In multi-tenant mode, you must specify migration targets:
+
 ```bash
-# Upgrade tenants 100-200 when sorted alphabetically (positions 100 to 200)
-alembic -x upgrade_all_tenants=true -x tenant_range_start=100 -x tenant_range_end=200 upgrade head
+# Upgrade all tenant schemas
+alembic upgrade head -x upgrade_all_tenants=true
 
-# Upgrade tenants starting from position 1000 alphabetically
-alembic -x upgrade_all_tenants=true -x tenant_range_start=1000 upgrade head
+# Upgrade specific schemas
+alembic upgrade head -x schemas=tenant_123,tenant_456
 
-# Upgrade first 500 tenants alphabetically
-alembic -x upgrade_all_tenants=true -x tenant_range_end=500 upgrade head
+# Upgrade a range of tenants (alphabetically sorted)
+alembic upgrade head -x tenant_range_start=0 -x tenant_range_end=100
+
+# Continue on error (skip failed schemas)
+alembic upgrade head -x upgrade_all_tenants=true -x continue=true
 ```
 
-**Continue on error (for batch operations):**
+### Creating New Migrations
+
 ```bash
-alembic -x upgrade_all_tenants=true -x continue=true upgrade head
+# Auto-generate migration from model changes
+alembic revision --autogenerate -m "description of changes"
+
+# Create empty migration
+alembic revision -m "description of changes"
 ```
 
-The tenant range filtering works by:
-1. Sorting tenant IDs alphabetically
-2. Using 1-based position numbers (1st, 2nd, 3rd tenant, etc.)
-3. Filtering to the specified range of positions
-4. Non-tenant schemas (like 'public') are always included
+## Configuration Options
+
+Pass options via `-x key=value`:
+
+- **`create_schema`**: Create schema if it doesn't exist (default: `true`)
+- **`upgrade_all_tenants`**: Migrate all tenant schemas (default: `false`)
+- **`continue`**: Continue on error for individual tenants (default: `false`)
+- **`tenant_range_start`**: Start index for tenant range filtering (0-based)
+- **`tenant_range_end`**: End index for tenant range filtering (exclusive)
+- **`schemas`**: Comma-separated list of specific schema names to migrate
+
+## Notes
+
+- Kombu tables (`kombu_queue`, `kombu_message`) are excluded from migrations
+- IAM authentication is supported via `USE_IAM_AUTH` environment variable
+- Set `[logger_root] level=INFO` in `alembic.ini` to see migration logs

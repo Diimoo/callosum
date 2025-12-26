@@ -1,123 +1,109 @@
-<!-- ONYX_METADATA={"link": "https://github.com/onyx-dot-app/onyx/blob/main/web/README.md"} -->
+# Onyx Web Frontend
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+The Next.js web application for Onyx.
 
-## Getting Started
-
-Install node / npm: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
-Install all dependencies: `npm i`
-
-Then, run the development server:
+## Quick Start
 
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-_Note:_ if you are having problems accessing the ^, try setting the `WEB_DOMAIN` env variable to
-`http://127.0.0.1:3000` and accessing it there.
-
-### Connecting to a Cloud Backend
-
-To test your local frontend development server against a cloud backend (e.g., staging or production),
-create a `.env.local` file in the `web/` directory with the following configuration:
+## Project Structure
 
 ```text
-# Point local dev server to cloud backend
-INTERNAL_URL=https://st-dev.onyx.app/api
-
-# Debug auth cookie for authenticating against remote backend
-# This cookie is automatically injected into API requests when in development mode
-# To get this value:
-#   1. Go to https://st-dev.onyx.app (or your target backend URL) and log in
-#   2. Open DevTools (F12) → Application → Cookies → [your backend domain]
-#   3. Find the "fastapiusersauth" cookie and copy its value
-#   4. Paste the value below (without quotes)
-# Note: This cookie may expire, so you may need to refresh it periodically
-DEBUG_AUTH_COOKIE=your_cookie_value_here
+web/
+├── src/
+│   ├── app/           # Next.js App Router pages
+│   ├── components/    # React components
+│   ├── hooks/         # Custom React hooks
+│   ├── lib/           # Utility libraries
+│   └── icons/         # SVG icon components
+├── lib/
+│   └── opal/          # Opal component library
+├── public/            # Static assets
+├── tests/             # Test files and setup
+├── tailwind.config.js # Tailwind CSS configuration
+└── next.config.js     # Next.js configuration
 ```
 
-By default, this does _NOT_ override existing cookies, so if you've logged in previously, you
-may need to delete the cookies for the `localhost` domain.
+## Development
 
-**Important notes:**
+### Scripts
 
-- The `.env.local` file should be created in the `web/` directory (same level as `package.json`)
-- After creating or modifying `.env.local`, restart your development server for changes to take effect
-- The `DEBUG_AUTH_COOKIE` is only used in development mode (`NODE_ENV=development`)
-- If `INTERNAL_URL` is not set, the frontend will connect to the local backend at `http://127.0.0.1:8080`
-- Keep your `.env.local` file secure and never commit it to version control (it should already be in `.gitignore`)
-
-## Testing
-
-This testing process will reset your application into a clean state.
-Don't run these tests if you don't want to do this!
-
-Bring up the entire application.
-
-0. Install playwright dependencies
-
-```cd web
-npx playwright install
+```bash
+npm run dev           # Start dev server
+npm run build         # Production build
+npm run lint          # Run ESLint
+npm run format        # Format with Prettier
+npm run test          # Run Jest tests
+npm run test:watch    # Run tests in watch mode
+npm run types:check   # TypeScript type checking
 ```
 
-**Note:** If you're building the web app for E2E testing (e.g., in CI or Docker), use `npm run build:e2e` instead of `npm run build`. This preserves `data-testid` attributes that Playwright tests rely on. In production builds, these attributes are stripped for smaller bundle sizes.
+### Code Standards
 
-1. Reset the instance
+See [STANDARDS.md](./STANDARDS.md) for detailed coding guidelines, including:
 
-```cd backend
-export PYTEST_IGNORE_SKIP=true
-pytest -s tests/integration/tests/playwright/test_playwright.py
+- Always use absolute imports with `@` prefix
+- Prefer regular functions over arrow functions for components
+- Extract prop types into interfaces
+- Use `cn()` utility for class names
+- Use components from `refresh-components/` directory
+- Use icons only from `src/icons/` directory
+
+### Testing
+
+Tests are co-located with source files:
+
+```text
+src/app/auth/login/
+├── EmailPasswordForm.tsx
+└── EmailPasswordForm.test.tsx
 ```
 
-If you don't want to reset your local instance, you can still run playwright tests
-with SKIP_AUTH=true. This is convenient but slightly different from what happens
-in CI so tests might pass locally and fail in CI.
+See [tests/README.md](./tests/README.md) for testing guidelines.
 
-```cd web
-SKIP_AUTH=true npx playwright test create_and_edit_assistant.spec.ts --project=no-auth
+## Opal Component Library
+
+The `lib/opal/` directory contains the Opal component library. See [lib/opal/README.md](./lib/opal/README.md) for usage details.
+
+## Configuration
+
+### Environment Variables
+
+Key environment variables (see `.env.example` for full list):
+
+- `NEXT_PUBLIC_*` - Client-side variables
+- `INTERNAL_URL` - Backend API URL for server-side requests
+- `WEB_DOMAIN` - Public domain for the web app
+
+### Tailwind CSS
+
+Custom themes are defined in `tailwind-themes/`. The color system is carefully designed for light/dark mode - avoid using `dark:` modifiers (see STANDARDS.md).
+
+## Docker
+
+Build the Docker image:
+
+```bash
+docker build -t onyx-web-server .
 ```
 
-2. Run playwright
+## E2E Testing
 
-```
-cd web
+Playwright tests are configured in `playwright.config.ts`:
+
+```bash
+# Run E2E tests
 npx playwright test
-```
-
-To run a single test:
-
-```
-npx playwright test landing-page.spec.ts
-```
-
-If running locally, interactive options can help you see exactly what is happening in
-the test.
-
-```
-npx playwright test --ui
-npx playwright test --headed
-```
-
-3. Inspect results
-
-By default, playwright.config.ts is configured to output the results to:
-
-```
-web/test-results
-```
-
-4. Upload results to Chromatic (Optional)
-
-This step would normally not be run by third party developers, but first party devs
-may use this for local troubleshooting and testing.
-
-```
-cd web
-npx chromatic --playwright --project-token={your token here}
 ```

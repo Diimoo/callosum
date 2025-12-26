@@ -1,3 +1,4 @@
+import os
 from typing import cast
 
 from chonkie import SentenceChunker
@@ -27,9 +28,10 @@ from onyx.utils.text_processing import shared_precompare_cleanup
 from shared_configs.configs import DOC_EMBEDDING_CONTEXT_SIZE
 from shared_configs.configs import STRICT_CHUNK_TOKEN_LIMIT
 
-# Not supporting overlaps, we need a clean combination of chunks and it is unclear if overlaps
-# actually help quality at all
-CHUNK_OVERLAP = 0
+# Chunk overlap for improved context continuity at chunk boundaries.
+# Research shows ~10-15% overlap improves retrieval quality for boundary cases.
+# Set to 64 tokens by default (configurable via environment variable).
+CHUNK_OVERLAP = int(os.environ.get("CHUNK_OVERLAP_TOKENS", "64"))
 # Fairly arbitrary numbers but the general concept is we don't want the title/metadata to
 # overwhelm the actual contents of the chunk
 MAX_METADATA_PERCENTAGE = 0.25
