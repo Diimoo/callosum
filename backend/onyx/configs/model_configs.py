@@ -12,9 +12,9 @@ import os
 # The useable models configured as below must be SentenceTransformer compatible
 # NOTE: DO NOT CHANGE SET THESE UNLESS YOU KNOW WHAT YOU ARE DOING
 # IDEALLY, YOU SHOULD CHANGE EMBEDDING MODELS VIA THE UI
-# State-of-the-art embedding model - Qwen3-Embedding-8B
+# State-of-the-art embedding model - Qwen3-Embedding via Ollama
 # MTEB Multilingual #1 (score 70.58), 4096-dim, 32k context, 100+ languages
-DEFAULT_DOCUMENT_ENCODER_MODEL = "Qwen/Qwen3-Embedding-8B"
+DEFAULT_DOCUMENT_ENCODER_MODEL = "qwen3-embedding"
 DOCUMENT_ENCODER_MODEL = (
     os.environ.get("DOCUMENT_ENCODER_MODEL") or DEFAULT_DOCUMENT_ENCODER_MODEL
 )
