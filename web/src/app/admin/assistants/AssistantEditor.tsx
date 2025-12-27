@@ -242,10 +242,10 @@ export default function AssistantEditor({
     document_set_ids:
       existingPersona?.document_sets?.map((documentSet) => documentSet.id) ??
       ([] as number[]),
-    num_chunks: existingPersona?.num_chunks ?? null,
+    num_chunks: existingPersona?.num_chunks ?? "",
     search_start_date: existingPersona?.search_start_date
       ? existingPersona?.search_start_date.toString().split("T")[0]
-      : null,
+      : "",
     llm_relevance_filter: existingPersona?.llm_relevance_filter ?? false,
     llm_model_provider_override:
       existingPersona?.llm_model_provider_override ?? null,
@@ -541,7 +541,9 @@ export default function AssistantEditor({
 
           // if disable_retrieval is set, set num_chunks to 0
           // to tell the backend to not fetch any documents
-          const numChunks = searchToolEnabled ? values.num_chunks || 25 : 0;
+          const numChunks = searchToolEnabled
+            ? (values.num_chunks ? Number(values.num_chunks) : 25)
+            : 0;
           const starterMessages = values.starter_messages
             .filter((message: StarterMessage) => message.message.trim() !== "")
             .map((message: StarterMessage) => ({

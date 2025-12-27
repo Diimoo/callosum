@@ -41,10 +41,24 @@ export function useFormInputCallback<T = any>(
   name: string,
   f?: (event: T) => void
 ) {
-  const [field, , helpers] = useField<T>(name);
-  return (event: T) => {
+  const [, , helpers] = useField<T>(name);
+  return (eventOrValue: T | React.ChangeEvent<HTMLInputElement>) => {
     helpers.setTouched(true);
-    f?.(event);
-    field.onChange(event);
+    f?.(eventOrValue as T);
+    // Handle both DOM events and direct values (e.g., from Switch components)
+    if (
+      eventOrValue &&
+      typeof eventOrValue === "object" &&
+      "target" in eventOrValue
+    ) {
+      // DOM event - extract value from target
+      const target = eventOrValue.target as HTMLInputElement;
+      helpers.setValue(
+        target.type === "checkbox" ? (target.checked as T) : (target.value as T)
+      );
+    } else {
+      // Direct value (boolean, string, etc.)
+      helpers.setValue(eventOrValue as T);
+    }
   };
 }
