@@ -476,6 +476,32 @@ class CloudEmbedding:
         result = response.json()
         return [embedding["embedding"] for embedding in result["data"]]
 
+    async def _embed_ollama(
+        self, texts: list[str], model_name: str | None
+    ) -> list[Embedding]:
+        """Embed texts using Ollama's embedding API."""
+        if not model_name:
+            raise ValueError("Model name is required for Ollama embedding.")
+
+        # Default to localhost if no api_url is set
+        base_url = self.api_url or "http://localhost:11434"
+        embed_url = f"{base_url}/api/embed"
+
+        # Ollama embed API accepts multiple texts in one call
+        response = await self.http_client.post(
+            embed_url,
+            json={
+                "model": model_name,
+                "input": texts,
+            },
+            timeout=120.0,  # Ollama can be slow for large models
+        )
+        response.raise_for_status()
+        result = response.json()
+        
+        # Ollama returns {"embeddings": [[...], [...], ...]}
+        return result["embeddings"]
+
     @retry(tries=_RETRY_TRIES, delay=_RETRY_DELAY)
     async def embed(
         self,
@@ -495,6 +521,8 @@ class CloudEmbedding:
                 return await self._embed_azure(texts, f"azure/{deployment_name}")
             elif self.provider == EmbeddingProvider.LITELLM:
                 return await self._embed_litellm_proxy(texts, model_name)
+            elif self.provider == EmbeddingProvider.OLLAMA:
+                return await self._embed_ollama(texts, model_name)
 
             embedding_type = EmbeddingModelTextType.get_type(self.provider, text_type)
             if self.provider == EmbeddingProvider.COHERE:
@@ -715,7 +743,8 @@ class EmbeddingModel:
         if self.provider_type is None:
             raise ValueError("Provider type is required for direct API calls")
 
-        if self.api_key is None:
+        # Ollama doesn't require an API key
+        if self.api_key is None and self.provider_type != EmbeddingProvider.OLLAMA:
             logger.error("API key not provided for cloud model")
             raise RuntimeError("API key not provided for cloud model")
 
